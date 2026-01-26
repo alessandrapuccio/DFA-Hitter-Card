@@ -1,11 +1,11 @@
 export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83, 17] }) {
   // Color mapping for different levels
   const levelColors = {
-    'MLB': '#1e40af', // blue
-    '3A': '#ADADAD', // grey
-    '2A': '#10b981', // green
-    '1A': '#f59e0b', // amber
-    'Rookie': '#8b5cf6', // purple
+    'MLB': '#08519c', // blue
+    '3A': '#3182bd', // grey
+    '2A': '#6baed6', // green
+    '1A': '#bdd7e7', // amber
+    'RK': '#eff3ff', // purple
   };
 
   // Default color if level not in mapping

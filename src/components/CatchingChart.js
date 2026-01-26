@@ -62,7 +62,7 @@ export default function CatchingChart({
 
   return (
     <div className="w-full flex justify-center p-8">
-      <svg width={width} height={height} className="border border-gray-300 bg-white">
+      <svg width={width+100} height={height+100} className="border border-gray-300 bg-white">
         
         {/* Vertical center line */}
         <line
@@ -76,7 +76,15 @@ export default function CatchingChart({
         {categories.map((cat, i) => {
           const z = cat.value / cat.sd;
           const pct = Math.round(normalCDF(z) * 100);
-          const isLowPercentile = pct < 30;
+
+          const isLowPercentile = pct <= 20;
+          const isHighPercentile = pct >= 80;
+
+          const fillColor = isHighPercentile
+            ? "#81C784" // light green
+            : isLowPercentile
+            ? "#FF8488" // light red
+            : "#1e3a5f"; // dark blue
 
           return (
             <g key={i}>
@@ -91,40 +99,27 @@ export default function CatchingChart({
                 />
               )}
 
-            <text
+              <text
                 x={margin.left - 6}
                 y={yScale(i)}
                 textAnchor="end"
                 dominantBaseline="middle"
                 fill="#374151"
                 fontWeight="600"
-                fontSize={24}  // <-- adjust this number
-                >
+                fontSize={24}
+              >
                 {cat.label}
-             </text>
+              </text>
 
               {/* Dot */}
               <circle
                 cx={xScale(cat.value)}
                 cy={yScale(i)}
                 r="14"
-                fill="#1e3a5f"
+                fill={fillColor}
               />
 
-              {/* Background rect for low percentile */}
-              {isLowPercentile && (
-                <rect
-                  x={width - margin.right + 20 - 77}
-                  y={yScale(i) - 15}
-                  width="85"
-                  height="30"
-                  fill="#ffcccb"
-                  rx="5"
-                  ry="5"
-                />
-              )}
-
-              {/* Percentile label on right side */}
+              {/* Percentile label */}
               <text
                 x={width - margin.right + 20}
                 y={yScale(i)}
@@ -133,12 +128,12 @@ export default function CatchingChart({
                 fill="gray"
                 fontSize={21}
               >
-                {getOrdinalSuffix(pct)} pctl
+                {getOrdinalSuffix(pct)} 
               </text>
-
             </g>
           );
         })}
+
 
         {/* Axes */}
         <line
@@ -182,12 +177,17 @@ export default function CatchingChart({
 
         <text
           x={margin.left + chartWidth / 2}
-          y={height - 5}
+          y={height + 15}
           textAnchor="middle"
-          className="text-base font-semibold fill-gray-700"
+          style={{
+            fontSize: 30,        
+            fontWeight: 600,
+            fill: "#374151"     
+          }}
         >
           Runs
         </text>
+
       </svg>
     </div>
   );

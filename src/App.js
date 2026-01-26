@@ -3,12 +3,14 @@ import TrinityTrident from './components/TrinityTrident';
 import DeviationSlider from './components/DeviationSlider';
 import WRCPlusChart from './components/WRCPlusChart.js';
 import LevelTimeBar from './components/LevelTimeBar.js';
-import CatchingChart
- from './components/CatchingChart.js';
+import CatchingChart from './components/CatchingChart.js';
+import RollingTMWRCPlot from './components/RollingWRCPlot.js';
+
 export default function App() {
   return (
     
     <div className="min-h-screen bg-gray-50 py-8">
+      <RollingTMWRCPlot/>
       <LevelTimeBar/>
       <CatchingChart/>
       <h1 className="text-3xl font-bold text-center mb-8">Standard Deviation Slider</h1>
