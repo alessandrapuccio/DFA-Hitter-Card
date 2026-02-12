@@ -33,7 +33,7 @@ export default function DeviationSlider({ currentValue, avgValue, stdDev, aboveO
   const avgPosition = 50;
   
   return (
-    <div className="p-6 mx-auto" style={{ maxWidth: '295px' }}>
+    <div className="p-6 mx-auto" style={{ maxWidth: '220px' }}>
       <div className="text-sm text-gray-600 mb-1 text-center">
         Avg: {avgValue.toFixed(1)}
       </div>

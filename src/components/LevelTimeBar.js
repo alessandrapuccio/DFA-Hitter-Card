@@ -12,7 +12,7 @@ export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83
   const getColor = (level) => levelColors[level] || '#9ca3af';
 
   return (
-    <div className="w-full max-w-[990px] mx-auto p-6">
+    <div className="w-full max-w-[910px] mx-auto p-6">
         <div className="relative h-[110px] bg-gray-200 rounded-lg overflow-hidden flex">
         {levels.map((level, index) => {
           const percentage = percentages[index];
