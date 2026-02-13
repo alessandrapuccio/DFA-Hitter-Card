@@ -107,7 +107,7 @@ export default function App() {
           />
           
           <ShortDeviationSlider 
-            currentValue={72.4}
+            currentValue={59}
             avgValue={70.5}
             stdDev={2.6}
             aboveOrBelowRed="below"

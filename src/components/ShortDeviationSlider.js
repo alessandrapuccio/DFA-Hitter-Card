@@ -36,7 +36,7 @@ export default function ShortDeviationSlider({ currentValue, avgValue, stdDev, a
   const valuePosition = ((value - minValue) / (maxValue - minValue)) * 100;
   
   // Determine if title should be on right side (when value is low and would obscure title)
-  const titleOnRight = valuePosition < 25;
+  const titleOnRight = valuePosition < 33;
   
   // Format value label
   const valueLabel = percent ? `${value.toFixed(0)}%` : value.toFixed(0);
