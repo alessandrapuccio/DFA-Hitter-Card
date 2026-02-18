@@ -4,41 +4,23 @@ export default function ShortDeviationSlider({ currentValue, avgValue, stdDev, a
 
   const [value, setValue] = useState(currentValue);
   
-  // Calculate the color based on deviation from average
+  const shouldInvert = aboveOrBelowRed === 'above';
+  
   const getColor = () => {
     const deviation = (value - avgValue) / stdDev;
-    
-    // At least 1 SD above average
-    if (deviation >= 1) {
-      return aboveOrBelowRed === 'above' ? '#dc2626' : '#16a34a'; // red : green
-    }
-    // At least 1 SD below average
-    else if (deviation <= -1) {
-      return aboveOrBelowRed === 'below' ? '#dc2626' : '#16a34a'; // red : green
-    }
-    // Within 1 SD of average (default)
-    else {
-      return '#9ca3af'; // gray
-    }
+    if (deviation >= 1) return aboveOrBelowRed === 'above' ? '#dc2626' : '#16a34a';
+    else if (deviation <= -1) return aboveOrBelowRed === 'below' ? '#dc2626' : '#16a34a';
+    else return '#9ca3af';
   };
   
-  // Use provided range or calculate symmetric range around average (3 SD on each side)
   const range = stdDev * 7;
   const minValue = minRange !== undefined ? minRange : avgValue - range;
   const maxValue = maxRange !== undefined ? maxRange : avgValue + range;
-  
   const color = getColor();
-  
-  // Calculate position of average tick mark (should always be at 50% when range is symmetric)
   const avgPosition = 50;
-  
-  // Calculate position of current value for label
-  const valuePosition = ((value - minValue) / (maxValue - minValue)) * 100;
-  
-  // Determine if title should be on right side (when value is low and would obscure title)
+  const rawPosition = ((value - minValue) / (maxValue - minValue)) * 100;
+  const valuePosition = shouldInvert ? 100 - rawPosition : rawPosition;
   const titleOnRight = valuePosition < 33;
-  
-  // Format value label
   const valueLabel = percent ? `${value.toFixed(0)}%` : value.toFixed(0);
   
   return (
@@ -54,9 +36,6 @@ export default function ShortDeviationSlider({ currentValue, avgValue, stdDev, a
           outline: none;
           cursor: pointer;
         }
-        
-        
-        
         .custom-slider::-ms-thumb {
           width: 72px !important;
           height: 72px !important;
@@ -76,32 +55,28 @@ export default function ShortDeviationSlider({ currentValue, avgValue, stdDev, a
           onChange={(e) => setValue(parseFloat(e.target.value))}
           className="custom-slider"
           style={{
-            background: color
+            background: color,
+            direction: shouldInvert ? 'rtl' : 'ltr'
           }}
         />
-       {/* Custom Thumb */}
         <div
-            className="absolute flex items-center justify-center font-bold"
-            style={{
-                left: `${valuePosition}%`,
-                top: '45%',
-                transform: 'translate(-50%, -50%)',
-                width: '64px',
-                height: '64px',
-                borderRadius: '50%',
-                backgroundColor: '#fff',
-                border: `4px solid ${color}`,
-                color: color,
-                zIndex: 30,
-                fontSize: '28px'
-            }}
-            >
-            {valueLabel}
+          className="absolute flex items-center justify-center font-bold"
+          style={{
+            left: `${valuePosition}%`,
+            top: '45%',
+            transform: 'translate(-50%, -50%)',
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            backgroundColor: '#fff',
+            border: `4px solid ${color}`,
+            color: color,
+            zIndex: 30,
+            fontSize: '28px'
+          }}
+        >
+          {valueLabel}
         </div>
-
-
-        
-        {/* Title inside slider */}
         <div 
           className="absolute top-1/2 text-white font-bold pointer-events-none"
           style={{ 
@@ -112,8 +87,6 @@ export default function ShortDeviationSlider({ currentValue, avgValue, stdDev, a
         >
           {title}
         </div>
-        
-        {/* Tick mark at average */}
         <div 
           className="absolute w-1 bg-black pointer-events-none"
           style={{ 
@@ -122,8 +95,313 @@ export default function ShortDeviationSlider({ currentValue, avgValue, stdDev, a
             transform: 'translate(-50%, -50%)',
             height: '64px'
           }}
+        />
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Variation 1: Black outline pill shows full range, filled portion is colored,
+// unfilled portion is white inside a black-bordered pill.
+// ─────────────────────────────────────────────────────────────────────────────
+export function DeviationSliderV1({ currentValue, avgValue, stdDev, aboveOrBelowRed, minRange, maxRange, title, percent = false }) {
+  const [value, setValue] = useState(currentValue);
+  const shouldInvert = aboveOrBelowRed === 'above';
+
+  const getColor = () => {
+    const deviation = (value - avgValue) / stdDev;
+    if (deviation >= 1) return aboveOrBelowRed === 'above' ? '#dc2626' : '#16a34a';
+    else if (deviation <= -1) return aboveOrBelowRed === 'below' ? '#dc2626' : '#16a34a';
+    else return '#9ca3af';
+  };
+
+  const range = stdDev * 7;
+  const minValue = minRange !== undefined ? minRange : avgValue - range;
+  const maxValue = maxRange !== undefined ? maxRange : avgValue + range;
+  const color = getColor();
+  const avgPosition = 50;
+  const rawPosition = ((value - minValue) / (maxValue - minValue)) * 100;
+  const valuePosition = shouldInvert ? 100 - rawPosition : rawPosition;
+  const titleOnRight = valuePosition < 33;
+  const valueLabel = percent ? `${value.toFixed(0)}%` : value.toFixed(0);
+
+  // Always fill left-to-right using rawPosition (the actual data position, not flipped)
+  const fillGradient = `linear-gradient(to right, ${color} ${valuePosition}%, white ${valuePosition}%)`;
+
+  return (
+    <div className="px-6 py-2 mx-auto" style={{ maxWidth: '440px' }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        .v1-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 48px;
+          border-radius: 24px;
+          outline: none;
+          cursor: pointer;
+          border: 3px solid #111;
+          box-sizing: border-box;
+        }
+        .v1-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 0; opacity: 0; }
+        .v1-slider::-moz-range-thumb { width: 0; height: 0; opacity: 0; border: none; }
+      `}} />
+
+      <div className="relative" style={{ marginTop: '20px' }}>
+        <input
+          type="range"
+          min={minValue}
+          max={maxValue}
+          step={(maxValue - minValue) / 100}
+          value={value}
+          onChange={(e) => setValue(parseFloat(e.target.value))}
+          className="v1-slider"
+          style={{ background: fillGradient }}
+        />
+
+        {/* Dot */}
+        <div
+          className="absolute flex items-center justify-center font-bold"
+          style={{
+            left: `${valuePosition}%`,
+            top: '45%',
+            transform: 'translate(-50%, -50%)',
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            backgroundColor: '#fff',
+            border: `4px solid #111`,
+            color: color,
+            zIndex: 30,
+            fontSize: '28px'
+          }}
         >
+          {valueLabel}
         </div>
+
+        {/* Title */}
+        <div
+          className="absolute top-1/2 font-bold pointer-events-none"
+          style={{
+            [titleOnRight ? 'right' : 'left']: '10px',
+            transform: 'translateY(-60%)',
+            fontSize: '26px',
+            color: titleOnRight ? '#111' : '#fff',
+            zIndex: 20,
+          }}
+        >
+          {title}
+        </div>
+
+        {/* Avg tick */}
+        <div
+          className="absolute w-1 bg-black pointer-events-none"
+          style={{ left: `${avgPosition}%`, top: '45%', transform: 'translate(-50%, -50%)', height: '64px' }}
+        />
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Variation 2: Outline matches slider color, unfilled portion is white.
+// ─────────────────────────────────────────────────────────────────────────────
+export function DeviationSliderV2({ currentValue, avgValue, stdDev, aboveOrBelowRed, minRange, maxRange, title, percent = false }) {
+  const [value, setValue] = useState(currentValue);
+  const shouldInvert = aboveOrBelowRed === 'above';
+
+  const getColor = () => {
+    const deviation = (value - avgValue) / stdDev;
+    if (deviation >= 1) return aboveOrBelowRed === 'above' ? '#dc2626' : '#16a34a';
+    else if (deviation <= -1) return aboveOrBelowRed === 'below' ? '#dc2626' : '#16a34a';
+    else return '#9ca3af';
+  };
+
+  const range = stdDev * 7;
+  const minValue = minRange !== undefined ? minRange : avgValue - range;
+  const maxValue = maxRange !== undefined ? maxRange : avgValue + range;
+  const color = getColor();
+  const avgPosition = 50;
+  const rawPosition = ((value - minValue) / (maxValue - minValue)) * 100;
+  const valuePosition = shouldInvert ? 100 - rawPosition : rawPosition;
+  const titleOnRight = valuePosition < 33;
+  const valueLabel = percent ? `${value.toFixed(0)}%` : value.toFixed(0);
+
+  const fillGradient = `linear-gradient(to right, ${color} ${valuePosition}%, white ${valuePosition}%)`;
+
+  return (
+    <div className="px-6 py-2 mx-auto" style={{ maxWidth: '440px' }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        .v2-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 48px;
+          border-radius: 24px;
+          outline: none;
+          cursor: pointer;
+          box-sizing: border-box;
+        }
+        .v2-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 0; opacity: 0; }
+        .v2-slider::-moz-range-thumb { width: 0; height: 0; opacity: 0; border: none; }
+      `}} />
+
+      <div className="relative" style={{ marginTop: '20px' }}>
+        <input
+          type="range"
+          min={minValue}
+          max={maxValue}
+          step={(maxValue - minValue) / 100}
+          value={value}
+          onChange={(e) => setValue(parseFloat(e.target.value))}
+          className="v2-slider"
+          style={{
+            background: fillGradient,
+            border: `3px solid ${color}`,
+          }}
+        />
+
+        {/* Dot */}
+        <div
+          className="absolute flex items-center justify-center font-bold"
+          style={{
+            left: `${valuePosition}%`,
+            top: '45%',
+            transform: 'translate(-50%, -50%)',
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            backgroundColor: '#fff',
+            border: `4px solid ${color}`,
+            color: color,
+            zIndex: 30,
+            fontSize: '28px'
+          }}
+        >
+          {valueLabel}
+        </div>
+
+        {/* Title */}
+        <div
+          className="absolute top-1/2 font-bold pointer-events-none"
+          style={{
+            [titleOnRight ? 'right' : 'left']: '10px',
+            transform: 'translateY(-60%)',
+            fontSize: '26px',
+            color: titleOnRight ? color : '#fff',
+            zIndex: 20,
+          }}
+        >
+          {title}
+        </div>
+
+        {/* Avg tick */}
+        <div
+          className="absolute w-1 pointer-events-none"
+          style={{ left: `${avgPosition}%`, top: '45%', transform: 'translate(-50%, -50%)', height: '64px', backgroundColor: color }}
+        />
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Variation 3: No outline. Unfilled portion is a phantom light grey.
+// The filled portion is the colored track; unfilled is #e5e7eb (light grey).
+// ─────────────────────────────────────────────────────────────────────────────
+export function DeviationSliderV3({ currentValue, avgValue, stdDev, aboveOrBelowRed, minRange, maxRange, title, percent = false }) {
+  const [value, setValue] = useState(currentValue);
+  const shouldInvert = aboveOrBelowRed === 'above';
+
+  const getColor = () => {
+    const deviation = (value - avgValue) / stdDev;
+    if (deviation >= 1) return aboveOrBelowRed === 'above' ? '#dc2626' : '#16a34a';
+    else if (deviation <= -1) return aboveOrBelowRed === 'below' ? '#dc2626' : '#16a34a';
+    else return '#9ca3af';
+  };
+
+  const range = stdDev * 7;
+  const minValue = minRange !== undefined ? minRange : avgValue - range;
+  const maxValue = maxRange !== undefined ? maxRange : avgValue + range;
+  const color = getColor();
+  const avgPosition = 50;
+  const rawPosition = ((value - minValue) / (maxValue - minValue)) * 100;
+  const valuePosition = shouldInvert ? 100 - rawPosition : rawPosition;
+  const titleOnRight = valuePosition < 33;
+  const valueLabel = percent ? `${value.toFixed(0)}%` : value.toFixed(0);
+
+  const phantomGrey = '#e5e7eb';
+  const fillGradient = `linear-gradient(to right, ${color} ${valuePosition}%, ${phantomGrey} ${valuePosition}%)`;
+
+  return (
+    <div className="px-6 py-2 mx-auto" style={{ maxWidth: '440px' }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        .v3-slider {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 48px;
+          border-radius: 24px;
+          outline: none;
+          cursor: pointer;
+          border: none;
+          box-sizing: border-box;
+        }
+        .v3-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 0; height: 0; opacity: 0; }
+        .v3-slider::-moz-range-thumb { width: 0; height: 0; opacity: 0; border: none; }
+      `}} />
+
+      <div className="relative" style={{ marginTop: '20px' }}>
+        <input
+          type="range"
+          min={minValue}
+          max={maxValue}
+          step={(maxValue - minValue) / 100}
+          value={value}
+          onChange={(e) => setValue(parseFloat(e.target.value))}
+          className="v3-slider"
+          style={{ background: fillGradient }}
+        />
+
+        {/* Dot */}
+        <div
+          className="absolute flex items-center justify-center font-bold"
+          style={{
+            left: `${valuePosition}%`,
+            top: '45%',
+            transform: 'translate(-50%, -50%)',
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            backgroundColor: '#fff',
+            border: `4px solid ${color}`,
+            color: color,
+            zIndex: 30,
+            fontSize: '28px'
+          }}
+        >
+          {valueLabel}
+        </div>
+
+        {/* Title - colored text when on the grey side, white when on colored side */}
+        <div
+          className="absolute top-1/2 font-bold pointer-events-none"
+          style={{
+            [titleOnRight ? 'right' : 'left']: '10px',
+            transform: 'translateY(-60%)',
+            fontSize: '26px',
+            color: titleOnRight ? '#6b7280' : '#fff',
+            zIndex: 20,
+          }}
+        >
+          {title}
+        </div>
+
+        {/* Avg tick */}
+        <div
+          className="absolute w-1 bg-black pointer-events-none"
+          style={{ left: `${avgPosition}%`, top: '45%', transform: 'translate(-50%, -50%)', height: '64px', opacity: 0.7 }}
+        />
       </div>
     </div>
   );

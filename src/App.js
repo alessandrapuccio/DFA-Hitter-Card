@@ -1,123 +1,195 @@
 import React, { useState } from 'react';
 import TrinityTrident from './components/TrinityTrident';
 import DeviationSlider from './components/DeviationSlider';
-import ShortDeviationSlider from './components/ShortDeviationSlider';
+// import ShortDeviationSlider from './components/ShortDeviationSlider';
+import ShortDeviationSlider, { DeviationSliderV1, DeviationSliderV2, DeviationSliderV3 } from './components/ShortDeviationSlider';
 import WRCPlusChart from './components/WRCPlusChart.js';
 import LevelTimeBar from './components/LevelTimeBar.js';
 import CatchingChart from './components/CatchingChart.js';
 import RollingTMWRCPlot from './components/RollingWRCPlot.js';
 
+
+const SLIDERS_LEFT = [
+  { currentValue: 350, avgValue: 350, stdDev: 28, aboveOrBelowRed: "NA", title: "PA" },
+  { currentValue: 95, avgValue: 100, stdDev: 10, aboveOrBelowRed: "below", title: "TM wRC+" },
+  { currentValue: 100, avgValue: 100, stdDev: 10, aboveOrBelowRed: "below", title: "wRC+" },
+  { currentValue: 34, avgValue: 21.4, stdDev: 6.7, aboveOrBelowRed: "above", title: "K%", percent: true },
+  { currentValue: 22, avgValue: 10.5, stdDev: 3.6, aboveOrBelowRed: "below", title: "BB%", percent: true },
+];
+
+const SLIDERS_RIGHT = [
+  { currentValue: 14.7, avgValue: 24.7, stdDev: 5.8, aboveOrBelowRed: "above", title: "Chase" },
+  { currentValue: 62.2, avgValue: 65.6, stdDev: 5.8, aboveOrBelowRed: "below", title: "ZSwing" },
+  { currentValue: 29.5, avgValue: 16.2, stdDev: 5.1, aboveOrBelowRed: "above", title: "ZWhiff" },
+  { currentValue: 111.7, avgValue: 106, stdDev: 2.8, aboveOrBelowRed: "below", title: "EV T10%" },
+  { currentValue: 72.4, avgValue: 70.5, stdDev: 2.6, aboveOrBelowRed: "below", title: "Bat T10%" },
+];
+
+const VARIANTS = [
+  { label: "Original", Component: ShortDeviationSlider },
+  { label: "V1 — Black outline, white unfilled", Component: DeviationSliderV1 },
+  { label: "V2 — Color outline, white unfilled", Component: DeviationSliderV2 },
+  { label: "V3 — No outline, phantom grey", Component: DeviationSliderV3 },
+];
+
 export default function App() {
-
-
-
-
-
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="grid grid-cols-2 border-b-4 border-black">
-        <div className="bg-blue-950 text-white px-8 py-4">
-          <h1 className="text-4xl font-bold italic">RESULTS</h1>
-        </div>
-        <div className="bg-blue-950 text-white px-8 py-4 text-right">
-          <h1 className="text-4xl font-bold italic">TM</h1>
-        </div>
-      </div>
+      {VARIANTS.map(({ label, Component }) => (
+        <div key={label}>
+          {/* Section Header */}
+          <div className="grid grid-cols-2 border-b-4 border-black">
+            <div className="bg-blue-950 text-white px-8 py-4">
+              <h1 className="text-4xl font-bold italic">RESULTS</h1>
+            </div>
+            <div className="bg-blue-950 text-white px-8 py-4 text-right">
+              <h1 className="text-4xl font-bold italic">TM</h1>
+            </div>
+          </div>
 
-      {/* Sliders Grid */}
-      <div className="grid grid-cols-2">
-        {/* RESULTS Column */}
-        <div className="border-r-2 border-black">
-          <ShortDeviationSlider 
-            currentValue={350}
-            avgValue={350}
-            stdDev={28}
-            aboveOrBelowRed="NA"
-            title="PA"
-          />
-          
-          <ShortDeviationSlider 
-            currentValue={95}
-            avgValue={100}
-            stdDev={10}
-            aboveOrBelowRed="below"
-            title="TM wRC+"
-          />
-          
-          <ShortDeviationSlider 
-            currentValue={100}
-            avgValue={100}
-            stdDev={10}
-            aboveOrBelowRed="below"
-            title="wRC+"
-          />
-          
-          <ShortDeviationSlider 
-            currentValue={34}
-            avgValue={21.4}
-            stdDev={6.7}
-            aboveOrBelowRed="above"
-            title="K%"
-            percent={true}
-          />
-          
-          <ShortDeviationSlider 
-            currentValue={22}
-            avgValue={10.5}
-            stdDev={3.6}
-            aboveOrBelowRed="below"
-            title="BB%"
-            percent={true}
-          />
-        </div>
+          {/* Variant label */}
+          <div className="bg-gray-100 px-8 py-2 text-sm font-mono text-gray-500 border-b border-gray-300">
+            {label}
+          </div>
 
-        {/* TM Column */}
-        <div>
-          <ShortDeviationSlider 
-            currentValue={-12.8}
-            avgValue={0}
-            stdDev={5.8}
-            aboveOrBelowRed="above"
-            title="Chase"
-          />
-          
-          <ShortDeviationSlider 
-            currentValue={-3.1}
-            avgValue={0}
-            stdDev={5.8}
-            aboveOrBelowRed="below"
-            title="ZSwing"
-          />
-          
-          <ShortDeviationSlider 
-            currentValue={13.3}
-            avgValue={0}
-            stdDev={5.1}
-            aboveOrBelowRed="above"
-            title="ZWhiff"
-          />
-          
-          <ShortDeviationSlider 
-            currentValue={111.7}
-            avgValue={106}
-            stdDev={2.8}
-            aboveOrBelowRed="below"
-            title="EV T10%"
-          />
-          
-          <ShortDeviationSlider 
-            currentValue={59}
-            avgValue={70.5}
-            stdDev={2.6}
-            aboveOrBelowRed="below"
-            title="Bat T10%"
-          />
+          {/* Sliders Grid */}
+          <div className="grid grid-cols-2 border-b-4 border-black mb-4">
+            <div className="border-r-2 border-black">
+              {SLIDERS_LEFT.map((props) => (
+                <Component key={props.title} {...props} />
+              ))}
+            </div>
+            <div>
+              {SLIDERS_RIGHT.map((props) => (
+                <Component key={props.title} {...props} />
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }
+
+
+
+
+
+////// HITTING COLUMNS OF VALUES RESULTS AND TM
+// export default function App() {
+
+//   return (
+//     <div className="min-h-screen bg-white">
+//       {/* Header */}
+//       <div className="grid grid-cols-2 border-b-4 border-black">
+//         <div className="bg-blue-950 text-white px-8 py-4">
+//           <h1 className="text-4xl font-bold italic">RESULTS</h1>
+//         </div>
+//         <div className="bg-blue-950 text-white px-8 py-4 text-right">
+//           <h1 className="text-4xl font-bold italic">TM</h1>
+//         </div>
+//       </div>
+
+//       {/* Sliders Grid */}
+//       <div className="grid grid-cols-2">
+//         {/* RESULTS Column */}
+//         <div className="border-r-2 border-black">
+//           <ShortDeviationSlider 
+//             currentValue={350}
+//             avgValue={350}
+//             stdDev={28}
+//             aboveOrBelowRed="NA"
+//             title="PA"
+//           />
+          
+//           <ShortDeviationSlider 
+//             currentValue={95}
+//             avgValue={100}
+//             stdDev={10}
+//             aboveOrBelowRed="below"
+//             title="TM wRC+"
+//           />
+          
+//           <ShortDeviationSlider 
+//             currentValue={100}
+//             avgValue={100}
+//             stdDev={10}
+//             aboveOrBelowRed="below"
+//             title="wRC+"
+//           />
+          
+//           <ShortDeviationSlider 
+//             currentValue={34}
+//             avgValue={21.4}
+//             stdDev={6.7}
+//             aboveOrBelowRed="above"
+//             title="K%"
+//             percent={true}
+//           />
+          
+//           <ShortDeviationSlider 
+//             currentValue={22}
+//             avgValue={10.5}
+//             stdDev={3.6}
+//             aboveOrBelowRed="below"
+//             title="BB%"
+//             percent={true}
+//           />
+//         </div>
+
+//         {/* TM Column */}
+//         <div>
+//           <ShortDeviationSlider 
+//             currentValue={14.7}
+//             avgValue={24.7}
+//             stdDev={5.8}
+//             aboveOrBelowRed="above"
+//             title="Chase"
+//           />
+          
+//           <ShortDeviationSlider 
+//             currentValue={62.2}
+//             avgValue={65.6}
+//             stdDev={5.8}
+//             aboveOrBelowRed="below"
+//             title="ZSwing"
+//           />
+          
+//           <ShortDeviationSlider 
+//             currentValue={29.5}
+//             avgValue={16.2}
+//             stdDev={5.1}
+//             aboveOrBelowRed="above"
+//             title="ZWhiff"
+//           />
+          
+//           <ShortDeviationSlider 
+//             currentValue={111.7}
+//             avgValue={106}
+//             stdDev={2.8}
+//             aboveOrBelowRed="below"
+//             title="EV T10%"
+//           />
+          
+//           <ShortDeviationSlider 
+//             currentValue={72.4}
+//             avgValue={70.5}
+//             stdDev={2.6}
+//             aboveOrBelowRed="below"
+//             title="Bat T10%"
+//           />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+//////// ALL THE COMPONENTS 
 
 //   return (
     
