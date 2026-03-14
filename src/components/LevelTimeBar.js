@@ -1,64 +1,83 @@
-export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83, 17] }) {
-  // Color mapping for different levels
+// Card-ready component. barHeight controls bar thickness. inline=true puts level+% on one line.
+export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83, 17], barHeight = 38, inline = false }) {
   const levelColors = {
-    'MLB': '#08519c', // blue
-    '3A': '#3182bd', // grey
-    '2A': '#6baed6', // green
-    '1A': '#bdd7e7', // amber
-    'RK': '#eff3ff', // purple
+    'MLB': '#08519c',
+    '3A':  '#3182bd',
+    '2A':  '#6baed6',
+    '1A':  '#bdd7e7',
+    'RK':  '#eff3ff',
   };
 
-  // Default color if level not in mapping
   const getColor = (level) => levelColors[level] || '#9ca3af';
 
+  const fontSize     = Math.round(barHeight * 0.65);
+  const subFontSize  = Math.round(barHeight * 0.55);
+
   return (
-    <div className="w-full max-w-[910px] mx-auto p-6">
-        <div className="relative h-[110px] bg-gray-200 rounded-lg overflow-hidden flex">
+    <div style={{ width: '100%' }}>
+      <div
+        style={{
+          position: 'relative',
+          height: barHeight,
+          background: '#e5e7eb',
+          borderRadius: 4,
+          display: 'flex',
+          overflow: 'hidden',
+        }}
+      >
         {levels.map((level, index) => {
-          const percentage = percentages[index];
-          const color = getColor(level);
-          const showLabel = percentage >= 10; // Only show label if segment is at least 10%
-          
+          const pct      = percentages[index];
+          const color    = getColor(level);
+          const showLabel = pct >= 10;
+
           return (
             <div
               key={index}
-              className="relative flex items-center justify-center transition-all duration-300 hover:opacity-80"
               style={{
-                width: `${percentage}%`,
+                width: `${pct}%`,
                 backgroundColor: color,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                transition: 'opacity 0.2s',
               }}
+              onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
             >
-            {showLabel && (
-                <div
-                    className="text-white font-bold text-center px-2 flex flex-col gap-1"
-                    style={{ fontSize: '60px', lineHeight: '.8' }}
-                >
-                    <div>{level}</div>
-                    <div style={{ fontSize: '48px' }}>{percentage}%</div>
-                </div>
-            )}
+              {showLabel && (
+                inline ? (
+                  <div style={{
+                    color: 'white', fontWeight: 700,
+                    display: 'flex', alignItems: 'baseline', gap: 3,
+                    lineHeight: 1,
+                  }}>
+                    <span style={{ fontSize }}>{level}</span>
+                    {pct >= 20 && <span style={{ fontSize: subFontSize }}>{pct}%</span>}
+                  </div>
+                ) : (
+                  <div style={{ color: 'white', fontWeight: 700, textAlign: 'center', lineHeight: 1 }}>
+                    <div style={{ fontSize }}>{level}</div>
+                    <div style={{ fontSize: subFontSize }}>{pct}%</div>
+                  </div>
+                )
+              )}
             </div>
           );
         })}
       </div>
-      
-      {/* Legend below for segments too small to label */}
+
+      {/* Legend for segments too narrow to label */}
       {percentages.some(p => p < 10) && (
-        <div className="mt-4 flex flex-wrap gap-4 justify-center" style={{ fontSize: '48px' }}>
-          {levels.map((level, index) => {
-            if (percentages[index] < 10) {
-              return (
-                <div key={index} className="flex items-center gap-2">
-                  <div
-                    className="w-4 h-4 rounded"
-                    style={{ backgroundColor: getColor(level) }}
-                  />
-                  <span>{level}: {percentages[index]}%</span>
-                </div>
-              );
-            }
-            return null;
-          })}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: '4px 0', fontSize: 11 }}>
+          {levels.map((level, index) =>
+            percentages[index] < 10 ? (
+              <div key={index} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <div style={{ width: 10, height: 10, borderRadius: 2, backgroundColor: getColor(level) }} />
+                <span>{level}: {percentages[index]}%</span>
+              </div>
+            ) : null
+          )}
         </div>
       )}
     </div>

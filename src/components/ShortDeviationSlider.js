@@ -24,28 +24,23 @@ export default function ShortDeviationSlider({ currentValue, avgValue, stdDev, a
   const valueLabel = percent ? `${value.toFixed(0)}%` : value.toFixed(0);
   
   return (
-    <div className="px-6 py-2 mx-auto" style={{ maxWidth: '440px' }}>
+    <div style={{ padding: '2px 12px', width: '100%', boxSizing: 'border-box' }}>
       <style dangerouslySetInnerHTML={{__html: `
         .custom-slider {
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
           width: 100%;
-          height: 48px;
-          border-radius: 24px;
+          height: 24px;
+          border-radius: 12px;
           outline: none;
           cursor: pointer;
         }
-        .custom-slider::-ms-thumb {
-          width: 72px !important;
-          height: 72px !important;
-          border-radius: 50%;
-          background: #000;
-          cursor: pointer;
-        }
+        .custom-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 0; height: 0; }
+        .custom-slider::-moz-range-thumb { width: 0; height: 0; border: none; opacity: 0; }
       `}} />
-      
-      <div className="relative" style={{ marginTop: '20px' }}>
+
+      <div className="relative" style={{ marginTop: '10px' }}>
         <input
           type="range"
           min={minValue}
@@ -65,35 +60,37 @@ export default function ShortDeviationSlider({ currentValue, avgValue, stdDev, a
             left: `${valuePosition}%`,
             top: '45%',
             transform: 'translate(-50%, -50%)',
-            width: '64px',
-            height: '64px',
+            width: '32px',
+            height: '32px',
             borderRadius: '50%',
             backgroundColor: '#fff',
-            border: `4px solid ${color}`,
+            border: `2px solid ${color}`,
             color: color,
             zIndex: 30,
-            fontSize: '28px'
+            fontSize: '13px',
+            lineHeight: 1,
           }}
         >
           {valueLabel}
         </div>
-        <div 
+        <div
           className="absolute top-1/2 text-white font-bold pointer-events-none"
-          style={{ 
-            [titleOnRight ? 'right' : 'left']: '10px',
+          style={{
+            [titleOnRight ? 'right' : 'left']: '6px',
             transform: 'translateY(-60%)',
-            fontSize: '26px'
+            fontSize: '13px'
           }}
         >
           {title}
         </div>
-        <div 
-          className="absolute w-1 bg-black pointer-events-none"
-          style={{ 
-            left: `${avgPosition}%`, 
+        <div
+          className="absolute bg-black pointer-events-none"
+          style={{
+            left: `${avgPosition}%`,
             top: '45%',
             transform: 'translate(-50%, -50%)',
-            height: '64px'
+            width: '2px',
+            height: '32px'
           }}
         />
       </div>

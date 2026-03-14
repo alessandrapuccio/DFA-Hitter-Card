@@ -7,6 +7,7 @@ import WRCPlusChart from './components/WRCPlusChart.js';
 import LevelTimeBar from './components/LevelTimeBar.js';
 import CatchingChart from './components/CatchingChart.js';
 import RollingTMWRCPlot from './components/RollingWRCPlot.js';
+import HitterCard from './components/HitterCard.js';
 
 
 const SLIDERS_LEFT = [
@@ -33,6 +34,15 @@ const VARIANTS = [
 ];
 
 export default function App() {
+  return (
+    <div className="min-h-screen bg-gray-100 p-8">
+      <HitterCard />
+    </div>
+  );
+}
+
+// ─── old slider variant preview (kept for reference) ────────────────────────
+function SliderVariantPreview() {
   return (
     <div className="min-h-screen bg-white">
       {VARIANTS.map(({ label, Component }) => (
