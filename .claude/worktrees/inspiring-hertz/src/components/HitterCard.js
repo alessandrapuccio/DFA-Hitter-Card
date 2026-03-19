@@ -193,8 +193,8 @@ function AnchorTable({ player }) {
 function BaseballDiamond({ positions }) {
   const posSet = new Set(positions.map(p => p.pos));
   const fieldDots = {
-    '1B': { cx: 82, cy: 52 }, '2B': { cx: 55, cy: 24 },
-    'SS': { cx: 30, cy: 30 }, '3B': { cx: 20, cy: 52 },
+    '1B': { cx: 82, cy: 50 }, '2B': { cx: 55, cy: 24 },
+    'SS': { cx: 30, cy: 30 }, '3B': { cx: 20, cy: 50 },
     'LF': { cx: 12, cy: 10 }, 'CF': { cx: 55, cy: 8  },
     'RF': { cx: 95, cy: 10 }, 'C':  { cx: 55, cy: 78 },
     'P':  { cx: 55, cy: 46 }, 'DH': { cx: 55, cy: 92 },
