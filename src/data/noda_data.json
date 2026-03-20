@@ -5,14 +5,15 @@
     "bats": "L",
     "throws": "L",
     "age": 29,
-    "mls": 1.117,
+    "mls": 10.017,
     "option": { "has_option": true, "years": 1 },
     "outrighted": false,
     "salary": 780000,
     "p2": 280000,
-    "contract_current_year": 800000,
-    "contract_next_year": 800000,
-    "contract_year3": null
+    "anchor_val": 800000,
+    "ML_val": 800000,
+    "PV_val": null,
+    "ORG": "MIN"
   },
   "hitting": {
     "projections": {
@@ -27,7 +28,7 @@
     },
     "level_time": {
       "levels": ["3A", "MLB"],
-      "percentages": [83, 17]
+      "percentages": [85, 15]
     },
     "sliders_left": [
       { "currentValue": 350, "avgValue": 350, "stdDev": 28, "aboveOrBelowRed": "NA",    "title": "PA" },

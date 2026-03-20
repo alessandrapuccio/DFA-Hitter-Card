@@ -175,10 +175,10 @@ function AnchorTable({ player }) {
         <tbody>
           <tr>
             <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
-              ${(player.contract_current_year / 1e6).toFixed(1)}M
+              ${(player.anchor_val / 1e6).toFixed(1)}M
             </td>
             <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
-              ${(player.contract_next_year / 1e6).toFixed(1)}M
+              ${(player.ML_val / 1e6).toFixed(1)}M
             </td>
             <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
               --

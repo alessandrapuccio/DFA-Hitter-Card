@@ -3,7 +3,7 @@ import React from 'react';
 // Compact card-ready component — no full-page wrapper.
 export default function WRCPlusChart({ vR, vL, barContainerHeight = 130 }) {
   const getBarColor = (value) => {
-    if (value >= 110) return '#22c55e';
+    if (value >= 110) return '#16a34a';
     if (value <= 90)  return '#ef4444';
     return '#6b7280';
   };

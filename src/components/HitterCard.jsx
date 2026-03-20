@@ -3,7 +3,20 @@ import ShortDeviationSlider from './ShortDeviationSlider';
 import TrinityTrident from './TrinityTrident';
 import WRCPlusChart from './WRCPlusChart';
 import LevelTimeBar from './LevelTimeBar';
-import seattleLogo from '../data/seattle_logo.png';
+import ANCHOR from '../data/KRAKEN.png';
+import MLV from '../data/MLV.png';
+import PV from '../data/PV.svg';
+
+
+
+const logos = import.meta.glob('../data/logos/*.png', { eager: true });
+
+const logoMap = Object.fromEntries(
+  Object.entries(logos).map(([path, module]) => {
+    const fileName = path.split('/').pop().replace('.png', '');
+    return [fileName, module.default];
+  })
+);
 
 // ─── style helpers ────────────────────────────────────────────────────────────
 
@@ -44,6 +57,22 @@ function SectionHeader({ label, align = 'center' }) {
 }
 
 // ─── sub-panels ───────────────────────────────────────────────────────────────
+function formatSalary(value) {
+  if (value == null) return '';
+
+  const num = typeof value === 'string'
+    ? parseFloat(value.replace(/,/g, ''))
+    : value;
+
+  const format = (n, suffix) => {
+    const str = (n / suffix.div).toFixed(1);
+    return `${str.endsWith('.0') ? str.slice(0, -2) : str}${suffix.label}`;
+  };
+
+  if (num >= 1_000_000) return `$${format(num, { div: 1_000_000, label: 'M' })}`;
+  if (num >= 1_000)     return `$${format(num, { div: 1_000, label: 'K' })}`;
+  return `$${num.toFixed(1).endsWith('.0') ? num.toFixed(0) : num.toFixed(1)}`;
+}
 
 function PlayerBioPanel({ player }) {
   return (
@@ -54,19 +83,19 @@ function PlayerBioPanel({ player }) {
         background: HEADER_BG,
         display: 'flex',
         alignItems: 'center',
-        gap: 2,
+        gap: 11,
         padding: '10px 7px',
       }}>
         <img
-          src={seattleLogo}
-          alt="Seattle"
-          style={{ width: 58, height: 70, objectFit: 'contain', flexShrink: 0 }}
+          src={logoMap[player.ORG]}
+          alt={player.ORG}
+          style={{ width: 50, height: 70, marginLeft:5, objectFit: 'contain', flexShrink: 0 }}
         />
         <div>
           <div style={{ color: 'white', fontSize: 27, fontWeight: 800, fontStyle: 'italic', lineHeight: 1.1 }}>
             {player.name}
           </div>
-          <div style={{ color: 'white', display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 5 }}>
+          <div style={{ color: 'white', display: 'flex', alignItems: 'baseline', gap: 7, marginTop: 5 }}>
             <span style={{ fontSize: 22, fontWeight: 800, fontStyle: 'italic' }}>{player.position}&nbsp;</span>
             <span style={{ fontSize: 17, fontWeight: 400, opacity: 0.88 }}>
               {player.bats}/{player.throws}&nbsp;&nbsp;Age: {player.age}&nbsp;&nbsp;MLS: {player.mls}
@@ -97,9 +126,9 @@ function PlayerBioPanel({ player }) {
         </div>
         <div style={{ height: 3, background: HEADER_BG, width: '85%', marginBottom: 10 }} />
         <div style={{ fontSize: 21, fontWeight: 500 }}>
-          Salary: <strong>${(player.salary / 1000).toFixed(0)}K</strong>
+          Salary: <strong>{formatSalary(player.salary)}</strong>
           &nbsp;&nbsp;
-          P2: <strong>${(player.p2 / 1000).toFixed(0)}K</strong>
+          P2: <strong>{formatSalary(player.p2)}</strong>
         </div>
       </div>
     </div>
@@ -118,27 +147,47 @@ function AnchorTable({ player }) {
           <col style={colStyle} />
           <col style={colStyle} />
         </colgroup>
-        <thead>
-          <tr>
-            {['ANCHOR', 'MLV', 'PV'].map(h => (
-              <th key={h} style={{
-                background: HEADER_BG, color: 'white',
-                fontStyle: 'italic', fontWeight: 700,
-                padding: '6px 8px', textAlign: 'center', fontSize: 15,
-                border: cellBorder,
-              }}>
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
+
+      <thead>
+        <tr>
+          {[
+            { key: 'ANCHOR', src: ANCHOR, height: 51, isLarge: true },
+            { key: 'MLV', src: MLV, height: 26 },
+            { key: 'PV', src: PV, height: 28 },
+          ].map(({ key, src, height, isLarge }) => (
+            <th key={key} style={{
+              background: HEADER_BG,
+              padding: '6px 8px', textAlign: 'center',
+              border: cellBorder,
+              position: 'relative',
+            }}>
+              {isLarge ? (
+                <div style={{ position: 'relative', height: 20 }}>
+                  <img src={src} alt={key} style={{
+                    height,
+                    objectFit: 'contain',
+                    position: 'absolute',
+                    top: '50%', left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }} />
+                </div>
+              ) : (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 20 }}>
+                  <img src={src} alt={key} style={{ height, objectFit: 'contain' }} />
+                </div>
+              )}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
         <tbody>
           <tr>
             <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
-              ${(player.contract_current_year / 1e6).toFixed(1)}M
+              {player.anchor_val}
             </td>
             <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
-              ${(player.contract_next_year / 1e6).toFixed(1)}M
+              {player.anchor_val}
             </td>
             <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
               --
@@ -366,7 +415,7 @@ export default function HitterCard({ data }) {
                 top: 10,
                 background: HEADER_BG, color: 'white',
                 fontSize: 13, fontWeight: 700, fontStyle: 'italic',
-                padding: '3px 8px', letterSpacing: '0.4px',
+                padding: '6px 8px', letterSpacing: '0.4px',
                 zIndex: 1,
               }}>
                 PROJECTIONS
@@ -434,7 +483,7 @@ export default function HitterCard({ data }) {
               left: 5, top: 4,
               background: HEADER_BG, color: 'white',
               fontSize: 13, fontWeight: 700, fontStyle: 'italic',
-              padding: '3px 8px', letterSpacing: '0.4px',
+              padding: '6px 8px', letterSpacing: '0.4px',
               zIndex: 1,
             }}>
               RESULTS
@@ -460,7 +509,7 @@ export default function HitterCard({ data }) {
               right: 5, top: 4,
               background: HEADER_BG, color: 'white',
               fontSize: 13, fontWeight: 700, fontStyle: 'italic',
-              padding: '3px 8px', letterSpacing: '0.4px',
+              padding: '6px 8px', letterSpacing: '0.4px',
               zIndex: 1,
             }}>
               TM
@@ -496,106 +545,116 @@ export default function HitterCard({ data }) {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
 
         {/* DEFENSE */}
-<div style={{ flex: 5, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-  <SectionHeader label="DEFENSE" />
+        <div style={{ flex: 5, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <SectionHeader label="DEFENSE" />
 
-  {/* DEF Runs badge + stacked Rng/Arm */}
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '6px 12px 8px', flexShrink: 0 }}>
-    <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>DEF Runs:</span>
-    <span style={{
-      background: defense.def_runs >= 1 ? '#dcfce7' : defense.def_runs <= -1 ? '#fee2e2' : '#f3f4f6',
-      color:      defense.def_runs >= 1 ? '#16a34a' : defense.def_runs <= -1 ? '#dc2626' : '#374151',
-      padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
-    }}>
-      {defense.def_runs}
-    </span>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginLeft: 6, fontSize: 16, fontWeight: 600 }}>
-      <span>Rng+: <strong>{defense.rng_plus ?? '--'}</strong></span>
-      <span>Arm+: <strong>{defense.arm_plus ?? '--'}</strong></span>
-    </div>
-  </div>
-  {/* Decorative HEADER_BG divider — inset from edges */}
-  <div style={{ height: 2, minHeight: 2, flexShrink: 0, background: HEADER_BG, margin: '0 20px 0' }} />
+          {/* DEF Runs badge + stacked Rng/Arm */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '6px 12px 8px', flexShrink: 0 }}>
+            <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>DEF Runs:</span>
+            <span style={{
+              background: defense.def_runs >= 1 ? '#dcfce7' : defense.def_runs <= -1 ? '#fee2e2' : '#f3f4f6',
+              color:      defense.def_runs >= 1 ? '#16a34a' : defense.def_runs <= -1 ? '#dc2626' : '#374151',
+              padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
+            }}>
+              {defense.def_runs}
+            </span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginLeft: 6, fontSize: 16, fontWeight: 600 }}>
+              <span>Rng+: <strong>{defense.rng_plus ?? '--'}</strong></span>
+              <span>Arm+: <strong>{defense.arm_plus ?? '--'}</strong></span>
+            </div>
+          </div>
+          {/* Decorative HEADER_BG divider — inset from edges */}
+          <div style={{ height: 2, minHeight: 2, flexShrink: 0, background: HEADER_BG, margin: '0 20px 0' }} />
 
-  {/* Diamond + position table */}
-  <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'space-around', padding: '0 10px 0 16px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-      <BaseballDiamond positions={defense.positions} />
-    </div>
-    <PositionTable positions={defense.positions} />
-  </div>
-</div>
+          {/* Diamond + position table */}
+          <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'space-around', padding: '0 10px 0 16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+              <BaseballDiamond positions={defense.positions} />
+            </div>
+            <PositionTable positions={defense.positions} />
+          </div>
+        </div>
 
-{/* BASERUNNING */}
-<div style={{ flex: 3, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-  <SectionHeader label="BASERUNNING" />
+        {/* BASERUNNING */}
+        <div style={{ flex: 3, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <SectionHeader label="BASERUNNING" />
 
-  {/* BSR Runs badge + SB */}
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '8px 12px 7px', flexShrink: 0 }}>
-    <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>BSR Runs:</span>
-    <span style={{
-      background: baserunning.bsr_runs >= 1 ? '#dcfce7' : baserunning.bsr_runs <= -1 ? '#fee2e2' : '#f3f4f6',
-      color:      baserunning.bsr_runs >= 1 ? '#16a34a' : baserunning.bsr_runs <= -1 ? '#dc2626' : '#374151',
-      padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
-    }}>
-      {baserunning.bsr_runs}
-    </span>
-    <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', marginLeft: 6, color: HEADER_BG }}>SB:</span>
-    <span style={{ fontSize: 17, fontWeight: 600 }}>
-      {baserunning.sb_made}/{baserunning.sb_attempted}
-    </span>
-  </div>
-  {/* Decorative HEADER_BG divider — inset from edges */}
-  <div style={{ height: 2, background: HEADER_BG, margin: '0 20px 2px', flexShrink: 0 }} />
+          {/* BSR Runs badge + SB */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '8px 12px 7px', flexShrink: 0 }}>
+            <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>BSR Runs:</span>
+            <span style={{
+              background: baserunning.bsr_runs >= 1 ? '#dcfce7' : baserunning.bsr_runs <= -1 ? '#fee2e2' : '#f3f4f6',
+              color:      baserunning.bsr_runs >= 1 ? '#16a34a' : baserunning.bsr_runs <= -1 ? '#dc2626' : '#374151',
+              padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
+            }}>
+              {baserunning.bsr_runs}
+            </span>
+            <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', marginLeft: 6, color: HEADER_BG }}>SB:</span>
+            <span style={{ fontSize: 17, fontWeight: 600 }}>
+              {baserunning.sb_made}/{baserunning.sb_attempted}
+            </span>
+          </div>
+          {/* Decorative HEADER_BG divider — inset from edges */}
+          <div style={{ height: 2, background: HEADER_BG, margin: '0 20px 2px', flexShrink: 0 }} />
 
-  {/* Slider rows — centered in remaining space */}
-  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-    <BsrRow
-      label="BSR+:"
-      currentValue={baserunning.bsr_plus.playerValue}
-      avgValue={baserunning.bsr_plus.avgValue}
-      stdDev={baserunning.bsr_plus.stdDev}
-      aboveOrBelowRed="above"
-      unit=""
-      decimals={0}
-    />
-    <BsrRow
-      label="Sprint Speed:"
-      currentValue={baserunning.sprint_speed.playerValue}
-      avgValue={baserunning.sprint_speed.avgValue}
-      stdDev={baserunning.sprint_speed.stdDev}
-      aboveOrBelowRed="above"
-      unit=" ft/sec"
-      decimals={1}
-    />
-  </div>
-</div>
+          {/* Slider rows — centered in remaining space */}
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <BsrRow
+              label="BSR+:"
+              currentValue={baserunning.bsr_plus.playerValue}
+              avgValue={baserunning.bsr_plus.avgValue}
+              stdDev={baserunning.bsr_plus.stdDev}
+              aboveOrBelowRed="above"
+              unit=""
+              decimals={0}
+            />
+            <BsrRow
+              label="Sprint Speed:"
+              currentValue={baserunning.sprint_speed.playerValue}
+              avgValue={baserunning.sprint_speed.avgValue}
+              stdDev={baserunning.sprint_speed.stdDev}
+              aboveOrBelowRed="above"
+              unit=" ft/sec"
+              decimals={1}
+            />
+          </div>
+        </div>
 
         {/* HEALTH */}
         <div style={{ flex: 1.60, overflow: 'hidden' }}>
           <SectionHeader label="HEALTH" />
-          {/* Horizontal layout: years as columns */}
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed' }}>
-            <colgroup>
-              <col style={{ width: '34%' }} />
-              {Object.keys(health).map(yr => <col key={yr} style={{ width: `${66 / Object.keys(health).length}%` }} />)}
-            </colgroup>
-            <thead>
-              <tr>
-                <th style={{ background: '#e2e8f0', color: HEADER_BG, padding: '3px 8px', textAlign: 'left', fontStyle: 'normal', fontWeight: 700, border: '1px solid #cbd5e1' }}>Year</th>
-                {Object.keys(health).map(yr => (
-                  <th key={yr} style={{ background: '#e2e8f0', border: '1px solid #cbd5e1', color: HEADER_BG, padding: '3px 8px', textAlign: 'center', fontStyle: 'normal', fontWeight: 700 }}>{yr}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                  <td style={{ padding: '6px 8px', fontWeight: 600, fontSize: 15, border: '1px solid #cbd5e1', textAlign: 'left' }}>Days Missed</td>                {Object.values(health).map((days, i) => (
-                  <td key={i} style={{ padding: '3px 8px', textAlign: 'center', border: '1px solid #cbd5e1', fontWeight: 700, fontSize: 15, color: days > 15 ? '#dc2626' : '#374151' }}>{days}</td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+          {(() => {
+            const years = Object.keys(health).sort((a, b) => b - a);
+            return (
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed' }}>
+                <colgroup>
+                  <col style={{ width: '34%' }} />
+                  {years.map(yr => <col key={yr} style={{ width: `${66 / years.length}%` }} />)}
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th style={{ background: '#e2e8f0', color: HEADER_BG, padding: '5px 8px', textAlign: 'left', fontStyle: 'normal', fontWeight: 700, border: '1px solid #cbd5e1' }}>Year</th>
+                    {years.map(yr => (
+                      <th key={yr} style={{ background: '#e2e8f0', border: '1px solid #cbd5e1', color: HEADER_BG, padding: '3px 8px', textAlign: 'center', fontStyle: 'normal', fontWeight: 700 }}>{yr}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={{ padding: '6px 8px', fontWeight: 600, fontSize: 15, border: '1px solid #cbd5e1', textAlign: 'left' }}>Days Missed</td>
+                    {years.map((yr, i) => {
+                      const days = health[yr];
+                      return (
+                        <td key={i} style={{ padding: '7px 8px', textAlign: 'center', border: '1px solid #cbd5e1', fontWeight: 700, fontSize: 16, color: days > 15 ? '#dc2626' : '#374151' }}>
+                          {days}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                </tbody>
+              </table>
+            );
+          })()}
         </div>
 
         </div>
@@ -605,7 +664,7 @@ export default function HitterCard({ data }) {
       <div style={{ display: 'flex', borderTop: '2px solid #475569' }}>
 
         {/* ── LAST REPORT — 40% width ───────────────────────────────────── */}
-        <div style={{ flex: '0 0 40%', borderRight: BORDER }}>
+        <div style={{ flex: '0 0 37%', borderRight: BORDER }}>
 
           {/* Banner with scout name + date inline */}
           <div style={{
@@ -633,15 +692,22 @@ export default function HitterCard({ data }) {
         </div>
 
       {/* ── ROLE GRADES — PRESENT / FUTURE / TE ───────────────────────── */}
-      <div style={{ flex: '0 0 20%', borderRight: BORDER, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: '0 0 23%', borderRight: BORDER, display: 'flex', flexDirection: 'column' }}>
         <SectionHeader label="ROLE GRADES" />
         <div style={{ display: 'flex', alignItems: 'stretch', gap: 4, padding: '6px 8px', flex: 1 }}>
           {[['PRESENT', last_report.present], ['FUTURE', last_report.future], ['TE', last_report.te]].map(([label, val]) => (
-            <div key={label} style={{
-              flex: 1,
-              background: gradeBg(val), color: 'black',
-              borderRadius: 4, padding: '2px 4px', textAlign: 'center',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+           <div key={label} style={{
+                flex: '1 1 0',
+                minWidth: 0,
+                background: gradeBg(val),
+                color: 'black',
+                borderRadius: 4,
+                padding: '2px 4px',
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
             }}>
               <div style={{ fontWeight: 700, fontSize: 18 }}>{val}</div>
               <div style={{ fontSize: 13, fontWeight: 600 }}>{label}</div>
