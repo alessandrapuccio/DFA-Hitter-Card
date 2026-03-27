@@ -1,0 +1,2403 @@
+[
+  {
+    "pa_number": 1,
+    "gamedate": "2025-05-19",
+    "tmrv_roll": 96.7739
+  },
+  {
+    "pa_number": 2,
+    "gamedate": "2025-05-19",
+    "tmrv_roll": 93.6323
+  },
+  {
+    "pa_number": 3,
+    "gamedate": "2025-05-20",
+    "tmrv_roll": 90.151
+  },
+  {
+    "pa_number": 4,
+    "gamedate": "2025-05-20",
+    "tmrv_roll": 87.4792
+  },
+  {
+    "pa_number": 5,
+    "gamedate": "2025-05-20",
+    "tmrv_roll": 85.6869
+  },
+  {
+    "pa_number": 6,
+    "gamedate": "2025-05-20",
+    "tmrv_roll": 87.0195
+  },
+  {
+    "pa_number": 7,
+    "gamedate": "2025-05-21",
+    "tmrv_roll": 86.5468
+  },
+  {
+    "pa_number": 8,
+    "gamedate": "2025-05-21",
+    "tmrv_roll": 79.1836
+  },
+  {
+    "pa_number": 9,
+    "gamedate": "2025-05-21",
+    "tmrv_roll": 83.341
+  },
+  {
+    "pa_number": 10,
+    "gamedate": "2025-05-21",
+    "tmrv_roll": 84.2483
+  },
+  {
+    "pa_number": 11,
+    "gamedate": "2025-05-21",
+    "tmrv_roll": 90.0568
+  },
+  {
+    "pa_number": 12,
+    "gamedate": "2025-05-23",
+    "tmrv_roll": 87.9842
+  },
+  {
+    "pa_number": 13,
+    "gamedate": "2025-05-23",
+    "tmrv_roll": 92.4936
+  },
+  {
+    "pa_number": 14,
+    "gamedate": "2025-05-23",
+    "tmrv_roll": 91.9024
+  },
+  {
+    "pa_number": 15,
+    "gamedate": "2025-05-23",
+    "tmrv_roll": 96.5438
+  },
+  {
+    "pa_number": 16,
+    "gamedate": "2025-05-23",
+    "tmrv_roll": 91.5751
+  },
+  {
+    "pa_number": 17,
+    "gamedate": "2025-05-24",
+    "tmrv_roll": 90.5478
+  },
+  {
+    "pa_number": 18,
+    "gamedate": "2025-05-24",
+    "tmrv_roll": 91.7404
+  },
+  {
+    "pa_number": 19,
+    "gamedate": "2025-05-24",
+    "tmrv_roll": 92.6111
+  },
+  {
+    "pa_number": 20,
+    "gamedate": "2025-05-24",
+    "tmrv_roll": 95.5945
+  },
+  {
+    "pa_number": 21,
+    "gamedate": "2025-05-25",
+    "tmrv_roll": 99.694
+  },
+  {
+    "pa_number": 22,
+    "gamedate": "2025-05-25",
+    "tmrv_roll": 97.3979
+  },
+  {
+    "pa_number": 23,
+    "gamedate": "2025-05-25",
+    "tmrv_roll": 97.4252
+  },
+  {
+    "pa_number": 24,
+    "gamedate": "2025-05-25",
+    "tmrv_roll": 92.9301
+  },
+  {
+    "pa_number": 25,
+    "gamedate": "2025-05-25",
+    "tmrv_roll": 87.1152
+  },
+  {
+    "pa_number": 26,
+    "gamedate": "2025-05-27",
+    "tmrv_roll": 87.3417
+  },
+  {
+    "pa_number": 27,
+    "gamedate": "2025-05-27",
+    "tmrv_roll": 80.0435
+  },
+  {
+    "pa_number": 28,
+    "gamedate": "2025-05-27",
+    "tmrv_roll": 77.0407
+  },
+  {
+    "pa_number": 29,
+    "gamedate": "2025-05-27",
+    "tmrv_roll": 68.6067
+  },
+  {
+    "pa_number": 30,
+    "gamedate": "2025-05-27",
+    "tmrv_roll": 68.736
+  },
+  {
+    "pa_number": 31,
+    "gamedate": "2025-05-28",
+    "tmrv_roll": 64.4365
+  },
+  {
+    "pa_number": 32,
+    "gamedate": "2025-05-28",
+    "tmrv_roll": 65.0455
+  },
+  {
+    "pa_number": 33,
+    "gamedate": "2025-05-28",
+    "tmrv_roll": 68.2329
+  },
+  {
+    "pa_number": 34,
+    "gamedate": "2025-05-28",
+    "tmrv_roll": 67.4174
+  },
+  {
+    "pa_number": 35,
+    "gamedate": "2025-05-29",
+    "tmrv_roll": 81.6439
+  },
+  {
+    "pa_number": 36,
+    "gamedate": "2025-05-29",
+    "tmrv_roll": 81.3296
+  },
+  {
+    "pa_number": 37,
+    "gamedate": "2025-05-29",
+    "tmrv_roll": 79.42
+  },
+  {
+    "pa_number": 38,
+    "gamedate": "2025-05-29",
+    "tmrv_roll": 81.3342
+  },
+  {
+    "pa_number": 39,
+    "gamedate": "2025-05-29",
+    "tmrv_roll": 75.6885
+  },
+  {
+    "pa_number": 40,
+    "gamedate": "2025-05-30",
+    "tmrv_roll": 73.0953
+  },
+  {
+    "pa_number": 41,
+    "gamedate": "2025-05-30",
+    "tmrv_roll": 72.7733
+  },
+  {
+    "pa_number": 42,
+    "gamedate": "2025-05-30",
+    "tmrv_roll": 70.6235
+  },
+  {
+    "pa_number": 43,
+    "gamedate": "2025-05-30",
+    "tmrv_roll": 67.0713
+  },
+  {
+    "pa_number": 44,
+    "gamedate": "2025-05-30",
+    "tmrv_roll": 68.7757
+  },
+  {
+    "pa_number": 45,
+    "gamedate": "2025-05-31",
+    "tmrv_roll": 66.7161
+  },
+  {
+    "pa_number": 46,
+    "gamedate": "2025-05-31",
+    "tmrv_roll": 69.0465
+  },
+  {
+    "pa_number": 47,
+    "gamedate": "2025-05-31",
+    "tmrv_roll": 68.2839
+  },
+  {
+    "pa_number": 48,
+    "gamedate": "2025-05-31",
+    "tmrv_roll": 67.4832
+  },
+  {
+    "pa_number": 49,
+    "gamedate": "2025-05-31",
+    "tmrv_roll": 68.5089
+  },
+  {
+    "pa_number": 50,
+    "gamedate": "2025-06-01",
+    "tmrv_roll": 67.3691
+  },
+  {
+    "pa_number": 51,
+    "gamedate": "2025-06-01",
+    "tmrv_roll": 70.1616
+  },
+  {
+    "pa_number": 52,
+    "gamedate": "2025-06-01",
+    "tmrv_roll": 68.5178
+  },
+  {
+    "pa_number": 53,
+    "gamedate": "2025-06-01",
+    "tmrv_roll": 74.1774
+  },
+  {
+    "pa_number": 54,
+    "gamedate": "2025-06-03",
+    "tmrv_roll": 72.3448
+  },
+  {
+    "pa_number": 55,
+    "gamedate": "2025-06-03",
+    "tmrv_roll": 80.9173
+  },
+  {
+    "pa_number": 56,
+    "gamedate": "2025-06-03",
+    "tmrv_roll": 84.0254
+  },
+  {
+    "pa_number": 57,
+    "gamedate": "2025-06-03",
+    "tmrv_roll": 88.3035
+  },
+  {
+    "pa_number": 58,
+    "gamedate": "2025-06-04",
+    "tmrv_roll": 87.1193
+  },
+  {
+    "pa_number": 59,
+    "gamedate": "2025-06-04",
+    "tmrv_roll": 88.4778
+  },
+  {
+    "pa_number": 60,
+    "gamedate": "2025-06-04",
+    "tmrv_roll": 83.1068
+  },
+  {
+    "pa_number": 61,
+    "gamedate": "2025-06-04",
+    "tmrv_roll": 82.3487
+  },
+  {
+    "pa_number": 62,
+    "gamedate": "2025-06-05",
+    "tmrv_roll": 84.7321
+  },
+  {
+    "pa_number": 63,
+    "gamedate": "2025-06-05",
+    "tmrv_roll": 89.3781
+  },
+  {
+    "pa_number": 64,
+    "gamedate": "2025-06-05",
+    "tmrv_roll": 93.8098
+  },
+  {
+    "pa_number": 65,
+    "gamedate": "2025-06-05",
+    "tmrv_roll": 92.7947
+  },
+  {
+    "pa_number": 66,
+    "gamedate": "2025-06-06",
+    "tmrv_roll": 97.6894
+  },
+  {
+    "pa_number": 67,
+    "gamedate": "2025-06-06",
+    "tmrv_roll": 94.937
+  },
+  {
+    "pa_number": 68,
+    "gamedate": "2025-06-06",
+    "tmrv_roll": 91.0129
+  },
+  {
+    "pa_number": 69,
+    "gamedate": "2025-06-06",
+    "tmrv_roll": 84.3855
+  },
+  {
+    "pa_number": 70,
+    "gamedate": "2025-06-07",
+    "tmrv_roll": 90.2879
+  },
+  {
+    "pa_number": 71,
+    "gamedate": "2025-06-07",
+    "tmrv_roll": 87.3242
+  },
+  {
+    "pa_number": 72,
+    "gamedate": "2025-06-08",
+    "tmrv_roll": 82.0843
+  },
+  {
+    "pa_number": 73,
+    "gamedate": "2025-06-08",
+    "tmrv_roll": 81.8179
+  },
+  {
+    "pa_number": 74,
+    "gamedate": "2025-06-08",
+    "tmrv_roll": 81.5485
+  },
+  {
+    "pa_number": 75,
+    "gamedate": "2025-06-08",
+    "tmrv_roll": 85.9087
+  },
+  {
+    "pa_number": 76,
+    "gamedate": "2025-06-08",
+    "tmrv_roll": 82.1161
+  },
+  {
+    "pa_number": 77,
+    "gamedate": "2025-06-09",
+    "tmrv_roll": 81.6444
+  },
+  {
+    "pa_number": 78,
+    "gamedate": "2025-06-09",
+    "tmrv_roll": 81.3967
+  },
+  {
+    "pa_number": 79,
+    "gamedate": "2025-06-09",
+    "tmrv_roll": 81.384
+  },
+  {
+    "pa_number": 80,
+    "gamedate": "2025-06-09",
+    "tmrv_roll": 85.1134
+  },
+  {
+    "pa_number": 81,
+    "gamedate": "2025-06-09",
+    "tmrv_roll": 87.6198
+  },
+  {
+    "pa_number": 82,
+    "gamedate": "2025-06-10",
+    "tmrv_roll": 84.9381
+  },
+  {
+    "pa_number": 83,
+    "gamedate": "2025-06-10",
+    "tmrv_roll": 84.1883
+  },
+  {
+    "pa_number": 84,
+    "gamedate": "2025-06-10",
+    "tmrv_roll": 77.0535
+  },
+  {
+    "pa_number": 85,
+    "gamedate": "2025-06-10",
+    "tmrv_roll": 75.6826
+  },
+  {
+    "pa_number": 86,
+    "gamedate": "2025-06-10",
+    "tmrv_roll": 79.7192
+  },
+  {
+    "pa_number": 87,
+    "gamedate": "2025-06-11",
+    "tmrv_roll": 73.934
+  },
+  {
+    "pa_number": 88,
+    "gamedate": "2025-06-11",
+    "tmrv_roll": 75.3253
+  },
+  {
+    "pa_number": 89,
+    "gamedate": "2025-06-11",
+    "tmrv_roll": 75.5167
+  },
+  {
+    "pa_number": 90,
+    "gamedate": "2025-06-11",
+    "tmrv_roll": 71.1542
+  },
+  {
+    "pa_number": 91,
+    "gamedate": "2025-06-13",
+    "tmrv_roll": 67.6209
+  },
+  {
+    "pa_number": 92,
+    "gamedate": "2025-06-13",
+    "tmrv_roll": 70.2322
+  },
+  {
+    "pa_number": 93,
+    "gamedate": "2025-06-13",
+    "tmrv_roll": 65.0966
+  },
+  {
+    "pa_number": 94,
+    "gamedate": "2025-06-13",
+    "tmrv_roll": 63.1176
+  },
+  {
+    "pa_number": 95,
+    "gamedate": "2025-06-13",
+    "tmrv_roll": 70.2749
+  },
+  {
+    "pa_number": 96,
+    "gamedate": "2025-06-14",
+    "tmrv_roll": 71.9894
+  },
+  {
+    "pa_number": 97,
+    "gamedate": "2025-06-14",
+    "tmrv_roll": 66.0181
+  },
+  {
+    "pa_number": 98,
+    "gamedate": "2025-06-14",
+    "tmrv_roll": 67.2656
+  },
+  {
+    "pa_number": 99,
+    "gamedate": "2025-06-14",
+    "tmrv_roll": 66.4211
+  },
+  {
+    "pa_number": 100,
+    "gamedate": "2025-06-14",
+    "tmrv_roll": 67.2759
+  },
+  {
+    "pa_number": 101,
+    "gamedate": "2025-06-15",
+    "tmrv_roll": 72.6631
+  },
+  {
+    "pa_number": 102,
+    "gamedate": "2025-06-15",
+    "tmrv_roll": 71.5804
+  },
+  {
+    "pa_number": 103,
+    "gamedate": "2025-06-15",
+    "tmrv_roll": 68.4954
+  },
+  {
+    "pa_number": 104,
+    "gamedate": "2025-06-15",
+    "tmrv_roll": 74.3217
+  },
+  {
+    "pa_number": 105,
+    "gamedate": "2025-06-16",
+    "tmrv_roll": 73.233
+  },
+  {
+    "pa_number": 106,
+    "gamedate": "2025-06-16",
+    "tmrv_roll": 71.8883
+  },
+  {
+    "pa_number": 107,
+    "gamedate": "2025-06-16",
+    "tmrv_roll": 71.4779
+  },
+  {
+    "pa_number": 108,
+    "gamedate": "2025-06-16",
+    "tmrv_roll": 73.0906
+  },
+  {
+    "pa_number": 109,
+    "gamedate": "2025-06-17",
+    "tmrv_roll": 69.0112
+  },
+  {
+    "pa_number": 110,
+    "gamedate": "2025-06-17",
+    "tmrv_roll": 68.1822
+  },
+  {
+    "pa_number": 111,
+    "gamedate": "2025-06-17",
+    "tmrv_roll": 65.4519
+  },
+  {
+    "pa_number": 112,
+    "gamedate": "2025-06-17",
+    "tmrv_roll": 64.9826
+  },
+  {
+    "pa_number": 113,
+    "gamedate": "2025-06-18",
+    "tmrv_roll": 75.6803
+  },
+  {
+    "pa_number": 114,
+    "gamedate": "2025-06-18",
+    "tmrv_roll": 75.8052
+  },
+  {
+    "pa_number": 115,
+    "gamedate": "2025-06-18",
+    "tmrv_roll": 74.0186
+  },
+  {
+    "pa_number": 116,
+    "gamedate": "2025-06-18",
+    "tmrv_roll": 77.8095
+  },
+  {
+    "pa_number": 117,
+    "gamedate": "2025-06-20",
+    "tmrv_roll": 80.6542
+  },
+  {
+    "pa_number": 118,
+    "gamedate": "2025-06-20",
+    "tmrv_roll": 84.9725
+  },
+  {
+    "pa_number": 119,
+    "gamedate": "2025-06-20",
+    "tmrv_roll": 94.9933
+  },
+  {
+    "pa_number": 120,
+    "gamedate": "2025-06-20",
+    "tmrv_roll": 95.3456
+  },
+  {
+    "pa_number": 121,
+    "gamedate": "2025-06-20",
+    "tmrv_roll": 91.4607
+  },
+  {
+    "pa_number": 122,
+    "gamedate": "2025-06-21",
+    "tmrv_roll": 95.6174
+  },
+  {
+    "pa_number": 123,
+    "gamedate": "2025-06-21",
+    "tmrv_roll": 95.9307
+  },
+  {
+    "pa_number": 124,
+    "gamedate": "2025-06-21",
+    "tmrv_roll": 96.1466
+  },
+  {
+    "pa_number": 125,
+    "gamedate": "2025-06-21",
+    "tmrv_roll": 98.7496
+  },
+  {
+    "pa_number": 126,
+    "gamedate": "2025-06-21",
+    "tmrv_roll": 106.5888
+  },
+  {
+    "pa_number": 127,
+    "gamedate": "2025-06-22",
+    "tmrv_roll": 102.9461
+  },
+  {
+    "pa_number": 128,
+    "gamedate": "2025-06-22",
+    "tmrv_roll": 107.0312
+  },
+  {
+    "pa_number": 129,
+    "gamedate": "2025-06-22",
+    "tmrv_roll": 104.8336
+  },
+  {
+    "pa_number": 130,
+    "gamedate": "2025-06-22",
+    "tmrv_roll": 107.7584
+  },
+  {
+    "pa_number": 131,
+    "gamedate": "2025-06-22",
+    "tmrv_roll": 109.4259
+  },
+  {
+    "pa_number": 132,
+    "gamedate": "2025-06-22",
+    "tmrv_roll": 108.2099
+  },
+  {
+    "pa_number": 133,
+    "gamedate": "2025-06-23",
+    "tmrv_roll": 107.5037
+  },
+  {
+    "pa_number": 134,
+    "gamedate": "2025-06-23",
+    "tmrv_roll": 107.5881
+  },
+  {
+    "pa_number": 135,
+    "gamedate": "2025-06-23",
+    "tmrv_roll": 94.4635
+  },
+  {
+    "pa_number": 136,
+    "gamedate": "2025-06-23",
+    "tmrv_roll": 94.8725
+  },
+  {
+    "pa_number": 137,
+    "gamedate": "2025-06-23",
+    "tmrv_roll": 95.6019
+  },
+  {
+    "pa_number": 138,
+    "gamedate": "2025-06-24",
+    "tmrv_roll": 93.2799
+  },
+  {
+    "pa_number": 139,
+    "gamedate": "2025-06-24",
+    "tmrv_roll": 94.985
+  },
+  {
+    "pa_number": 140,
+    "gamedate": "2025-06-24",
+    "tmrv_roll": 97.1719
+  },
+  {
+    "pa_number": 141,
+    "gamedate": "2025-06-24",
+    "tmrv_roll": 97.5666
+  },
+  {
+    "pa_number": 142,
+    "gamedate": "2025-06-24",
+    "tmrv_roll": 97.1995
+  },
+  {
+    "pa_number": 143,
+    "gamedate": "2025-06-25",
+    "tmrv_roll": 96.6861
+  },
+  {
+    "pa_number": 144,
+    "gamedate": "2025-06-25",
+    "tmrv_roll": 94.1969
+  },
+  {
+    "pa_number": 145,
+    "gamedate": "2025-06-25",
+    "tmrv_roll": 95.4008
+  },
+  {
+    "pa_number": 146,
+    "gamedate": "2025-06-25",
+    "tmrv_roll": 95.3513
+  },
+  {
+    "pa_number": 147,
+    "gamedate": "2025-06-26",
+    "tmrv_roll": 94.5865
+  },
+  {
+    "pa_number": 148,
+    "gamedate": "2025-06-26",
+    "tmrv_roll": 94.3306
+  },
+  {
+    "pa_number": 149,
+    "gamedate": "2025-06-26",
+    "tmrv_roll": 92.9213
+  },
+  {
+    "pa_number": 150,
+    "gamedate": "2025-06-26",
+    "tmrv_roll": 93.4927
+  },
+  {
+    "pa_number": 151,
+    "gamedate": "2025-06-27",
+    "tmrv_roll": 94.2006
+  },
+  {
+    "pa_number": 152,
+    "gamedate": "2025-06-27",
+    "tmrv_roll": 98.3812
+  },
+  {
+    "pa_number": 153,
+    "gamedate": "2025-06-27",
+    "tmrv_roll": 95.6175
+  },
+  {
+    "pa_number": 154,
+    "gamedate": "2025-06-27",
+    "tmrv_roll": 109.2927
+  },
+  {
+    "pa_number": 155,
+    "gamedate": "2025-06-27",
+    "tmrv_roll": 99.464
+  },
+  {
+    "pa_number": 156,
+    "gamedate": "2025-06-27",
+    "tmrv_roll": 97.308
+  },
+  {
+    "pa_number": 157,
+    "gamedate": "2025-06-28",
+    "tmrv_roll": 104.6381
+  },
+  {
+    "pa_number": 158,
+    "gamedate": "2025-06-28",
+    "tmrv_roll": 108.9069
+  },
+  {
+    "pa_number": 159,
+    "gamedate": "2025-06-28",
+    "tmrv_roll": 121.0439
+  },
+  {
+    "pa_number": 160,
+    "gamedate": "2025-06-28",
+    "tmrv_roll": 122.06
+  },
+  {
+    "pa_number": 161,
+    "gamedate": "2025-06-29",
+    "tmrv_roll": 121.7499
+  },
+  {
+    "pa_number": 162,
+    "gamedate": "2025-06-29",
+    "tmrv_roll": 124.7052
+  },
+  {
+    "pa_number": 163,
+    "gamedate": "2025-06-29",
+    "tmrv_roll": 130.5
+  },
+  {
+    "pa_number": 164,
+    "gamedate": "2025-06-29",
+    "tmrv_roll": 128.6998
+  },
+  {
+    "pa_number": 165,
+    "gamedate": "2025-06-29",
+    "tmrv_roll": 130.4655
+  },
+  {
+    "pa_number": 166,
+    "gamedate": "2025-06-29",
+    "tmrv_roll": 127.0144
+  },
+  {
+    "pa_number": 167,
+    "gamedate": "2025-06-30",
+    "tmrv_roll": 131.6347
+  },
+  {
+    "pa_number": 168,
+    "gamedate": "2025-06-30",
+    "tmrv_roll": 131.4621
+  },
+  {
+    "pa_number": 169,
+    "gamedate": "2025-06-30",
+    "tmrv_roll": 131.6882
+  },
+  {
+    "pa_number": 170,
+    "gamedate": "2025-06-30",
+    "tmrv_roll": 126.8045
+  },
+  {
+    "pa_number": 171,
+    "gamedate": "2025-06-30",
+    "tmrv_roll": 124.186
+  },
+  {
+    "pa_number": 172,
+    "gamedate": "2025-07-01",
+    "tmrv_roll": 123.9003
+  },
+  {
+    "pa_number": 173,
+    "gamedate": "2025-07-01",
+    "tmrv_roll": 125.5651
+  },
+  {
+    "pa_number": 174,
+    "gamedate": "2025-07-01",
+    "tmrv_roll": 128.3967
+  },
+  {
+    "pa_number": 175,
+    "gamedate": "2025-07-01",
+    "tmrv_roll": 124.7157
+  },
+  {
+    "pa_number": 176,
+    "gamedate": "2025-07-02",
+    "tmrv_roll": 125.5738
+  },
+  {
+    "pa_number": 177,
+    "gamedate": "2025-07-02",
+    "tmrv_roll": 128.8196
+  },
+  {
+    "pa_number": 178,
+    "gamedate": "2025-07-02",
+    "tmrv_roll": 129.1596
+  },
+  {
+    "pa_number": 179,
+    "gamedate": "2025-07-02",
+    "tmrv_roll": 142.3162
+  },
+  {
+    "pa_number": 180,
+    "gamedate": "2025-07-03",
+    "tmrv_roll": 143.494
+  },
+  {
+    "pa_number": 181,
+    "gamedate": "2025-07-03",
+    "tmrv_roll": 140.8391
+  },
+  {
+    "pa_number": 182,
+    "gamedate": "2025-07-03",
+    "tmrv_roll": 140.5634
+  },
+  {
+    "pa_number": 183,
+    "gamedate": "2025-07-03",
+    "tmrv_roll": 141.487
+  },
+  {
+    "pa_number": 184,
+    "gamedate": "2025-07-03",
+    "tmrv_roll": 144.782
+  },
+  {
+    "pa_number": 185,
+    "gamedate": "2025-07-04",
+    "tmrv_roll": 146.2059
+  },
+  {
+    "pa_number": 186,
+    "gamedate": "2025-07-04",
+    "tmrv_roll": 142.5458
+  },
+  {
+    "pa_number": 187,
+    "gamedate": "2025-07-04",
+    "tmrv_roll": 142.2299
+  },
+  {
+    "pa_number": 188,
+    "gamedate": "2025-07-04",
+    "tmrv_roll": 138.9605
+  },
+  {
+    "pa_number": 189,
+    "gamedate": "2025-07-05",
+    "tmrv_roll": 139.1202
+  },
+  {
+    "pa_number": 190,
+    "gamedate": "2025-07-05",
+    "tmrv_roll": 141.5188
+  },
+  {
+    "pa_number": 191,
+    "gamedate": "2025-07-05",
+    "tmrv_roll": 142.4312
+  },
+  {
+    "pa_number": 192,
+    "gamedate": "2025-07-05",
+    "tmrv_roll": 140.3443
+  },
+  {
+    "pa_number": 193,
+    "gamedate": "2025-07-06",
+    "tmrv_roll": 146.5241
+  },
+  {
+    "pa_number": 194,
+    "gamedate": "2025-07-06",
+    "tmrv_roll": 146.9372
+  },
+  {
+    "pa_number": 195,
+    "gamedate": "2025-07-06",
+    "tmrv_roll": 141.5137
+  },
+  {
+    "pa_number": 196,
+    "gamedate": "2025-07-06",
+    "tmrv_roll": 141.0775
+  },
+  {
+    "pa_number": 197,
+    "gamedate": "2025-07-08",
+    "tmrv_roll": 147.0222
+  },
+  {
+    "pa_number": 198,
+    "gamedate": "2025-07-08",
+    "tmrv_roll": 150.2427
+  },
+  {
+    "pa_number": 199,
+    "gamedate": "2025-07-08",
+    "tmrv_roll": 151.5344
+  },
+  {
+    "pa_number": 200,
+    "gamedate": "2025-07-08",
+    "tmrv_roll": 154.3794
+  },
+  {
+    "pa_number": 201,
+    "gamedate": "2025-07-09",
+    "tmrv_roll": 147.6898
+  },
+  {
+    "pa_number": 202,
+    "gamedate": "2025-07-09",
+    "tmrv_roll": 148.5086
+  },
+  {
+    "pa_number": 203,
+    "gamedate": "2025-07-09",
+    "tmrv_roll": 154.1483
+  },
+  {
+    "pa_number": 204,
+    "gamedate": "2025-07-09",
+    "tmrv_roll": 145.7874
+  },
+  {
+    "pa_number": 205,
+    "gamedate": "2025-07-10",
+    "tmrv_roll": 146.2797
+  },
+  {
+    "pa_number": 206,
+    "gamedate": "2025-07-10",
+    "tmrv_roll": 160.1125
+  },
+  {
+    "pa_number": 207,
+    "gamedate": "2025-07-10",
+    "tmrv_roll": 159.9367
+  },
+  {
+    "pa_number": 208,
+    "gamedate": "2025-07-10",
+    "tmrv_roll": 161.1542
+  },
+  {
+    "pa_number": 209,
+    "gamedate": "2025-07-10",
+    "tmrv_roll": 163.4899
+  },
+  {
+    "pa_number": 210,
+    "gamedate": "2025-07-11",
+    "tmrv_roll": 163.4921
+  },
+  {
+    "pa_number": 211,
+    "gamedate": "2025-07-11",
+    "tmrv_roll": 161.4015
+  },
+  {
+    "pa_number": 212,
+    "gamedate": "2025-07-11",
+    "tmrv_roll": 164.6468
+  },
+  {
+    "pa_number": 213,
+    "gamedate": "2025-07-11",
+    "tmrv_roll": 149.5273
+  },
+  {
+    "pa_number": 214,
+    "gamedate": "2025-07-11",
+    "tmrv_roll": 150.4178
+  },
+  {
+    "pa_number": 215,
+    "gamedate": "2025-07-12",
+    "tmrv_roll": 149.161
+  },
+  {
+    "pa_number": 216,
+    "gamedate": "2025-07-12",
+    "tmrv_roll": 148.5148
+  },
+  {
+    "pa_number": 217,
+    "gamedate": "2025-07-12",
+    "tmrv_roll": 146.8417
+  },
+  {
+    "pa_number": 218,
+    "gamedate": "2025-07-12",
+    "tmrv_roll": 153.1116
+  },
+  {
+    "pa_number": 219,
+    "gamedate": "2025-07-12",
+    "tmrv_roll": 151.909
+  },
+  {
+    "pa_number": 220,
+    "gamedate": "2025-07-12",
+    "tmrv_roll": 148.2073
+  },
+  {
+    "pa_number": 221,
+    "gamedate": "2025-07-13",
+    "tmrv_roll": 148.1217
+  },
+  {
+    "pa_number": 222,
+    "gamedate": "2025-07-13",
+    "tmrv_roll": 150.6866
+  },
+  {
+    "pa_number": 223,
+    "gamedate": "2025-07-13",
+    "tmrv_roll": 149.0835
+  },
+  {
+    "pa_number": 224,
+    "gamedate": "2025-07-13",
+    "tmrv_roll": 150.9093
+  },
+  {
+    "pa_number": 225,
+    "gamedate": "2025-07-13",
+    "tmrv_roll": 151.5686
+  },
+  {
+    "pa_number": 226,
+    "gamedate": "2025-07-18",
+    "tmrv_roll": 144.0384
+  },
+  {
+    "pa_number": 227,
+    "gamedate": "2025-07-18",
+    "tmrv_roll": 142.3989
+  },
+  {
+    "pa_number": 228,
+    "gamedate": "2025-07-18",
+    "tmrv_roll": 139.9798
+  },
+  {
+    "pa_number": 229,
+    "gamedate": "2025-07-18",
+    "tmrv_roll": 140.9206
+  },
+  {
+    "pa_number": 230,
+    "gamedate": "2025-07-19",
+    "tmrv_roll": 142.4142
+  },
+  {
+    "pa_number": 231,
+    "gamedate": "2025-07-19",
+    "tmrv_roll": 140.8553
+  },
+  {
+    "pa_number": 232,
+    "gamedate": "2025-07-19",
+    "tmrv_roll": 138.9679
+  },
+  {
+    "pa_number": 233,
+    "gamedate": "2025-07-19",
+    "tmrv_roll": 144.6457
+  },
+  {
+    "pa_number": 234,
+    "gamedate": "2025-07-19",
+    "tmrv_roll": 150.0687
+  },
+  {
+    "pa_number": 235,
+    "gamedate": "2025-07-20",
+    "tmrv_roll": 154.271
+  },
+  {
+    "pa_number": 236,
+    "gamedate": "2025-07-20",
+    "tmrv_roll": 154.7676
+  },
+  {
+    "pa_number": 237,
+    "gamedate": "2025-07-20",
+    "tmrv_roll": 158.6773
+  },
+  {
+    "pa_number": 238,
+    "gamedate": "2025-07-20",
+    "tmrv_roll": 163.7961
+  },
+  {
+    "pa_number": 239,
+    "gamedate": "2025-07-20",
+    "tmrv_roll": 169.6542
+  },
+  {
+    "pa_number": 240,
+    "gamedate": "2025-07-21",
+    "tmrv_roll": 168.7373
+  },
+  {
+    "pa_number": 241,
+    "gamedate": "2025-07-21",
+    "tmrv_roll": 168.483
+  },
+  {
+    "pa_number": 242,
+    "gamedate": "2025-07-21",
+    "tmrv_roll": 168.7725
+  },
+  {
+    "pa_number": 243,
+    "gamedate": "2025-07-21",
+    "tmrv_roll": 175.3334
+  },
+  {
+    "pa_number": 244,
+    "gamedate": "2025-07-22",
+    "tmrv_roll": 180.0574
+  },
+  {
+    "pa_number": 245,
+    "gamedate": "2025-07-22",
+    "tmrv_roll": 180.4547
+  },
+  {
+    "pa_number": 246,
+    "gamedate": "2025-07-22",
+    "tmrv_roll": 178.3514
+  },
+  {
+    "pa_number": 247,
+    "gamedate": "2025-07-23",
+    "tmrv_roll": 179.884
+  },
+  {
+    "pa_number": 248,
+    "gamedate": "2025-07-23",
+    "tmrv_roll": 180.266
+  },
+  {
+    "pa_number": 249,
+    "gamedate": "2025-07-23",
+    "tmrv_roll": 178.6818
+  },
+  {
+    "pa_number": 250,
+    "gamedate": "2025-07-23",
+    "tmrv_roll": 182.3046
+  },
+  {
+    "pa_number": 251,
+    "gamedate": "2025-07-24",
+    "tmrv_roll": 185.4125
+  },
+  {
+    "pa_number": 252,
+    "gamedate": "2025-07-24",
+    "tmrv_roll": 179.9117
+  },
+  {
+    "pa_number": 253,
+    "gamedate": "2025-07-24",
+    "tmrv_roll": 183.9067
+  },
+  {
+    "pa_number": 254,
+    "gamedate": "2025-07-24",
+    "tmrv_roll": 176.3629
+  },
+  {
+    "pa_number": 255,
+    "gamedate": "2025-07-24",
+    "tmrv_roll": 178.0388
+  },
+  {
+    "pa_number": 256,
+    "gamedate": "2025-07-25",
+    "tmrv_roll": 176.4564
+  },
+  {
+    "pa_number": 257,
+    "gamedate": "2025-07-25",
+    "tmrv_roll": 163.1881
+  },
+  {
+    "pa_number": 258,
+    "gamedate": "2025-07-25",
+    "tmrv_roll": 156.1469
+  },
+  {
+    "pa_number": 259,
+    "gamedate": "2025-07-25",
+    "tmrv_roll": 141.1558
+  },
+  {
+    "pa_number": 260,
+    "gamedate": "2025-07-25",
+    "tmrv_roll": 144.1753
+  },
+  {
+    "pa_number": 261,
+    "gamedate": "2025-07-26",
+    "tmrv_roll": 144.8821
+  },
+  {
+    "pa_number": 262,
+    "gamedate": "2025-07-26",
+    "tmrv_roll": 152.9931
+  },
+  {
+    "pa_number": 263,
+    "gamedate": "2025-07-26",
+    "tmrv_roll": 144.3446
+  },
+  {
+    "pa_number": 264,
+    "gamedate": "2025-07-26",
+    "tmrv_roll": 144.3356
+  },
+  {
+    "pa_number": 265,
+    "gamedate": "2025-07-26",
+    "tmrv_roll": 148.5864
+  },
+  {
+    "pa_number": 266,
+    "gamedate": "2025-07-27",
+    "tmrv_roll": 151.5227
+  },
+  {
+    "pa_number": 267,
+    "gamedate": "2025-07-27",
+    "tmrv_roll": 147.4404
+  },
+  {
+    "pa_number": 268,
+    "gamedate": "2025-07-27",
+    "tmrv_roll": 148.2426
+  },
+  {
+    "pa_number": 269,
+    "gamedate": "2025-07-27",
+    "tmrv_roll": 152.5667
+  },
+  {
+    "pa_number": 270,
+    "gamedate": "2025-07-28",
+    "tmrv_roll": 157.9377
+  },
+  {
+    "pa_number": 271,
+    "gamedate": "2025-07-28",
+    "tmrv_roll": 154.8316
+  },
+  {
+    "pa_number": 272,
+    "gamedate": "2025-07-28",
+    "tmrv_roll": 155.2073
+  },
+  {
+    "pa_number": 273,
+    "gamedate": "2025-07-28",
+    "tmrv_roll": 154.0232
+  },
+  {
+    "pa_number": 274,
+    "gamedate": "2025-07-29",
+    "tmrv_roll": 151.6056
+  },
+  {
+    "pa_number": 275,
+    "gamedate": "2025-07-29",
+    "tmrv_roll": 159.5342
+  },
+  {
+    "pa_number": 276,
+    "gamedate": "2025-07-29",
+    "tmrv_roll": 160.2655
+  },
+  {
+    "pa_number": 277,
+    "gamedate": "2025-07-29",
+    "tmrv_roll": 156.7985
+  },
+  {
+    "pa_number": 278,
+    "gamedate": "2025-07-30",
+    "tmrv_roll": 158.4776
+  },
+  {
+    "pa_number": 279,
+    "gamedate": "2025-07-30",
+    "tmrv_roll": 143.9683
+  },
+  {
+    "pa_number": 280,
+    "gamedate": "2025-07-30",
+    "tmrv_roll": 144.1562
+  },
+  {
+    "pa_number": 281,
+    "gamedate": "2025-07-30",
+    "tmrv_roll": 144.5356
+  },
+  {
+    "pa_number": 282,
+    "gamedate": "2025-07-31",
+    "tmrv_roll": 151.1263
+  },
+  {
+    "pa_number": 283,
+    "gamedate": "2025-07-31",
+    "tmrv_roll": 150.945
+  },
+  {
+    "pa_number": 284,
+    "gamedate": "2025-07-31",
+    "tmrv_roll": 153.2146
+  },
+  {
+    "pa_number": 285,
+    "gamedate": "2025-07-31",
+    "tmrv_roll": 159.8644
+  },
+  {
+    "pa_number": 286,
+    "gamedate": "2025-08-01",
+    "tmrv_roll": 159.5719
+  },
+  {
+    "pa_number": 287,
+    "gamedate": "2025-08-01",
+    "tmrv_roll": 162.8051
+  },
+  {
+    "pa_number": 288,
+    "gamedate": "2025-08-01",
+    "tmrv_roll": 168.9924
+  },
+  {
+    "pa_number": 289,
+    "gamedate": "2025-08-01",
+    "tmrv_roll": 172.026
+  },
+  {
+    "pa_number": 290,
+    "gamedate": "2025-08-02",
+    "tmrv_roll": 175.6789
+  },
+  {
+    "pa_number": 291,
+    "gamedate": "2025-08-02",
+    "tmrv_roll": 177.9405
+  },
+  {
+    "pa_number": 292,
+    "gamedate": "2025-08-02",
+    "tmrv_roll": 176.5761
+  },
+  {
+    "pa_number": 293,
+    "gamedate": "2025-08-02",
+    "tmrv_roll": 169.2045
+  },
+  {
+    "pa_number": 294,
+    "gamedate": "2025-08-02",
+    "tmrv_roll": 170.4032
+  },
+  {
+    "pa_number": 295,
+    "gamedate": "2025-08-03",
+    "tmrv_roll": 169.1523
+  },
+  {
+    "pa_number": 296,
+    "gamedate": "2025-08-03",
+    "tmrv_roll": 175.9309
+  },
+  {
+    "pa_number": 297,
+    "gamedate": "2025-08-03",
+    "tmrv_roll": 184.2903
+  },
+  {
+    "pa_number": 298,
+    "gamedate": "2025-08-03",
+    "tmrv_roll": 179.3002
+  },
+  {
+    "pa_number": 299,
+    "gamedate": "2025-08-05",
+    "tmrv_roll": 185.706
+  },
+  {
+    "pa_number": 300,
+    "gamedate": "2025-08-05",
+    "tmrv_roll": 181.8604
+  },
+  {
+    "pa_number": 301,
+    "gamedate": "2025-08-05",
+    "tmrv_roll": 181.497
+  },
+  {
+    "pa_number": 302,
+    "gamedate": "2025-08-05",
+    "tmrv_roll": 179.4331
+  },
+  {
+    "pa_number": 303,
+    "gamedate": "2025-08-05",
+    "tmrv_roll": 175.5805
+  },
+  {
+    "pa_number": 304,
+    "gamedate": "2025-08-06",
+    "tmrv_roll": 176.3211
+  },
+  {
+    "pa_number": 305,
+    "gamedate": "2025-08-06",
+    "tmrv_roll": 177.2479
+  },
+  {
+    "pa_number": 306,
+    "gamedate": "2025-08-06",
+    "tmrv_roll": 163.0914
+  },
+  {
+    "pa_number": 307,
+    "gamedate": "2025-08-06",
+    "tmrv_roll": 170.2958
+  },
+  {
+    "pa_number": 308,
+    "gamedate": "2025-08-07",
+    "tmrv_roll": 168.0909
+  },
+  {
+    "pa_number": 309,
+    "gamedate": "2025-08-07",
+    "tmrv_roll": 166.0361
+  },
+  {
+    "pa_number": 310,
+    "gamedate": "2025-08-07",
+    "tmrv_roll": 166.5384
+  },
+  {
+    "pa_number": 311,
+    "gamedate": "2025-08-07",
+    "tmrv_roll": 165.8287
+  },
+  {
+    "pa_number": 312,
+    "gamedate": "2025-08-07",
+    "tmrv_roll": 164.3126
+  },
+  {
+    "pa_number": 313,
+    "gamedate": "2025-08-08",
+    "tmrv_roll": 164.8303
+  },
+  {
+    "pa_number": 314,
+    "gamedate": "2025-08-08",
+    "tmrv_roll": 163.7412
+  },
+  {
+    "pa_number": 315,
+    "gamedate": "2025-08-08",
+    "tmrv_roll": 163.0377
+  },
+  {
+    "pa_number": 316,
+    "gamedate": "2025-08-08",
+    "tmrv_roll": 160.4569
+  },
+  {
+    "pa_number": 317,
+    "gamedate": "2025-08-09",
+    "tmrv_roll": 164.3443
+  },
+  {
+    "pa_number": 318,
+    "gamedate": "2025-08-09",
+    "tmrv_roll": 166.4854
+  },
+  {
+    "pa_number": 319,
+    "gamedate": "2025-08-09",
+    "tmrv_roll": 155.5443
+  },
+  {
+    "pa_number": 320,
+    "gamedate": "2025-08-09",
+    "tmrv_roll": 155.2127
+  },
+  {
+    "pa_number": 321,
+    "gamedate": "2025-08-09",
+    "tmrv_roll": 167.1989
+  },
+  {
+    "pa_number": 322,
+    "gamedate": "2025-08-10",
+    "tmrv_roll": 163.2679
+  },
+  {
+    "pa_number": 323,
+    "gamedate": "2025-08-10",
+    "tmrv_roll": 158.4127
+  },
+  {
+    "pa_number": 324,
+    "gamedate": "2025-08-10",
+    "tmrv_roll": 157.576
+  },
+  {
+    "pa_number": 325,
+    "gamedate": "2025-08-10",
+    "tmrv_roll": 157.2609
+  },
+  {
+    "pa_number": 326,
+    "gamedate": "2025-08-12",
+    "tmrv_roll": 160.1623
+  },
+  {
+    "pa_number": 327,
+    "gamedate": "2025-08-12",
+    "tmrv_roll": 165.2226
+  },
+  {
+    "pa_number": 328,
+    "gamedate": "2025-08-12",
+    "tmrv_roll": 164.5487
+  },
+  {
+    "pa_number": 329,
+    "gamedate": "2025-08-12",
+    "tmrv_roll": 166.5681
+  },
+  {
+    "pa_number": 330,
+    "gamedate": "2025-08-13",
+    "tmrv_roll": 165.7877
+  },
+  {
+    "pa_number": 331,
+    "gamedate": "2025-08-13",
+    "tmrv_roll": 167.5045
+  },
+  {
+    "pa_number": 332,
+    "gamedate": "2025-08-13",
+    "tmrv_roll": 168.3965
+  },
+  {
+    "pa_number": 333,
+    "gamedate": "2025-08-13",
+    "tmrv_roll": 163.9503
+  },
+  {
+    "pa_number": 334,
+    "gamedate": "2025-08-14",
+    "tmrv_roll": 161.5194
+  },
+  {
+    "pa_number": 335,
+    "gamedate": "2025-08-14",
+    "tmrv_roll": 156.8139
+  },
+  {
+    "pa_number": 336,
+    "gamedate": "2025-08-14",
+    "tmrv_roll": 155.6948
+  },
+  {
+    "pa_number": 337,
+    "gamedate": "2025-08-14",
+    "tmrv_roll": 157.6469
+  },
+  {
+    "pa_number": 338,
+    "gamedate": "2025-08-15",
+    "tmrv_roll": 157.3882
+  },
+  {
+    "pa_number": 339,
+    "gamedate": "2025-08-15",
+    "tmrv_roll": 151.5916
+  },
+  {
+    "pa_number": 340,
+    "gamedate": "2025-08-15",
+    "tmrv_roll": 152.3964
+  },
+  {
+    "pa_number": 341,
+    "gamedate": "2025-08-15",
+    "tmrv_roll": 152.5081
+  },
+  {
+    "pa_number": 342,
+    "gamedate": "2025-08-15",
+    "tmrv_roll": 159.7181
+  },
+  {
+    "pa_number": 343,
+    "gamedate": "2025-08-15",
+    "tmrv_roll": 157.3893
+  },
+  {
+    "pa_number": 344,
+    "gamedate": "2025-08-16",
+    "tmrv_roll": 155.5763
+  },
+  {
+    "pa_number": 345,
+    "gamedate": "2025-08-16",
+    "tmrv_roll": 158.1478
+  },
+  {
+    "pa_number": 346,
+    "gamedate": "2025-08-16",
+    "tmrv_roll": 158.437
+  },
+  {
+    "pa_number": 347,
+    "gamedate": "2025-08-16",
+    "tmrv_roll": 161.7434
+  },
+  {
+    "pa_number": 348,
+    "gamedate": "2025-08-17",
+    "tmrv_roll": 161.4264
+  },
+  {
+    "pa_number": 349,
+    "gamedate": "2025-08-17",
+    "tmrv_roll": 164.8167
+  },
+  {
+    "pa_number": 350,
+    "gamedate": "2025-08-17",
+    "tmrv_roll": 162.271
+  },
+  {
+    "pa_number": 351,
+    "gamedate": "2025-08-17",
+    "tmrv_roll": 155.064
+  },
+  {
+    "pa_number": 352,
+    "gamedate": "2025-08-17",
+    "tmrv_roll": 156.0242
+  },
+  {
+    "pa_number": 353,
+    "gamedate": "2025-08-18",
+    "tmrv_roll": 154.0222
+  },
+  {
+    "pa_number": 354,
+    "gamedate": "2025-08-18",
+    "tmrv_roll": 149.8927
+  },
+  {
+    "pa_number": 355,
+    "gamedate": "2025-08-18",
+    "tmrv_roll": 153.7407
+  },
+  {
+    "pa_number": 356,
+    "gamedate": "2025-08-18",
+    "tmrv_roll": 159.0122
+  },
+  {
+    "pa_number": 357,
+    "gamedate": "2025-08-19",
+    "tmrv_roll": 165.2195
+  },
+  {
+    "pa_number": 358,
+    "gamedate": "2025-08-19",
+    "tmrv_roll": 167.2919
+  },
+  {
+    "pa_number": 359,
+    "gamedate": "2025-08-19",
+    "tmrv_roll": 169.978
+  },
+  {
+    "pa_number": 360,
+    "gamedate": "2025-08-19",
+    "tmrv_roll": 167.8139
+  },
+  {
+    "pa_number": 361,
+    "gamedate": "2025-08-20",
+    "tmrv_roll": 166.7843
+  },
+  {
+    "pa_number": 362,
+    "gamedate": "2025-08-20",
+    "tmrv_roll": 153.664
+  },
+  {
+    "pa_number": 363,
+    "gamedate": "2025-08-20",
+    "tmrv_roll": 152.2632
+  },
+  {
+    "pa_number": 364,
+    "gamedate": "2025-08-20",
+    "tmrv_roll": 150.1532
+  },
+  {
+    "pa_number": 365,
+    "gamedate": "2025-08-22",
+    "tmrv_roll": 149.9375
+  },
+  {
+    "pa_number": 366,
+    "gamedate": "2025-08-22",
+    "tmrv_roll": 152.7447
+  },
+  {
+    "pa_number": 367,
+    "gamedate": "2025-08-22",
+    "tmrv_roll": 150.988
+  },
+  {
+    "pa_number": 368,
+    "gamedate": "2025-08-23",
+    "tmrv_roll": 150.229
+  },
+  {
+    "pa_number": 369,
+    "gamedate": "2025-08-23",
+    "tmrv_roll": 145.3665
+  },
+  {
+    "pa_number": 370,
+    "gamedate": "2025-08-23",
+    "tmrv_roll": 145.9668
+  },
+  {
+    "pa_number": 371,
+    "gamedate": "2025-08-23",
+    "tmrv_roll": 148.3338
+  },
+  {
+    "pa_number": 372,
+    "gamedate": "2025-08-24",
+    "tmrv_roll": 148.0704
+  },
+  {
+    "pa_number": 373,
+    "gamedate": "2025-08-24",
+    "tmrv_roll": 149.8104
+  },
+  {
+    "pa_number": 374,
+    "gamedate": "2025-08-24",
+    "tmrv_roll": 150.4099
+  },
+  {
+    "pa_number": 375,
+    "gamedate": "2025-08-24",
+    "tmrv_roll": 143.8682
+  },
+  {
+    "pa_number": 376,
+    "gamedate": "2025-08-25",
+    "tmrv_roll": 144.7367
+  },
+  {
+    "pa_number": 377,
+    "gamedate": "2025-08-25",
+    "tmrv_roll": 143.5565
+  },
+  {
+    "pa_number": 378,
+    "gamedate": "2025-08-25",
+    "tmrv_roll": 141.5725
+  },
+  {
+    "pa_number": 379,
+    "gamedate": "2025-08-25",
+    "tmrv_roll": 141.2458
+  },
+  {
+    "pa_number": 380,
+    "gamedate": "2025-08-26",
+    "tmrv_roll": 143.2307
+  },
+  {
+    "pa_number": 381,
+    "gamedate": "2025-08-26",
+    "tmrv_roll": 145.5845
+  },
+  {
+    "pa_number": 382,
+    "gamedate": "2025-08-26",
+    "tmrv_roll": 139.0823
+  },
+  {
+    "pa_number": 383,
+    "gamedate": "2025-08-26",
+    "tmrv_roll": 141.6343
+  },
+  {
+    "pa_number": 384,
+    "gamedate": "2025-08-26",
+    "tmrv_roll": 136.73
+  },
+  {
+    "pa_number": 385,
+    "gamedate": "2025-08-27",
+    "tmrv_roll": 130.6928
+  },
+  {
+    "pa_number": 386,
+    "gamedate": "2025-08-27",
+    "tmrv_roll": 134.659
+  },
+  {
+    "pa_number": 387,
+    "gamedate": "2025-08-27",
+    "tmrv_roll": 146.7014
+  },
+  {
+    "pa_number": 388,
+    "gamedate": "2025-08-27",
+    "tmrv_roll": 142.3016
+  },
+  {
+    "pa_number": 389,
+    "gamedate": "2025-08-29",
+    "tmrv_roll": 144.0993
+  },
+  {
+    "pa_number": 390,
+    "gamedate": "2025-08-29",
+    "tmrv_roll": 145.7479
+  },
+  {
+    "pa_number": 391,
+    "gamedate": "2025-08-29",
+    "tmrv_roll": 147.6662
+  },
+  {
+    "pa_number": 392,
+    "gamedate": "2025-08-29",
+    "tmrv_roll": 152.8069
+  },
+  {
+    "pa_number": 393,
+    "gamedate": "2025-08-30",
+    "tmrv_roll": 153.9824
+  },
+  {
+    "pa_number": 394,
+    "gamedate": "2025-08-30",
+    "tmrv_roll": 156.6678
+  },
+  {
+    "pa_number": 395,
+    "gamedate": "2025-08-30",
+    "tmrv_roll": 163.3329
+  },
+  {
+    "pa_number": 396,
+    "gamedate": "2025-08-30",
+    "tmrv_roll": 156.3974
+  },
+  {
+    "pa_number": 397,
+    "gamedate": "2025-08-31",
+    "tmrv_roll": 143.7687
+  },
+  {
+    "pa_number": 398,
+    "gamedate": "2025-08-31",
+    "tmrv_roll": 144.4326
+  },
+  {
+    "pa_number": 399,
+    "gamedate": "2025-08-31",
+    "tmrv_roll": 141.5248
+  },
+  {
+    "pa_number": 400,
+    "gamedate": "2025-08-31",
+    "tmrv_roll": 145.0764
+  },
+  {
+    "pa_number": 401,
+    "gamedate": "2025-09-01",
+    "tmrv_roll": 144.7903
+  },
+  {
+    "pa_number": 402,
+    "gamedate": "2025-09-01"
+  },
+  {
+    "pa_number": 403,
+    "gamedate": "2025-09-01"
+  },
+  {
+    "pa_number": 404,
+    "gamedate": "2025-09-01"
+  },
+  {
+    "pa_number": 405,
+    "gamedate": "2025-09-02"
+  },
+  {
+    "pa_number": 406,
+    "gamedate": "2025-09-02"
+  },
+  {
+    "pa_number": 407,
+    "gamedate": "2025-09-02"
+  },
+  {
+    "pa_number": 408,
+    "gamedate": "2025-09-02"
+  },
+  {
+    "pa_number": 409,
+    "gamedate": "2025-09-03"
+  },
+  {
+    "pa_number": 410,
+    "gamedate": "2025-09-03"
+  },
+  {
+    "pa_number": 411,
+    "gamedate": "2025-09-03"
+  },
+  {
+    "pa_number": 412,
+    "gamedate": "2025-09-03"
+  },
+  {
+    "pa_number": 413,
+    "gamedate": "2025-09-05"
+  },
+  {
+    "pa_number": 414,
+    "gamedate": "2025-09-05"
+  },
+  {
+    "pa_number": 415,
+    "gamedate": "2025-09-05"
+  },
+  {
+    "pa_number": 416,
+    "gamedate": "2025-09-05"
+  },
+  {
+    "pa_number": 417,
+    "gamedate": "2025-09-06"
+  },
+  {
+    "pa_number": 418,
+    "gamedate": "2025-09-06"
+  },
+  {
+    "pa_number": 419,
+    "gamedate": "2025-09-06"
+  },
+  {
+    "pa_number": 420,
+    "gamedate": "2025-09-06"
+  },
+  {
+    "pa_number": 421,
+    "gamedate": "2025-09-06"
+  },
+  {
+    "pa_number": 422,
+    "gamedate": "2025-09-06"
+  },
+  {
+    "pa_number": 423,
+    "gamedate": "2025-09-07"
+  },
+  {
+    "pa_number": 424,
+    "gamedate": "2025-09-07"
+  },
+  {
+    "pa_number": 425,
+    "gamedate": "2025-09-07"
+  },
+  {
+    "pa_number": 426,
+    "gamedate": "2025-09-07"
+  },
+  {
+    "pa_number": 427,
+    "gamedate": "2025-09-08"
+  },
+  {
+    "pa_number": 428,
+    "gamedate": "2025-09-08"
+  },
+  {
+    "pa_number": 429,
+    "gamedate": "2025-09-08"
+  },
+  {
+    "pa_number": 430,
+    "gamedate": "2025-09-08"
+  },
+  {
+    "pa_number": 431,
+    "gamedate": "2025-09-09"
+  },
+  {
+    "pa_number": 432,
+    "gamedate": "2025-09-09"
+  },
+  {
+    "pa_number": 433,
+    "gamedate": "2025-09-09"
+  },
+  {
+    "pa_number": 434,
+    "gamedate": "2025-09-09"
+  },
+  {
+    "pa_number": 435,
+    "gamedate": "2025-09-10"
+  },
+  {
+    "pa_number": 436,
+    "gamedate": "2025-09-10"
+  },
+  {
+    "pa_number": 437,
+    "gamedate": "2025-09-10"
+  },
+  {
+    "pa_number": 438,
+    "gamedate": "2025-09-10"
+  },
+  {
+    "pa_number": 439,
+    "gamedate": "2025-09-10"
+  },
+  {
+    "pa_number": 440,
+    "gamedate": "2025-09-10"
+  },
+  {
+    "pa_number": 441,
+    "gamedate": "2025-09-11"
+  },
+  {
+    "pa_number": 442,
+    "gamedate": "2025-09-11"
+  },
+  {
+    "pa_number": 443,
+    "gamedate": "2025-09-11"
+  },
+  {
+    "pa_number": 444,
+    "gamedate": "2025-09-11"
+  },
+  {
+    "pa_number": 445,
+    "gamedate": "2025-09-11"
+  },
+  {
+    "pa_number": 446,
+    "gamedate": "2025-09-12"
+  },
+  {
+    "pa_number": 447,
+    "gamedate": "2025-09-12"
+  },
+  {
+    "pa_number": 448,
+    "gamedate": "2025-09-12"
+  },
+  {
+    "pa_number": 449,
+    "gamedate": "2025-09-13"
+  },
+  {
+    "pa_number": 450,
+    "gamedate": "2025-09-13"
+  },
+  {
+    "pa_number": 451,
+    "gamedate": "2025-09-13"
+  },
+  {
+    "pa_number": 452,
+    "gamedate": "2025-09-13"
+  },
+  {
+    "pa_number": 453,
+    "gamedate": "2025-09-14"
+  },
+  {
+    "pa_number": 454,
+    "gamedate": "2025-09-14"
+  },
+  {
+    "pa_number": 455,
+    "gamedate": "2025-09-14"
+  },
+  {
+    "pa_number": 456,
+    "gamedate": "2025-09-16"
+  },
+  {
+    "pa_number": 457,
+    "gamedate": "2025-09-16"
+  },
+  {
+    "pa_number": 458,
+    "gamedate": "2025-09-16"
+  },
+  {
+    "pa_number": 459,
+    "gamedate": "2025-09-16"
+  },
+  {
+    "pa_number": 460,
+    "gamedate": "2025-09-16"
+  },
+  {
+    "pa_number": 461,
+    "gamedate": "2025-09-17"
+  },
+  {
+    "pa_number": 462,
+    "gamedate": "2025-09-17"
+  },
+  {
+    "pa_number": 463,
+    "gamedate": "2025-09-17"
+  },
+  {
+    "pa_number": 464,
+    "gamedate": "2025-09-17"
+  },
+  {
+    "pa_number": 465,
+    "gamedate": "2025-09-18"
+  },
+  {
+    "pa_number": 466,
+    "gamedate": "2025-09-18"
+  },
+  {
+    "pa_number": 467,
+    "gamedate": "2025-09-18"
+  },
+  {
+    "pa_number": 468,
+    "gamedate": "2025-09-18"
+  },
+  {
+    "pa_number": 469,
+    "gamedate": "2025-09-19"
+  },
+  {
+    "pa_number": 470,
+    "gamedate": "2025-09-19"
+  },
+  {
+    "pa_number": 471,
+    "gamedate": "2025-09-19"
+  },
+  {
+    "pa_number": 472,
+    "gamedate": "2025-09-19"
+  },
+  {
+    "pa_number": 473,
+    "gamedate": "2025-09-20"
+  },
+  {
+    "pa_number": 474,
+    "gamedate": "2025-09-20"
+  },
+  {
+    "pa_number": 475,
+    "gamedate": "2025-09-20"
+  },
+  {
+    "pa_number": 476,
+    "gamedate": "2025-09-20"
+  },
+  {
+    "pa_number": 477,
+    "gamedate": "2025-09-20"
+  },
+  {
+    "pa_number": 478,
+    "gamedate": "2025-09-21"
+  },
+  {
+    "pa_number": 479,
+    "gamedate": "2025-09-21"
+  },
+  {
+    "pa_number": 480,
+    "gamedate": "2025-09-21"
+  },
+  {
+    "pa_number": 481,
+    "gamedate": "2025-09-21"
+  },
+  {
+    "pa_number": 482,
+    "gamedate": "2025-09-23"
+  },
+  {
+    "pa_number": 483,
+    "gamedate": "2025-09-23"
+  },
+  {
+    "pa_number": 484,
+    "gamedate": "2025-09-23"
+  },
+  {
+    "pa_number": 485,
+    "gamedate": "2025-09-23"
+  },
+  {
+    "pa_number": 486,
+    "gamedate": "2025-09-24"
+  },
+  {
+    "pa_number": 487,
+    "gamedate": "2025-09-24"
+  },
+  {
+    "pa_number": 488,
+    "gamedate": "2025-09-24"
+  },
+  {
+    "pa_number": 489,
+    "gamedate": "2025-09-24"
+  },
+  {
+    "pa_number": 490,
+    "gamedate": "2025-09-24"
+  },
+  {
+    "pa_number": 491,
+    "gamedate": "2025-09-25"
+  },
+  {
+    "pa_number": 492,
+    "gamedate": "2025-09-25"
+  },
+  {
+    "pa_number": 493,
+    "gamedate": "2025-09-25"
+  },
+  {
+    "pa_number": 494,
+    "gamedate": "2025-09-26"
+  },
+  {
+    "pa_number": 495,
+    "gamedate": "2025-09-26"
+  },
+  {
+    "pa_number": 496,
+    "gamedate": "2025-09-26"
+  },
+  {
+    "pa_number": 497,
+    "gamedate": "2025-09-27"
+  },
+  {
+    "pa_number": 498,
+    "gamedate": "2025-09-27"
+  },
+  {
+    "pa_number": 499,
+    "gamedate": "2025-09-27"
+  },
+  {
+    "pa_number": 500,
+    "gamedate": "2025-09-27"
+  }
+]

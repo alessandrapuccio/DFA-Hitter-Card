@@ -7,8 +7,9 @@ import ANCHOR from '../data/KRAKEN.png';
 import MLV from '../data/MLV.png';
 import PV from '../data/PV.svg';
 
-
-
+import RollingAveragePlot from '../components/RollingAvgPlot';
+import julioData from '../data/julio_tmwrc.json';
+import joshData from '../data/josh_tmwrc.json';
 const logos = import.meta.glob('../data/logos/*.png', { eager: true });
 
 const logoMap = Object.fromEntries(
@@ -110,25 +111,34 @@ function PlayerBioPanel({ player }) {
         alignItems: 'center', justifyContent: 'center',
         padding: '12px 14px',
       }}>
-        <div style={{ display: 'flex', gap: 24, alignItems: 'center', marginBottom: 10 }}>
-          <span style={{ fontSize: 21, fontWeight: 600 }}>
-            Opt:{' '}
-            <span style={{ background: '#dcfce7', color: '#16a34a', padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 21 }}>
-              Y({player.option.years})
-            </span>
+      <div style={{ display: 'flex', gap: 24, alignItems: 'center', marginBottom: 10 }}>
+        <span style={{ fontSize: 21, fontWeight: 600 }}>
+          Opt:{' '}
+          <span style={{
+            background: player.option?.includes('Y') ? '#dcfce7' : '#fee2e2',
+            color: player.option?.includes('Y') ? '#16a34a' : '#dc2626',
+            padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 21
+          }}>
+            {player.option}
           </span>
-          <span style={{ fontSize: 21, fontWeight: 600 }}>
-            Out:{' '}
-            <span style={{ background: '#dcfce7', color: '#16a34a', padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 21 }}>
-              N
-            </span>
+        </span>
+        <span style={{ fontSize: 21, fontWeight: 600 }}>
+          Out:{' '}
+          <span style={{
+            background: player.outrighted === 'Y' ? '#fee2e2' : '#dcfce7',
+            color: player.outrighted === 'Y' ? '#dc2626' : '#16a34a',
+            padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 21
+          }}>
+            {player.outrighted}
           </span>
-        </div>
+        </span>
+      </div>
+
         <div style={{ height: 3, background: HEADER_BG, width: '85%', marginBottom: 10 }} />
         <div style={{ fontSize: 21, fontWeight: 500 }}>
-          Salary: <strong>{formatSalary(player.salary)}</strong>
+          <strong>Salary: </strong>{formatSalary(player.salary)}
           &nbsp;&nbsp;
-          P2: <strong>{formatSalary(player.p2)}</strong>
+          <strong>P2: </strong>{formatSalary(player.p2)}
         </div>
       </div>
     </div>
@@ -183,14 +193,14 @@ function AnchorTable({ player }) {
 
         <tbody>
           <tr>
-            <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
-              {player.anchor_val}
+            <td style={{ padding: '9px 8px 5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 19, border: cellBorder, verticalAlign: 'bottom'  }}>
+               {player.anchor_val}
             </td>
-            <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
-              {player.anchor_val}
+            <td style={{ padding: '9px 8px 5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 19, border: cellBorder, verticalAlign: 'bottom' }}>
+               {player.ML_val}
             </td>
-            <td style={{ padding: '5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 18, border: cellBorder }}>
-              --
+            <td style={{ padding: '9px 8px 5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 19, border: cellBorder, verticalAlign: 'bottom' }}>
+               {player.PV_val}
             </td>
           </tr>
         </tbody>
@@ -200,24 +210,39 @@ function AnchorTable({ player }) {
 }
 
 function BaseballDiamond({ positions }) {
-  const posSet = new Set(positions.map(p => p.pos));
-const fieldDots = {
-  // Infield
-  '1B': { cx: 82, cy: 50 },    // slightly up to align with base
-  '2B': { cx: 65, cy: 30 },    // centered on second base
-  'SS': { cx: 45, cy: 30 },    // slightly left of 2B
-  '3B': { cx: 28, cy: 50 },    // aligns with third base
+  const posMap = Object.fromEntries(positions.map(p => [p.pos, p]));
+  const fieldDots = {
+    // Infield
+    '1B': { cx: 82, cy: 50 },
+    '2B': { cx: 65, cy: 30 },
+    'SS': { cx: 45, cy: 30 },
+    '3B': { cx: 28, cy: 50 },
+    // Outfield
+    'LF': { cx: 20, cy: 12 },
+    'CF': { cx: 55, cy: -5 },
+    'RF': { cx: 90, cy: 12 },
+    // Pitcher, Catcher, DH
+    'P':  { cx: 55, cy: 48 },
+    'C':  { cx: 55, cy: 78 },
+    'DH': { cx: 55, cy: 96 },
+  };
 
-  // Outfield
-  'LF': { cx: 20, cy: 12 },    // left field near foul line
-  'CF': { cx: 55, cy: -5 },    // straight up center
-  'RF': { cx: 90, cy: 12 },    // right field further up/right
+  // Compute dot sizes: only scale relative to each other when multiple positions exist
+  const activePosData = positions.filter(p => fieldDots[p.pos]);
+  const maxOpps = activePosData.length > 1 ? Math.max(...activePosData.map(p => p.opps)) : null;
+  const minDotR = 4;
+  const maxDotR = 8;
 
-  // Pitcher, Catcher, DH
-  'P': { cx: 55, cy: 48 },     // pitcher on mound
-  'C': { cx: 55, cy: 78 },     // catcher behind home plate
-  'DH': { cx: 55, cy: 96 },    // designated hitter off field (optional)
-};
+  const getDotR = (opps) => {
+    if (maxOpps === null || activePosData.length <= 1) return minDotR;
+    return minDotR + ((opps / maxOpps) * (maxDotR - minDotR));
+  };
+
+  const getDotColor = (runs_saved) => {
+    if (runs_saved > 3)  return '#16a34a';
+    if (runs_saved < -3) return '#dc2626';
+    return '#374151';
+  };
 
   return (
 <svg width={100} height={115} viewBox="0 0 110 110" style={{ flexShrink: 0, marginLeft: '8px', marginTop: '10px' }}>
@@ -241,11 +266,13 @@ const fieldDots = {
   <circle cx="55" cy="89" r="3" fill="#94a3b8" />
 
   {/* player dots */}
-  {Object.entries(fieldDots).map(([pos, { cx, cy }]) =>
-    posSet.has(pos)
-      ? <circle key={pos} cx={cx} cy={cy + 15} r={5} fill="#ef4444" stroke="white" strokeWidth="1.5" />
-      : null
-  )}
+  {Object.entries(fieldDots).map(([pos, { cx, cy }]) => {
+    const posData = posMap[pos];
+    if (!posData) return null;
+    const r = getDotR(posData.opps);
+    const fill = getDotColor(posData.runs_saved);
+    return <circle key={pos} cx={cx} cy={cy + 15} r={r} fill={fill} stroke="white" strokeWidth="1.5" />;
+  })}
 
 </svg>
 
@@ -278,7 +305,7 @@ function PositionTable({ positions }) {
           <tr key={i} style={{ background: i % 2 === 0 ? '#f8fafc' : 'white' }}>
             <td style={{ padding: '4px 8px', fontSize: 15, border: '2px solid #475569', textAlign: 'center', fontWeight: 700 }}>{row.pos}</td>
             <td style={{ padding: '4px 8px', fontSize: 15, border: '2px solid #475569',textAlign: 'center' }}>{row.opps}</td>
-            <td style={{ padding: '4px 8px', fontSize: 15, border: '2px solid #475569', textAlign: 'center', fontWeight: 700, color: row.runs_saved < 0 ? '#dc2626' : '#16a34a' }}>
+            <td style={{ padding: '4px 8px', fontSize: 15, border: '2px solid #475569', textAlign: 'center', fontWeight: 700, color: row.runs_saved > 3 ? '#16a34a' : row.runs_saved < -3 ? '#dc2626' : '#374151' }}>
               {row.runs_saved}
             </td>
           </tr>
@@ -354,6 +381,8 @@ function BsrRow({ label, currentValue, avgValue, stdDev, aboveOrBelowRed, unit =
 export default function HitterCard({ data }) {
   const { player, hitting, defense, baserunning, health, last_report, impact_statement, grades } = data;
 
+  console.log('rollingTmwrcData:', hitting.rollingTmwrcData);
+
   return (
     <div style={{
       width: 1020,
@@ -373,9 +402,11 @@ export default function HitterCard({ data }) {
           {/* Rolling avg chart — keep overflow crop; chart is Recharts auto-sized */}
           <div style={{ borderTop: BORDER }}>
             <SectionHeader label="ROLLING AVG TM wRC+" align="center" />
-            {/* <div style={{ height: 100, overflow: 'hidden' }}>
-              <RollingTMWRCPlot playerName="Noda, Ryan" average={100} />
-            </div> */}
+              <RollingAveragePlot 
+                data={hitting.rollingTmwrcData} 
+                height={180} 
+              />
+
           </div>
         </div>
 
@@ -558,17 +589,17 @@ export default function HitterCard({ data }) {
             }}>
               {defense.def_runs}
             </span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginLeft: 6, fontSize: 16, fontWeight: 600 }}>
-              <span>Rng+: <strong>{defense.rng_plus ?? '--'}</strong></span>
-              <span>Arm+: <strong>{defense.arm_plus ?? '--'}</strong></span>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginLeft: 6, fontSize: 16, fontWeight: 600 }}>
+            <span>Rng+: <strong style={{ color: defense.rng_plus == null ? '#374151' : defense.rng_plus > 110 ? '#16a34a' : defense.rng_plus < 90 ? '#dc2626' : '#374151' }}>{defense.rng_plus ?? ' —'}</strong></span>
+            <span>Arm+: <strong style={{ color: defense.arm_plus == null ? '#374151' : defense.arm_plus > 110 ? '#16a34a' : defense.arm_plus < 90 ? '#dc2626' : '#374151' }}>{defense.arm_plus ?? ' —'}</strong></span>
+          </div>
           </div>
           {/* Decorative HEADER_BG divider — inset from edges */}
           <div style={{ height: 2, minHeight: 2, flexShrink: 0, background: HEADER_BG, margin: '0 20px 0' }} />
 
           {/* Diamond + position table */}
           <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'space-around', padding: '0 10px 0 16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: 25, justifyContent: 'center', flex: 1 }}>
               <BaseballDiamond positions={defense.positions} />
             </div>
             <PositionTable positions={defense.positions} />
@@ -604,7 +635,7 @@ export default function HitterCard({ data }) {
               currentValue={baserunning.bsr_plus.playerValue}
               avgValue={baserunning.bsr_plus.avgValue}
               stdDev={baserunning.bsr_plus.stdDev}
-              aboveOrBelowRed="above"
+              aboveOrBelowRed="below"
               unit=""
               decimals={0}
             />
@@ -613,7 +644,7 @@ export default function HitterCard({ data }) {
               currentValue={baserunning.sprint_speed.playerValue}
               avgValue={baserunning.sprint_speed.avgValue}
               stdDev={baserunning.sprint_speed.stdDev}
-              aboveOrBelowRed="above"
+              aboveOrBelowRed="below"
               unit=" ft/sec"
               decimals={1}
             />
@@ -734,7 +765,13 @@ export default function HitterCard({ data }) {
         </div>
       </div>
 
+
+
       </div>
+
+
     </div>
+
+    
   );
 }

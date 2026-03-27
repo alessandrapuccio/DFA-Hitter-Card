@@ -6,14 +6,14 @@
     "throws": "L",
     "age": 29,
     "mls": 10.017,
-    "option": { "has_option": true, "years": 1 },
-    "outrighted": false,
+    "option": "N",
+    "outrighted": "N",
     "salary": 780000,
     "p2": 280000,
     "anchor_val": 800000,
     "ML_val": 800000,
-    "PV_val": null,
-    "ORG": "MIN"
+    "PV_val": "—",
+    "ORG": "FA"
   },
   "hitting": {
     "projections": {
@@ -31,7 +31,7 @@
       "percentages": [85, 15]
     },
     "sliders_left": [
-      { "currentValue": 350, "avgValue": 350, "stdDev": 28, "aboveOrBelowRed": "NA",    "title": "PA" },
+      { "currentValue": 450, "avgValue": 350, "stdDev": 28, "aboveOrBelowRed": "NA",    "title": "PA" },
       { "currentValue": 95,  "avgValue": 100, "stdDev": 10, "aboveOrBelowRed": "below", "title": "TM wRC+" },
       { "currentValue": 100, "avgValue": 100, "stdDev": 10, "aboveOrBelowRed": "below", "title": "wRC+" },
       { "currentValue": 22,  "avgValue": 10.5,"stdDev": 3.6,"aboveOrBelowRed": "below", "title": "BB%", "percent": true },
@@ -47,7 +47,7 @@
   },
   "defense": {
     "def_runs": -1.1,
-    "rng_plus": 107,
+    "rng_plus": 111,
     "arm_plus": null,
     "positions": [
       { "pos": "1B", "opps": 72, "runs_saved": -1.4 },

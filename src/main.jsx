@@ -35,3 +35,5 @@ if (typeof window !== 'undefined' && window.Shiny) {
 if (import.meta.env.DEV) {
   import('./data/noda_data.json').then((m) => mountCard('root', m.default));
 }
+
+
