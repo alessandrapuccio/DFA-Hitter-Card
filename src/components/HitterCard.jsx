@@ -59,6 +59,8 @@ function SectionHeader({ label, align = 'center' }) {
 
 // ─── sub-panels ───────────────────────────────────────────────────────────────
 function formatSalary(value) {
+  if (value == "—") return value;
+
   if (value == null) return '';
 
   const num = typeof value === 'string'
@@ -148,59 +150,60 @@ function PlayerBioPanel({ player }) {
 
 function AnchorTable({ player }) {
   const cellBorder = '1px solid #cbd5e1';
-  const colStyle = { width: '33.33%' };
   return (
     <div style={{ borderTop: BORDER }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed', overflow: 'visible' }}>
         <colgroup>
-          <col style={colStyle} />
-          <col style={colStyle} />
-          <col style={colStyle} />
+          <col style={{ width: '42%' }} />
+          <col style={{ width: '29%' }} />
+          <col style={{ width: '29%' }} />
         </colgroup>
-
-      <thead>
-        <tr>
-          {[
-            { key: 'ANCHOR', src: ANCHOR, height: 51, isLarge: true },
-            { key: 'MLV', src: MLV, height: 26 },
-            { key: 'PV', src: PV, height: 28 },
-          ].map(({ key, src, height, isLarge }) => (
-            <th key={key} style={{
-              background: HEADER_BG,
-              padding: '6px 8px', textAlign: 'center',
-              border: cellBorder,
-              position: 'relative',
-            }}>
-              {isLarge ? (
-                <div style={{ position: 'relative', height: 20 }}>
-                  <img src={src} alt={key} style={{
-                    height,
-                    objectFit: 'contain',
-                    position: 'absolute',
-                    top: '50%', left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                  }} />
-                </div>
-              ) : (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 20 }}>
-                  <img src={src} alt={key} style={{ height, objectFit: 'contain' }} />
-                </div>
-              )}
-            </th>
-          ))}
-        </tr>
-      </thead>
 
         <tbody>
           <tr>
-            <td style={{ padding: '9px 8px 5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 19, border: cellBorder, verticalAlign: 'bottom'  }}>
-               {player.anchor_val}
+            {/* ANCHOR column — large watermark logo behind big number */}
+            <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'visible' }}>
+              <img src={ANCHOR} alt="ANCHOR" style={{
+                position: 'absolute',
+                top: '40%', left: '50%',
+                transform: 'translate(-50%, -50%)',
+                height: 80,
+                objectFit: 'contain',
+                opacity: 0.3,
+                pointerEvents: 'none',
+                zIndex: 0,
+              }} />
+              <span style={{ position: 'relative', fontWeight: 800, fontSize: 38, lineHeight: 1, color: '#1e3a5f', zIndex: 1 }}>
+                {player.anchor_val}
+              </span>
             </td>
-            <td style={{ padding: '9px 8px 5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 19, border: cellBorder, verticalAlign: 'bottom' }}>
-               {player.ML_val}
+
+            {/* MLV column */}
+            <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'hidden' }}>
+              <img src={MLV} alt="MLV" style={{
+                position: 'absolute',
+                top: '50%', left: '50%',
+                transform: 'translate(-50%, -50%)',
+                height: 60,
+                objectFit: 'contain',
+                opacity: 0.18,
+                pointerEvents: 'none',
+              }} />
+              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>{player.ML_val}</span>
             </td>
-            <td style={{ padding: '9px 8px 5px 8px', textAlign: 'center', fontWeight: 700, fontSize: 19, border: cellBorder, verticalAlign: 'bottom' }}>
-               {player.PV_val}
+
+            {/* PV column */}
+            <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'hidden' }}>
+              <img src={PV} alt="PV" style={{
+                position: 'absolute',
+                top: '50%', left: '50%',
+                transform: 'translate(-50%, -50%)',
+                height: 60,
+                objectFit: 'contain',
+                opacity: 0.18,
+                pointerEvents: 'none',
+              }} />
+              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>{player.PV_val}</span>
             </td>
           </tr>
         </tbody>
@@ -227,15 +230,16 @@ function BaseballDiamond({ positions }) {
     'DH': { cx: 55, cy: 96 },
   };
 
-  // Compute dot sizes: only scale relative to each other when multiple positions exist
+  // Dot sizing: consistent base size for all minimums, scale by share of total opps
   const activePosData = positions.filter(p => fieldDots[p.pos]);
-  const maxOpps = activePosData.length > 1 ? Math.max(...activePosData.map(p => p.opps)) : null;
-  const minDotR = 4;
-  const maxDotR = 8;
+  const totalOpps = activePosData.reduce((sum, p) => sum + p.opps, 0);
+  const minDotR = 4;   // base size — used for single-position players AND least-played position
+  const maxDotR = 9;   // largest dot (most-played position in multi-position players)
 
   const getDotR = (opps) => {
-    if (maxOpps === null || activePosData.length <= 1) return minDotR;
-    return minDotR + ((opps / maxOpps) * (maxDotR - minDotR));
+    if (activePosData.length <= 1 || totalOpps === 0) return minDotR+3;
+    const share = opps / totalOpps; // 0→1 across all positions
+    return minDotR + (share * (maxDotR - minDotR));
   };
 
   const getDotColor = (runs_saved) => {
@@ -316,6 +320,79 @@ function PositionTable({ positions }) {
 }
 
 // ─── main card ────────────────────────────────────────────────────────────────
+
+// BaserunningSlider — same visual style as ShortDeviationSlider, stacked layout,
+// slightly less tall than the Results/TM sliders to fit two stacked in the section.
+function BaserunningSlider({ currentValue, avgValue, stdDev, aboveOrBelowRed, title, decimals = 0, unit = '' }) {
+  const shouldInvert = aboveOrBelowRed === 'above';
+  const range = stdDev * 7;
+  const minValue = avgValue - range;
+  const maxValue = avgValue + range;
+
+  const deviation = (currentValue - avgValue) / stdDev;
+  const color =
+    deviation >= 1  ? (aboveOrBelowRed === 'above' ? '#dc2626' : '#16a34a')
+    : deviation <= -1 ? (aboveOrBelowRed === 'below' ? '#dc2626' : '#16a34a')
+    : '#9ca3af';
+
+  const rawPosition = ((currentValue - minValue) / (maxValue - minValue)) * 100;
+  const valuePosition = Math.max(2, Math.min(98, shouldInvert ? 100 - rawPosition : rawPosition));
+
+  const titleOnRight = valuePosition < 33;
+  const titleColor = titleOnRight ? '#6b7280' : '#fff';
+  const valueLabel = decimals > 0 ? Number(currentValue).toFixed(decimals) + unit : Math.round(currentValue) + unit;
+
+  return (
+    <div style={{ padding: '2px 20px', boxSizing: 'border-box' }}>
+      <div style={{ position: 'relative', height: '22px', marginTop: '2px' }}>
+        {/* Grey background track */}
+        <div style={{
+          position: 'absolute', left: 0, right: 0,
+          top: '50%', transform: 'translateY(-50%)',
+          height: '19px', borderRadius: '10px',
+          background: '#e5e7eb', zIndex: 0,
+        }} />
+        {/* Colored fill */}
+        <div style={{
+          position: 'absolute', top: '50%', transform: 'translateY(-50%)',
+          height: '19px', borderRadius: '10px',
+          background: color, zIndex: 1,
+          left: 0, width: `${valuePosition}%`,
+        }} />
+        {/* Average marker */}
+        <div style={{
+          position: 'absolute', left: '50%', top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '2px', height: '24px',
+          background: '#000', zIndex: 20, pointerEvents: 'none',
+        }} />
+        {/* Title label */}
+        <div style={{
+          position: 'absolute', top: '53%', transform: 'translateY(-60%)',
+          fontSize: '11px', fontWeight: 'bold', color: titleColor,
+          pointerEvents: 'none', zIndex: 25, whiteSpace: 'nowrap',
+          ...(titleOnRight ? { right: '6px' } : { left: '6px' }),
+        }}>
+          {title}
+        </div>
+        {/* Value thumb */}
+        <div style={{
+          position: 'absolute',
+          left: `${valuePosition}%`, top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '26px', height: '26px', borderRadius: '50%',
+          background: '#fff', border: `2px solid ${color}`,
+          color: color,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontSize: '11px', fontWeight: 'bold',
+          zIndex: 30, pointerEvents: 'none', userSelect: 'none',
+        }}>
+          {valueLabel}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function BsrRow({ label, currentValue, avgValue, stdDev, aboveOrBelowRed, unit = '', decimals = 0 }) {
 
@@ -471,8 +548,8 @@ export default function HitterCard({ data }) {
                 paddingTop: 38,
               }}>
                 <WRCPlusChart vL={hitting.projections.vL} vR={hitting.projections.vR} barContainerHeight={100} />
-                <div style={{ textAlign: 'center', fontSize: 17, padding: '4px 0 8px', fontWeight: 600 }}>
-                  wRC+: <strong style={{ fontSize: 18 }}>{hitting.projections.wrc_plus}</strong>
+                <div style={{ textAlign: 'center', fontSize: 17,color:HEADER_BG, padding: '4px 0 8px', fontWeight: 600 }}>
+                  wRC+: <strong style={{ fontSize: 18, color:HEADER_BG }}>{hitting.projections.wrc_plus}</strong>
                 </div>
               </div>
 
@@ -549,7 +626,7 @@ export default function HitterCard({ data }) {
             {/* Center vertical divider */}
             <div style={{
               position: 'absolute',
-              left: '50%', top: 12, bottom: 6,
+              left: '50%', top: 45, bottom: 14,
               width: 2, background: HEADER_BG,
               transform: 'translateX(-50%)',
               pointerEvents: 'none',
@@ -628,26 +705,27 @@ export default function HitterCard({ data }) {
           {/* Decorative HEADER_BG divider — inset from edges */}
           <div style={{ height: 2, background: HEADER_BG, margin: '0 20px 2px', flexShrink: 0 }} />
 
-          {/* Slider rows — centered in remaining space */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <BsrRow
-              label="BSR+:"
-              currentValue={baserunning.bsr_plus.playerValue}
-              avgValue={baserunning.bsr_plus.avgValue}
-              stdDev={baserunning.bsr_plus.stdDev}
-              aboveOrBelowRed="below"
-              unit=""
-              decimals={0}
-            />
-            <BsrRow
-              label="Sprint Speed:"
-              currentValue={baserunning.sprint_speed.playerValue}
-              avgValue={baserunning.sprint_speed.avgValue}
-              stdDev={baserunning.sprint_speed.stdDev}
-              aboveOrBelowRed="below"
-              unit=" ft/sec"
-              decimals={1}
-            />
+          {/* Side-by-side sliders */}
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', marginTop: -5 }}>
+            <div style={{ flex: 1, marginRight: -5, marginLeft: 5 }}>
+              <ShortDeviationSlider
+                title="BSR+"
+                currentValue={baserunning.bsr_plus.playerValue}
+                avgValue={baserunning.bsr_plus.avgValue}
+                stdDev={baserunning.bsr_plus.stdDev}
+                aboveOrBelowRed="below"
+              />
+            </div>
+            <div style={{ flex: 1, marginLeft: -5, marginRight: 5 }}>
+              <ShortDeviationSlider
+                title=" Speed"
+                currentValue={baserunning.sprint_speed.playerValue}
+                avgValue={baserunning.sprint_speed.avgValue}
+                stdDev={baserunning.sprint_speed.stdDev}
+                aboveOrBelowRed="below"
+              />
+            </div>
+            
           </div>
         </div>
 

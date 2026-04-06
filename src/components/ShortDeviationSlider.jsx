@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function ShortDeviationSlider({
   currentValue,
@@ -11,7 +11,7 @@ export default function ShortDeviationSlider({
   percent = false,
   noValue = false,
 }) {
-  const [value, setValue] = useState(currentValue ?? avgValue);
+  const value = currentValue ?? avgValue;
 
   const shouldInvert = aboveOrBelowRed === 'above';
   const range = stdDev * 7;
@@ -129,30 +129,6 @@ export default function ShortDeviationSlider({
           </div>
         )}
 
-        {/* Invisible range input for interaction — omitted when noValue */}
-        {!noValue && (
-          <input
-            type="range"
-            min={minValue}
-            max={maxValue}
-            step={(maxValue - minValue) / 100}
-            value={value}
-            onChange={(e) => setValue(parseFloat(e.target.value))}
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '100%',
-              margin: 0,
-              zIndex: 10,
-              opacity: 0,
-              cursor: 'grab',
-              height: '28px',
-            }}
-          />
-        )}
       </div>
     </div>
   );
