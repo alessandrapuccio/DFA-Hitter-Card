@@ -3,6 +3,7 @@ import ShortDeviationSlider from './ShortDeviationSlider';
 import TrinityTrident from './TrinityTrident';
 import WRCPlusChart from './WRCPlusChart';
 import LevelTimeBar from './LevelTimeBar';
+import CatchingChart from './CatchingChart';
 import ANCHOR from '../data/KRAKEN.png';
 import MLV from '../data/MLV.png';
 import PV from '../data/PV.svg';
@@ -232,13 +233,15 @@ function BaseballDiamond({ positions }) {
 
   // Dot sizing: consistent base size for all minimums, scale by share of total opps
   const activePosData = positions.filter(p => fieldDots[p.pos]);
-  const totalOpps = activePosData.reduce((sum, p) => sum + p.opps, 0);
-  const minDotR = 4;   // base size — used for single-position players AND least-played position
-  const maxDotR = 9;   // largest dot (most-played position in multi-position players)
+  // gc is used for catcher rows, opps for field rows — normalise to a single key
+  const getOpps = (p) => p.opps ?? p.gc ?? 0;
+  const totalOpps = activePosData.reduce((sum, p) => sum + getOpps(p), 0);
+  const minDotR = 4;
+  const maxDotR = 9;
 
   const getDotR = (opps) => {
-    if (activePosData.length <= 1 || totalOpps === 0) return minDotR+3;
-    const share = opps / totalOpps; // 0→1 across all positions
+    if (activePosData.length <= 1 || totalOpps === 0) return minDotR + 3;
+    const share = opps / totalOpps;
     return minDotR + (share * (maxDotR - minDotR));
   };
 
@@ -273,47 +276,71 @@ function BaseballDiamond({ positions }) {
   {Object.entries(fieldDots).map(([pos, { cx, cy }]) => {
     const posData = posMap[pos];
     if (!posData) return null;
-    const r = getDotR(posData.opps);
+    const opps = getOpps(posData);
+    const r = getDotR(opps);
     const fill = getDotColor(posData.runs_saved);
     return <circle key={pos} cx={cx} cy={cy + 15} r={r} fill={fill} stroke="white" strokeWidth="1.5" />;
   })}
 
 </svg>
-
-
-
   );
 }
 
 
-function PositionTable({ positions }) {
+function PositionTable({ positions, isCatcher = false }) {
+  const catcherRows = positions.filter(r => r.type === 'catcher');
+  const fieldRows   = positions.filter(r => r.type === 'field');
+
+  const headerStyle = {
+    background: HEADER_BG, color: 'white', border: '2px solid #475569',
+    padding: '5px 8px', textAlign: 'center', fontWeight: 700,
+  };
+  const tdBase   = { padding: '4px 8px', fontSize: 15, border: '2px solid #475569', textAlign: 'center' };
+  const runColor = (rs) => rs > 3 ? '#16a34a' : rs < -3 ? '#dc2626' : '#374151';
+
+  const renderRows = (rows, offset = 0) => rows.map((row, i) => (
+    <tr key={i + offset} style={{ background: (i + offset) % 2 === 0 ? '#f8fafc' : 'white' }}>
+      <td style={{ ...tdBase, fontWeight: 700 }}>{row.pos}</td>
+      <td style={tdBase}>{row.gc ?? row.opps}</td>
+      <td style={{ ...tdBase, fontWeight: 700, color: runColor(row.runs_saved) }}>{row.runs_saved}</td>
+    </tr>
+  ));
+
+  // Pure non-catcher or pure catcher — single header table
+  if (!isCatcher || catcherRows.length === 0 || fieldRows.length === 0) {
+    const col2 = isCatcher ? 'GC' : 'OPPS';
+    return (
+      <table style={{ fontSize: 12, borderCollapse: 'collapse', tableLayout: 'fixed', width: 'auto' }}>
+        <colgroup>
+          <col style={{ width: 45 }} /><col style={{ width: 55 }} /><col style={{ width: 85 }} />
+        </colgroup>
+        <thead>
+          <tr>{['POS', col2, 'Runs Saved'].map(h => <th key={h} style={headerStyle}>{h}</th>)}</tr>
+        </thead>
+        <tbody>{renderRows(positions)}</tbody>
+      </table>
+    );
+  }
+
+  // Mixed: determine primary position by GC vs max opps
+  const primaryIsCatcher = catcherRows[0].gc >= Math.max(...fieldRows.map(r => r.gc ?? 0), 0);
+  const firstGroup    = primaryIsCatcher ? catcherRows : fieldRows;
+  const secondGroup   = primaryIsCatcher ? fieldRows   : catcherRows;
+  const firstHeaders  = primaryIsCatcher ? ['POS', 'GC',   'Runs Saved'] : ['POS', 'OPPS', 'Runs Saved'];
+  const secondHeaders = primaryIsCatcher ? ['POS', 'OPPS', 'Runs Saved'] : ['POS', 'GC',   'Runs Saved'];
+
   return (
     <table style={{ fontSize: 12, borderCollapse: 'collapse', tableLayout: 'fixed', width: 'auto' }}>
       <colgroup>
-        <col style={{ width: 45 }} />
-        <col style={{ width: 55 }} />
-        <col style={{ width: 85 }} />
+        <col style={{ width: 45 }} /><col style={{ width: 55 }} /><col style={{ width: 85 }} />
       </colgroup>
       <thead>
-        <tr>
-          {['POS', 'OPPS', 'Runs Saved'].map(h => (
-            <th key={h} style={{
-              background: HEADER_BG, color: 'white',border: '2px solid #475569',
-              padding: '5px 8px', textAlign: 'center', fontWeight: 700,
-            }}>{h}</th>
-          ))}
-        </tr>
+        <tr>{firstHeaders.map(h => <th key={h} style={headerStyle}>{h}</th>)}</tr>
       </thead>
       <tbody>
-        {positions.map((row, i) => (
-          <tr key={i} style={{ background: i % 2 === 0 ? '#f8fafc' : 'white' }}>
-            <td style={{ padding: '4px 8px', fontSize: 15, border: '2px solid #475569', textAlign: 'center', fontWeight: 700 }}>{row.pos}</td>
-            <td style={{ padding: '4px 8px', fontSize: 15, border: '2px solid #475569',textAlign: 'center' }}>{row.opps}</td>
-            <td style={{ padding: '4px 8px', fontSize: 15, border: '2px solid #475569', textAlign: 'center', fontWeight: 700, color: row.runs_saved > 3 ? '#16a34a' : row.runs_saved < -3 ? '#dc2626' : '#374151' }}>
-              {row.runs_saved}
-            </td>
-          </tr>
-        ))}
+        {renderRows(firstGroup, 0)}
+        <tr>{secondHeaders.map(h => <th key={h} style={headerStyle}>{h}</th>)}</tr>
+        {renderRows(secondGroup, firstGroup.length)}
       </tbody>
     </table>
   );
@@ -470,7 +497,7 @@ export default function HitterCard({ data }) {
       boxSizing: 'border-box',
     }}>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '325px 1fr 1fr', alignItems: 'stretch' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr 330px', alignItems: 'stretch' }}>
         {/* ── COL 1: Player bio + Rolling chart ──────────────────────────── */}
         <div style={{ borderRight: BORDER }}>
           <PlayerBioPanel player={player} />
@@ -488,7 +515,7 @@ export default function HitterCard({ data }) {
         </div>
 
         {/* ── COL 2: Hitting ─────────────────────────────────────────────── */}
-        <div style={{ borderRight: BORDER, overflow: 'hidden' }}>
+        <div style={{ borderRight: BORDER, overflow: 'hidden', minWidth: 0 }}>
           <div style={{
             background: HEADER_BG, color: 'white',
             fontWeight: 700, fontStyle: 'italic',
@@ -653,10 +680,10 @@ export default function HitterCard({ data }) {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
 
         {/* DEFENSE */}
-        <div style={{ flex: 5, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 5, minHeight: 0, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
           <SectionHeader label="DEFENSE" />
 
-          {/* DEF Runs badge + stacked Rng/Arm */}
+          {/* DEF Runs badge + stacked Rng/Arm (or Deter/Arm for catchers) */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '6px 12px 8px', flexShrink: 0 }}>
             <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>DEF Runs:</span>
             <span style={{
@@ -667,24 +694,38 @@ export default function HitterCard({ data }) {
               {defense.def_runs}
             </span>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginLeft: 6, fontSize: 16, fontWeight: 600 }}>
-            <span>Rng+: <strong style={{ color: defense.rng_plus == null ? '#374151' : defense.rng_plus > 110 ? '#16a34a' : defense.rng_plus < 90 ? '#dc2626' : '#374151' }}>{defense.rng_plus ?? ' —'}</strong></span>
+            <span>{defense.primary_catcher ? 'Deter+' : 'Rng+'}:{' '}
+              <strong style={{ color: (defense.primary_catcher ? defense.deter_plus : defense.rng_plus) == null ? '#374151' : (defense.primary_catcher ? defense.deter_plus : defense.rng_plus) > 110 ? '#16a34a' : (defense.primary_catcher ? defense.deter_plus : defense.rng_plus) < 90 ? '#dc2626' : '#374151' }}>
+                {(defense.primary_catcher ? defense.deter_plus : defense.rng_plus) ?? ' —'}
+              </strong>
+            </span>
             <span>Arm+: <strong style={{ color: defense.arm_plus == null ? '#374151' : defense.arm_plus > 110 ? '#16a34a' : defense.arm_plus < 90 ? '#dc2626' : '#374151' }}>{defense.arm_plus ?? ' —'}</strong></span>
           </div>
           </div>
           {/* Decorative HEADER_BG divider — inset from edges */}
           <div style={{ height: 2, minHeight: 2, flexShrink: 0, background: HEADER_BG, margin: '0 20px 0' }} />
 
-          {/* Diamond + position table */}
-          <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'space-around', padding: '0 10px 0 16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', marginRight: 25, justifyContent: 'center', flex: 1 }}>
-              <BaseballDiamond positions={defense.positions} />
+          {/* Diamond (non-catcher) or CatchingChart (catcher) + position table */}
+          <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden', alignItems: 'center', justifyContent: 'space-around', padding: '0 10px 0 16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', marginRight: defense.primary_catcher ? 8 : 25, justifyContent: 'center', flex: 1 }}>
+              {defense.primary_catcher
+                ? <CatchingChart
+                    overall={defense.catcher_def_runs}
+                    framing={defense.catcher_framing_runs}
+                    sb={defense.catcher_sb_runs}
+                    blocking={defense.catcher_block_runs}
+                    width={160}
+                    height={150}
+                  />
+                : <BaseballDiamond positions={defense.positions} />
+              }
             </div>
-            <PositionTable positions={defense.positions} />
+            <PositionTable positions={defense.positions} isCatcher={defense.is_catcher} />
           </div>
         </div>
 
         {/* BASERUNNING */}
-        <div style={{ flex: 3, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 3, minHeight: 0, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
           <SectionHeader label="BASERUNNING" />
 
           {/* BSR Runs badge + SB */}
@@ -730,7 +771,7 @@ export default function HitterCard({ data }) {
         </div>
 
         {/* HEALTH */}
-        <div style={{ flex: 1.60, overflow: 'hidden' }}>
+        <div style={{ flex: 1.60, minHeight: 0, overflow: 'hidden' }}>
           <SectionHeader label="HEALTH" />
           {(() => {
             const years = Object.keys(health).sort((a, b) => b - a);

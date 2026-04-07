@@ -1,7 +1,8 @@
+
 {
   "player": {
     "name": "Ryan Noda",
-    "position": "1B",
+    "position": "C",
     "bats": "L",
     "throws": "L",
     "age": 29,
@@ -19,7 +20,7 @@
     "projections": {
       "wrc_plus": 92,
       "vL": 74,
-      "vR": 99
+      "vR": 104
     },
     "trident": {
       "swdec_plus": 111,
@@ -27,7 +28,7 @@
       "con_plus": 63
     },
     "level_time": {
-      "levels": ["3A", "MLB"],
+      "levels": ["3A", "ML"],
       "percentages": [85, 15]
     },
     "sliders_left": [
@@ -46,12 +47,19 @@
     ]
   },
   "defense": {
+    "is_catcher": true,
     "def_runs": -1.1,
     "rng_plus": 107,
-    "arm_plus": null,
+    "arm_plus": 95,
+    "deter_plus": 88,
+    "catcher_gc": 58,
+    "catcher_def_runs": -1.1,
+    "catcher_framing_runs": -3.2,
+    "catcher_sb_runs": 1.7,
+    "catcher_block_runs": 0.3,
     "positions": [
-      { "pos": "1B", "opps": 72, "runs_saved": -1.4 },
-      { "pos": "RF", "opps": 40, "runs_saved": -0.6 }
+      { "pos": "C",  "gc": 58, "runs_saved": -1.1 },
+      { "pos": "1B", "gc": 40, "runs_saved": -1.4 }
     ]
   },
   "baserunning": {
@@ -74,85 +82,6 @@
     "2024": 0,
     "2023": 33
   },
-  "rolling_avg": [
-    { "gamedate": "2025-04-15", "rollingWrcPlus": 101.2 },
-    { "gamedate": "2025-04-17", "rollingWrcPlus": 99.8 },
-    { "gamedate": "2025-04-19", "rollingWrcPlus": 102.3 },
-    { "gamedate": "2025-04-21", "rollingWrcPlus": 100.5 },
-    { "gamedate": "2025-04-23", "rollingWrcPlus": 98.7 },
-    { "gamedate": "2025-04-25", "rollingWrcPlus": 97.4 },
-    { "gamedate": "2025-04-27", "rollingWrcPlus": 96.1 },
-    { "gamedate": "2025-04-29", "rollingWrcPlus": 98.9 },
-    { "gamedate": "2025-05-01", "rollingWrcPlus": 97.3 },
-    { "gamedate": "2025-05-03", "rollingWrcPlus": 95.6 },
-    { "gamedate": "2025-05-05", "rollingWrcPlus": 94.2 },
-    { "gamedate": "2025-05-07", "rollingWrcPlus": 93.8 },
-    { "gamedate": "2025-05-09", "rollingWrcPlus": 92.1 },
-    { "gamedate": "2025-05-11", "rollingWrcPlus": 90.7 },
-    { "gamedate": "2025-05-13", "rollingWrcPlus": 89.4 },
-    { "gamedate": "2025-05-15", "rollingWrcPlus": 88.2 },
-    { "gamedate": "2025-05-17", "rollingWrcPlus": 87.9 },
-    { "gamedate": "2025-05-19", "rollingWrcPlus": 89.3 },
-    { "gamedate": "2025-05-21", "rollingWrcPlus": 91.8 },
-    { "gamedate": "2025-05-23", "rollingWrcPlus": 90.4 },
-    { "gamedate": "2025-05-25", "rollingWrcPlus": 92.2 },
-    { "gamedate": "2025-05-27", "rollingWrcPlus": 91.6 },
-    { "gamedate": "2025-05-29", "rollingWrcPlus": 90.1 },
-    { "gamedate": "2025-05-31", "rollingWrcPlus": 89.7 },
-    { "gamedate": "2025-06-02", "rollingWrcPlus": 88.5 },
-    { "gamedate": "2025-06-04", "rollingWrcPlus": 87.3 },
-    { "gamedate": "2025-06-06", "rollingWrcPlus": 89.1 },
-    { "gamedate": "2025-06-08", "rollingWrcPlus": 90.8 },
-    { "gamedate": "2025-06-10", "rollingWrcPlus": 92.4 },
-    { "gamedate": "2025-06-12", "rollingWrcPlus": 91.9 },
-    { "gamedate": "2025-06-14", "rollingWrcPlus": 90.3 },
-    { "gamedate": "2025-06-16", "rollingWrcPlus": 89.6 },
-    { "gamedate": "2025-06-18", "rollingWrcPlus": 88.9 },
-    { "gamedate": "2025-06-20", "rollingWrcPlus": 90.2 },
-    { "gamedate": "2025-06-22", "rollingWrcPlus": 91.5 },
-    { "gamedate": "2025-06-24", "rollingWrcPlus": 92.8 },
-    { "gamedate": "2025-06-26", "rollingWrcPlus": 91.2 },
-    { "gamedate": "2025-06-28", "rollingWrcPlus": 90.7 },
-    { "gamedate": "2025-06-30", "rollingWrcPlus": 92.1 },
-    { "gamedate": "2025-07-02", "rollingWrcPlus": 93.4 },
-    { "gamedate": "2025-07-04", "rollingWrcPlus": 94.7 },
-    { "gamedate": "2025-07-06", "rollingWrcPlus": 93.1 },
-    { "gamedate": "2025-07-08", "rollingWrcPlus": 92.6 },
-    { "gamedate": "2025-07-10", "rollingWrcPlus": 94.3 },
-    { "gamedate": "2025-07-12", "rollingWrcPlus": 95.8 },
-    { "gamedate": "2025-07-14", "rollingWrcPlus": 94.2 },
-    { "gamedate": "2025-07-16", "rollingWrcPlus": 93.7 },
-    { "gamedate": "2025-07-18", "rollingWrcPlus": 92.9 },
-    { "gamedate": "2025-07-20", "rollingWrcPlus": 94.1 },
-    { "gamedate": "2025-07-22", "rollingWrcPlus": 93.6 },
-    { "gamedate": "2025-07-24", "rollingWrcPlus": 91.8 },
-    { "gamedate": "2025-07-26", "rollingWrcPlus": 92.4 },
-    { "gamedate": "2025-07-28", "rollingWrcPlus": 93.9 },
-    { "gamedate": "2025-07-30", "rollingWrcPlus": 94.5 },
-    { "gamedate": "2025-08-01", "rollingWrcPlus": 93.2 },
-    { "gamedate": "2025-08-03", "rollingWrcPlus": 94.8 },
-    { "gamedate": "2025-08-05", "rollingWrcPlus": 95.9 },
-    { "gamedate": "2025-08-07", "rollingWrcPlus": 94.6 },
-    { "gamedate": "2025-08-09", "rollingWrcPlus": 93.4 },
-    { "gamedate": "2025-08-11", "rollingWrcPlus": 92.7 },
-    { "gamedate": "2025-08-13", "rollingWrcPlus": 93.8 },
-    { "gamedate": "2025-08-15", "rollingWrcPlus": 95.1 },
-    { "gamedate": "2025-08-17", "rollingWrcPlus": 94.3 },
-    { "gamedate": "2025-08-19", "rollingWrcPlus": 93.6 },
-    { "gamedate": "2025-08-21", "rollingWrcPlus": 92.9 },
-    { "gamedate": "2025-08-23", "rollingWrcPlus": 91.4 },
-    { "gamedate": "2025-08-25", "rollingWrcPlus": 92.1 },
-    { "gamedate": "2025-08-27", "rollingWrcPlus": 93.3 },
-    { "gamedate": "2025-08-29", "rollingWrcPlus": 94.7 },
-    { "gamedate": "2025-08-31", "rollingWrcPlus": 93.9 },
-    { "gamedate": "2025-09-02", "rollingWrcPlus": 92.6 },
-    { "gamedate": "2025-09-04", "rollingWrcPlus": 93.1 },
-    { "gamedate": "2025-09-06", "rollingWrcPlus": 94.2 },
-    { "gamedate": "2025-09-08", "rollingWrcPlus": 95.0 },
-    { "gamedate": "2025-09-10", "rollingWrcPlus": 93.8 },
-    { "gamedate": "2025-09-12", "rollingWrcPlus": 92.4 },
-    { "gamedate": "2025-09-14", "rollingWrcPlus": 93.1 }
-  ],
   "last_report": {
     "scout": "M Ault",
     "date": "4/25/2025",
