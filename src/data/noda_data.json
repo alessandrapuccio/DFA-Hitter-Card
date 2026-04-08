@@ -1,7 +1,7 @@
 
 {
   "player": {
-    "name": "Ryan Noda",
+    "name": "Ryan Nod3333aoo",
     "position": "C",
     "bats": "L",
     "throws": "L",
@@ -11,8 +11,8 @@
     "outrighted": "N",
     "salary": 780000,
     "p2": 280000,
-    "anchor_val": 90,
-    "ML_val": 8,
+    "anchor_val": 90.0,
+    "ML_val": 8.4,
     "PV_val": 70,
     "ORG": "FA"
   },
@@ -43,7 +43,7 @@
       { "currentValue": 14.7,  "avgValue": 24.7, "stdDev": 5.8, "aboveOrBelowRed": "above", "title": "Chase" },
       { "currentValue": 29.5,  "avgValue": 16.2, "stdDev": 5.1, "aboveOrBelowRed": "above", "title": "ZWhiff" },
       { "currentValue": 111.7, "avgValue": 106,  "stdDev": 2.8, "aboveOrBelowRed": "below", "title": "EV T10%" },
-      { "currentValue": 72.4,  "avgValue": 70.5, "stdDev": 2.6, "aboveOrBelowRed": "below", "title": "Bat T10%" }
+      { "currentValue": 37,  "avgValue": 50, "stdDev": 10, "aboveOrBelowRed": "below", "title": "Bat T10%" }
     ]
   },
   "defense": {

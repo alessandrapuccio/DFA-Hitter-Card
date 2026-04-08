@@ -1,14 +1,5 @@
-import React, { useState } from 'react';
-import TrinityTrident from './components/TrinityTrident';
-import DeviationSlider from './components/DeviationSlider';
-// import ShortDeviationSlider from './components/ShortDeviationSlider';
 import ShortDeviationSlider, { DeviationSliderV1, DeviationSliderV2, DeviationSliderV3 } from './components/ShortDeviationSlider';
-import WRCPlusChart from './components/WRCPlusChart.js';
-import LevelTimeBar from './components/LevelTimeBar.js';
-import CatchingChart from './components/CatchingChart.js';
-import RollingTMWRCPlot from './components/RollingWRCPlot.js';
 import HitterCard from './components/HitterCard.js';
-
 
 const SLIDERS_LEFT = [
   { currentValue: 350, avgValue: 350, stdDev: 28, aboveOrBelowRed: "NA", title: "PA" },
@@ -19,9 +10,9 @@ const SLIDERS_LEFT = [
 ];
 
 const SLIDERS_RIGHT = [
-  { currentValue: 14.7, avgValue: 24.7, stdDev: 5.8, aboveOrBelowRed: "above", title: "Chase" },
-  { currentValue: 62.2, avgValue: 65.6, stdDev: 5.8, aboveOrBelowRed: "below", title: "ZSwing" },
-  { currentValue: 29.5, avgValue: 16.2, stdDev: 5.1, aboveOrBelowRed: "above", title: "ZWhiff" },
+  { currentValue: 14.7, avgValue: 24.7, stdDev: 5.8, aboveOrBelowRed: "above", title: "Chase%" },
+  { currentValue: 62.2, avgValue: 65.6, stdDev: 5.8, aboveOrBelowRed: "below", title: "ZSwing%" },
+  { currentValue: 29.5, avgValue: 16.2, stdDev: 5.1, aboveOrBelowRed: "above", title: "ZWhiff%" },
   { currentValue: 111.7, avgValue: 106, stdDev: 2.8, aboveOrBelowRed: "below", title: "EV T10%" },
   { currentValue: 72.4, avgValue: 70.5, stdDev: 2.6, aboveOrBelowRed: "below", title: "Bat T10%" },
 ];

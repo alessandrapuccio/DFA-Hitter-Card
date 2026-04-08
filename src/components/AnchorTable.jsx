@@ -4,6 +4,8 @@ import ANCHOR from '../data/KRAKEN.png';
 import MLV from '../data/MLV.png';
 import PV from '../data/PV.svg';
 
+const fmt = (val) => Number(val).toFixed(1);
+
 export default function AnchorTable({ player }) {
   const cellBorder = '1px solid #cbd5e1';
   return (
@@ -17,7 +19,6 @@ export default function AnchorTable({ player }) {
 
         <tbody>
           <tr>
-            {/* ANCHOR column — large watermark logo behind big number */}
             <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'visible' }}>
               <img src={ANCHOR} alt="ANCHOR" style={{
                 position: 'absolute',
@@ -30,11 +31,10 @@ export default function AnchorTable({ player }) {
                 zIndex: 0,
               }} />
               <span style={{ position: 'relative', fontWeight: 800, fontSize: 38, lineHeight: 1, color: '#1e3a5f', zIndex: 1 }}>
-                {player.anchor_val}
+                ${fmt(player.anchor_val)}
               </span>
             </td>
 
-            {/* MLV column */}
             <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'hidden' }}>
               <img src={MLV} alt="MLV" style={{
                 position: 'absolute',
@@ -45,10 +45,9 @@ export default function AnchorTable({ player }) {
                 opacity: 0.18,
                 pointerEvents: 'none',
               }} />
-              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>{player.ML_val}</span>
+              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>${fmt(player.ML_val)}</span>
             </td>
 
-            {/* PV column */}
             <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'hidden' }}>
               <img src={PV} alt="PV" style={{
                 position: 'absolute',
@@ -59,7 +58,7 @@ export default function AnchorTable({ player }) {
                 opacity: 0.18,
                 pointerEvents: 'none',
               }} />
-              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>{player.PV_val}</span>
+              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>${fmt(player.PV_val)}</span>
             </td>
           </tr>
         </tbody>

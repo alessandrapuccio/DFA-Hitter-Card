@@ -305,7 +305,7 @@ export default function HitterCard({ data }) {
         <div style={{ flex: 1.60, minHeight: 0, overflow: 'hidden' }}>
           <SectionHeader label="HEALTH" />
           {(() => {
-            const years = Object.keys(health).sort((a, b) => b - a);
+            const years = Object.keys(health).sort((a, b) => a - b);
             return (
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed' }}>
                 <colgroup>
@@ -376,7 +376,7 @@ export default function HitterCard({ data }) {
       <div style={{ flex: '0 0 23%', borderRight: BORDER, display: 'flex', flexDirection: 'column' }}>
         <SectionHeader label="ROLE GRADES" />
         <div style={{ display: 'flex', alignItems: 'stretch', gap: 4, padding: '6px 8px', flex: 1 }}>
-          {[['PRESENT', last_report.present], ['FUTURE', last_report.future], ['TE', last_report.te]].map(([label, val]) => (
+          {[['PRESENT', last_report.present], ['FUTURE', last_report.future], ['TOP END', last_report.te]].map(([label, val]) => (
            <div key={label} style={{
                 flex: '1 1 0',
                 minWidth: 0,
