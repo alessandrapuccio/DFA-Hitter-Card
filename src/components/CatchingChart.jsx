@@ -61,7 +61,7 @@ export default function CatchingChart({
   const ticks = [-20, -10, 0, 10, 20];
 
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} overflow="visible">
 
       {/* Vertical center line */}
       <line
@@ -91,7 +91,7 @@ export default function CatchingChart({
             <text
               x={margin.left - 4} y={yScale(i)}
               textAnchor="end" dominantBaseline="middle"
-              fill="#374151" fontWeight="600" fontSize={9}
+              fill="#374151" fontWeight="600" fontSize={10}
             >
               {cat.label}
             </text>
@@ -101,9 +101,9 @@ export default function CatchingChart({
 
             {/* Percentile */}
             <text
-              x={width - margin.right + 4} y={yScale(i)}
+              x={width - margin.right - 8} y={yScale(i)}
               textAnchor="start" dominantBaseline="middle"
-              fill="gray" fontSize={8}
+              fill="gray" fontSize={12}
             >
               {getOrdinalSuffix(pct)}
             </text>

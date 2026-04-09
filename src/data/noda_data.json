@@ -1,7 +1,7 @@
 
 {
   "player": {
-    "name": "Ryan Nod3333aoo",
+    "name": "Ryan Nodoo",
     "position": "C",
     "bats": "L",
     "throws": "L",
@@ -11,9 +11,9 @@
     "outrighted": "N",
     "salary": 780000,
     "p2": 280000,
-    "anchor_val": 90.0,
-    "ML_val": 8.4,
-    "PV_val": 70,
+    "anchor_val": 950.0,
+    "ML_val": "—",
+    "PV_val": "—",
     "ORG": "FA"
   },
   "hitting": {
@@ -23,9 +23,9 @@
       "vR": 104
     },
     "trident": {
-      "swdec_plus": 111,
-      "dmg_plus": 104,
-      "con_plus": 63
+      "swdec_plus": 109,
+      "dmg_plus": 144,
+      "con_plus": 30
     },
     "level_time": {
       "levels": ["3A", "ML"],
@@ -39,15 +39,16 @@
       { "currentValue": 34,  "avgValue": 21.4,"stdDev": 6.7,"aboveOrBelowRed": "above", "title": "K%",  "percent": true }
     ],
     "sliders_right": [
-      { "currentValue": 62.2,  "avgValue": 65.6, "stdDev": 5.8, "aboveOrBelowRed": "below", "title": "ZSwing" },
-      { "currentValue": 14.7,  "avgValue": 24.7, "stdDev": 5.8, "aboveOrBelowRed": "above", "title": "Chase" },
-      { "currentValue": 29.5,  "avgValue": 16.2, "stdDev": 5.1, "aboveOrBelowRed": "above", "title": "ZWhiff" },
+      { "currentValue": 62.2,  "avgValue": 65.6, "stdDev": 5.8, "aboveOrBelowRed": "below", "title": "ZSwing%" },
+      { "currentValue": 14.7,  "avgValue": 24.7, "stdDev": 5.8, "aboveOrBelowRed": "above", "title": "Chase%" },
+      { "currentValue": 29.5,  "avgValue": 16.2, "stdDev": 5.1, "aboveOrBelowRed": "above", "title": "ZWhiff%" },
       { "currentValue": 111.7, "avgValue": 106,  "stdDev": 2.8, "aboveOrBelowRed": "below", "title": "EV T10%" },
       { "currentValue": 37,  "avgValue": 50, "stdDev": 10, "aboveOrBelowRed": "below", "title": "Bat T10%" }
     ]
   },
   "defense": {
     "is_catcher": true,
+    "primary_catcher": true,
     "def_runs": -1.1,
     "rng_plus": 107,
     "arm_plus": 95,
@@ -58,8 +59,8 @@
     "catcher_sb_runs": 1.7,
     "catcher_block_runs": 0.3,
     "positions": [
-      { "pos": "C",  "gc": 58, "runs_saved": -1.1 },
-      { "pos": "1B", "gc": 40, "runs_saved": -1.4 }
+      { "pos": "C",  "gc": 59, "runs_saved": -1.1 },
+      { "pos": "1B", "gc": 4, "runs_saved": -1.4 }
     ]
   },
   "baserunning": {

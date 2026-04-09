@@ -4,7 +4,8 @@ import ANCHOR from '../data/KRAKEN.png';
 import MLV from '../data/MLV.png';
 import PV from '../data/PV.svg';
 
-const fmt = (val) => Number(val).toFixed(1);
+const fmt = (val) => val === '—' ? '—' : Number(val).toFixed(1);
+const display = (val) => val === '—' ? '—' : `$${fmt(val)}`;
 
 export default function AnchorTable({ player }) {
   const cellBorder = '1px solid #cbd5e1';
@@ -19,19 +20,19 @@ export default function AnchorTable({ player }) {
 
         <tbody>
           <tr>
-            <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'visible' }}>
+            <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '10px 4px', position: 'relative', overflow: 'visible' }}>
               <img src={ANCHOR} alt="ANCHOR" style={{
                 position: 'absolute',
                 top: '40%', left: '50%',
                 transform: 'translate(-50%, -50%)',
-                height: 80,
+                height: 90,
                 objectFit: 'contain',
                 opacity: 0.3,
                 pointerEvents: 'none',
                 zIndex: 0,
               }} />
-              <span style={{ position: 'relative', fontWeight: 800, fontSize: 38, lineHeight: 1, color: '#1e3a5f', zIndex: 1 }}>
-                ${fmt(player.anchor_val)}
+              <span style={{ position: 'relative', fontWeight: 800, fontSize: 33, lineHeight: 1, color: '#1e3a5f', zIndex: 1 }}>
+               {display(player.anchor_val)}
               </span>
             </td>
 
@@ -40,12 +41,12 @@ export default function AnchorTable({ player }) {
                 position: 'absolute',
                 top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
-                height: 60,
-                objectFit: 'contain',
+                height: 50,
+                // objectFit: 'contain',
                 opacity: 0.18,
                 pointerEvents: 'none',
               }} />
-              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>${fmt(player.ML_val)}</span>
+              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>{display(player.ML_val)}</span>
             </td>
 
             <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'hidden' }}>
@@ -53,12 +54,12 @@ export default function AnchorTable({ player }) {
                 position: 'absolute',
                 top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
-                height: 60,
-                objectFit: 'contain',
+                height: 90,
+                // objectFit: 'contain',
                 opacity: 0.18,
                 pointerEvents: 'none',
               }} />
-              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>${fmt(player.PV_val)}</span>
+              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>{display(player.PV_val)}</span>
             </td>
           </tr>
         </tbody>

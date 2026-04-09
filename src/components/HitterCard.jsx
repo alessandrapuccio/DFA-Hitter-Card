@@ -19,31 +19,32 @@ export default function HitterCard({ data }) {
   console.log('rollingTmwrcData:', hitting.rollingTmwrcData);
 
   return (
-    <div style={{
-      width: 1020,
-      fontFamily: 'Arial, Helvetica, sans-serif',
-      lineHeight: 1,
-      border: '2px solid #475569',
-      background: '#ffffff',
-      boxSizing: 'border-box',
-    }}>
+<div style={{
+  width: 1020,
+  fontFamily: 'Arial, Helvetica, sans-serif',
+  lineHeight: 1,
+  border: '2px solid #475569',
+  background: '#ffffff',
+  boxSizing: 'border-box',
+}}>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr 330px', alignItems: 'stretch' }}>
-        {/* ── COL 1: Player bio + Rolling chart ──────────────────────────── */}
-        <div style={{ borderRight: BORDER }}>
-          <PlayerBioPanel player={player} />
-          <AnchorTable player={player} />
+  <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr 330px', alignItems: 'stretch' }}>
+    {/* ── COL 1: Player bio + Rolling chart ──────────────────────────── */}
+    <div style={{ borderRight: BORDER, display: 'flex', flexDirection: 'column' }}>
+      <PlayerBioPanel player={player} />
+      <AnchorTable player={player} />
 
-          {/* Rolling avg chart — keep overflow crop; chart is Recharts auto-sized */}
-          <div style={{ borderTop: BORDER }}>
-            <SectionHeader label="ROLLING AVG TM wRC+" align="center" />
-              <RollingAveragePlot
-                data={hitting.rollingTmwrcData}
-                height={180}
-              />
-
-          </div>
+      {/* Rolling avg chart — keep overflow crop; chart is Recharts auto-sized */}
+      <div style={{ borderTop: BORDER, flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <SectionHeader label="ROLLING AVG TM wRC+" align="center" />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <RollingAveragePlot
+            data={hitting.rollingTmwrcData}
+            height={180}
+          />
         </div>
+      </div>
+ </div>
 
         {/* ── COL 2: Hitting ─────────────────────────────────────────────── */}
         <div style={{ borderRight: BORDER, overflow: 'hidden', minWidth: 0 }}>
@@ -114,16 +115,16 @@ export default function HitterCard({ data }) {
               {/* ── Right half: Trident ────────────────────────────────────── */}
               <div style={{
                 flex: '0 0 50%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                paddingBottom: '10px',
+                display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+                overflow: 'hidden',
               }}>
-                <div style={{ transform: 'translate(-15px, -10px)' }}>   {/* move left 20 and up 10 */}
+                <div style={{ transform: 'translateX(0px)' }}>
                   <TrinityTrident
                     swdec={hitting.trident.swdec_plus}
                     dmg={hitting.trident.dmg_plus}
                     con={hitting.trident.con_plus}
                     width={210}
-                    height={175}
+                    height={210}
                   />
                 </div>
               </div>
@@ -237,7 +238,7 @@ export default function HitterCard({ data }) {
           <div style={{ height: 2, minHeight: 2, flexShrink: 0, background: HEADER_BG, margin: '0 20px 0' }} />
 
           {/* Diamond (non-catcher) or CatchingChart (catcher) + position table */}
-          <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'hidden', alignItems: 'center', justifyContent: 'space-around', padding: '0 10px 0 16px' }}>
+          <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'visible', alignItems: 'center', justifyContent: 'space-around', padding: '0 10px 0 12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', marginRight: defense.primary_catcher ? 8 : 25, justifyContent: 'center', flex: 1 }}>
               {defense.primary_catcher
                 ? <CatchingChart
@@ -245,7 +246,7 @@ export default function HitterCard({ data }) {
                     framing={defense.catcher_framing_runs}
                     sb={defense.catcher_sb_runs}
                     blocking={defense.catcher_block_runs}
-                    width={160}
+                    width={155}
                     height={150}
                   />
                 : <BaseballDiamond positions={defense.positions} />
@@ -314,7 +315,7 @@ export default function HitterCard({ data }) {
                 </colgroup>
                 <thead>
                   <tr>
-                    <th style={{ background: '#e2e8f0', color: HEADER_BG, padding: '5px 8px', textAlign: 'left', fontStyle: 'normal', fontWeight: 700, border: '1px solid #cbd5e1' }}>Year</th>
+                    <th style={{ background: '#e2e8f0', color: HEADER_BG, padding: '7px 8px', textAlign: 'left', fontStyle: 'normal', fontWeight: 700, border: '1px solid #cbd5e1' }}>Year</th>
                     {years.map(yr => (
                       <th key={yr} style={{ background: '#e2e8f0', border: '1px solid #cbd5e1', color: HEADER_BG, padding: '3px 8px', textAlign: 'center', fontStyle: 'normal', fontWeight: 700 }}>{yr}</th>
                     ))}
