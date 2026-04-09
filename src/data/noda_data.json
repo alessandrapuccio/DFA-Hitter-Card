@@ -25,7 +25,7 @@
     "trident": {
       "swdec_plus": 109,
       "dmg_plus": 144,
-      "con_plus": 30
+      "con_plus": 110
     },
     "level_time": {
       "levels": ["3A", "ML"],

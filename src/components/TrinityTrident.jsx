@@ -1,8 +1,8 @@
 import React from 'react';
 
 export default function TrinityTrident({ swdec = 111, dmg = 104, con = 63, width = 240, height = 230 }) {
-  const minValue = 25;
-  const maxValue = 152;
+  const minValue = 50;
+  const maxValue = 150;
   const minHeight = 100;
   const maxHeight = 380;
 
@@ -14,14 +14,18 @@ export default function TrinityTrident({ swdec = 111, dmg = 104, con = 63, width
 
   const getDisplayHeight = (value) => {
     let displayValue = value > 100 ? value + 7 : value;
+    displayValue = value > 106 ? value + 10 : value;
     displayValue = value < 96 ? value - 5 : displayValue;
     displayValue = value > 124 ? value - 1 : displayValue;
-    displayValue = value < 31 ? 40 : displayValue;
+    displayValue = value < 66 ? 66 : displayValue;
+
+    // if display value ends up less than 31, keep at 40 so prong exists
+    displayValue = displayValue < 66 ? 66 : displayValue;
     return getHeight(displayValue);
   };
 
   const getLabelY = (value, arrowTop) => {
-    if (value > 144 || value < 38) {
+    if (value > 144 || value < 67) {
       return arrowTop + 35 + 20;
     } else {
       return arrowTop - 40;
