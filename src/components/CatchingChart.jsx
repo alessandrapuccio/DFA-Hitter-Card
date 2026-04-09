@@ -33,11 +33,11 @@ export default function CatchingChart({
   sdOverall = 4.6,
   sdFraming = 3.7,
   sdSB = 2.0,
-  sdBlocking = 1.0
+  sdBlocking = 1.0,
+  width = 210,
+  height = 155,
 }) {
-  const width = 500;
-  const height = 300;
-  const margin = { top: 20, right: 120, bottom: 40, left: 100 };
+  const margin = { top: 15, right: 20, bottom: 26, left: 38 };
   
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
@@ -49,10 +49,10 @@ export default function CatchingChart({
     margin.left + ((value - minX) / (maxX - minX)) * chartWidth;
   
   const categories = [
-    { label: 'Overall', value: overall, sd: sdOverall, y: 0 },
-    { label: 'Framing', value: framing, sd: sdFraming, y: 1 },
-    { label: 'SB', value: sb, sd: sdSB, y: 2 },
-    { label: 'Blocking', value: blocking, sd: sdBlocking, y: 3 }
+    { label: 'Overall', value: overall, sd: sdOverall },
+    { label: 'Framing', value: framing, sd: sdFraming },
+    { label: 'SB',      value: sb,      sd: sdSB },
+    { label: 'Blocking',value: blocking, sd: sdBlocking },
   ];
   
   const rowHeight = chartHeight / categories.length;
@@ -61,134 +61,94 @@ export default function CatchingChart({
   const ticks = [-20, -10, 0, 10, 20];
 
   return (
-    <div className="w-full flex justify-center p-8">
-      <svg width={width+100} height={height+100} className="border border-gray-300 bg-white">
-        
-        {/* Vertical center line */}
-        <line
-          x1={xScale(0)}
-          y1={margin.top}
-          x2={xScale(0)}
-          y2={height - margin.bottom}
-          stroke="#999"
-        />
+    <svg width={width} height={height} overflow="visible">
 
-        {categories.map((cat, i) => {
-          const z = cat.value / cat.sd;
-          const pct = Math.round(normalCDF(z) * 100);
+      {/* Vertical center line */}
+      <line
+        x1={xScale(0)} y1={margin.top}
+        x2={xScale(0)} y2={height - margin.bottom}
+        stroke="#999" strokeWidth="1"
+      />
 
-          const isLowPercentile = pct <= 20;
-          const isHighPercentile = pct >= 80;
+      {categories.map((cat, i) => {
+        const z = cat.value / cat.sd;
+        const pct = Math.round(normalCDF(z) * 100);
+        const isLow  = pct <= 20;
+        const isHigh = pct >= 80;
+        const fillColor = isHigh ? '#81C784' : isLow ? '#FF8488' : '#1e3a5f';
 
-          const fillColor = isHighPercentile
-            ? "#81C784" // light green
-            : isLowPercentile
-            ? "#FF8488" // light red
-            : "#1e3a5f"; // dark blue
-
-          return (
-            <g key={i}>
-              {i % 2 === 0 && i !== 2 && (
-                <rect
-                  x={margin.left}
-                  y={margin.top + i * rowHeight}
-                  width={chartWidth}
-                  height={rowHeight}
-                  fill="#e0f2f7"
-                  opacity="0.5"
-                />
-              )}
-
-              <text
-                x={margin.left - 6}
-                y={yScale(i)}
-                textAnchor="end"
-                dominantBaseline="middle"
-                fill="#374151"
-                fontWeight="600"
-                fontSize={24}
-              >
-                {cat.label}
-              </text>
-
-              {/* Dot */}
-              <circle
-                cx={xScale(cat.value)}
-                cy={yScale(i)}
-                r="14"
-                fill={fillColor}
+        return (
+          <g key={i}>
+            {i % 2 === 0 && (
+              <rect
+                x={margin.left} y={margin.top + i * rowHeight}
+                width={chartWidth} height={rowHeight}
+                fill="#e0f2f7" opacity="0.5"
               />
+            )}
 
-              {/* Percentile label */}
-              <text
-                x={width - margin.right + 20}
-                y={yScale(i)}
-                textAnchor="end"
-                dominantBaseline="middle"
-                fill="gray"
-                fontSize={21}
-              >
-                {getOrdinalSuffix(pct)} 
-              </text>
-            </g>
-          );
-        })}
-
-
-        {/* Axes */}
-        <line
-          x1={margin.left}
-          y1={height - margin.bottom}
-          x2={width - margin.right}
-          y2={height - margin.bottom}
-          stroke="black"
-          strokeWidth="2"
-        />
-        
-        <line
-          x1={margin.left}
-          y1={margin.top}
-          x2={margin.left}
-          y2={height - margin.bottom}
-          stroke="black"
-          strokeWidth="2"
-        />
-
-        {ticks.map((tick) => (
-          <g key={tick}>
-            <line
-              x1={xScale(tick)}
-              y1={height - margin.bottom}
-              x2={xScale(tick)}
-              y2={height - margin.bottom + 6}
-              stroke="black"
-              strokeWidth="2"
-            />
+            {/* Row label */}
             <text
-              x={xScale(tick)}
-              y={height - margin.bottom + 20}
-              textAnchor="middle"
-              className="text-sm fill-gray-700"
+              x={margin.left - 4} y={yScale(i)}
+              textAnchor="end" dominantBaseline="middle"
+              fill="#374151" fontWeight="600" fontSize={10}
             >
-              {tick}
+              {cat.label}
+            </text>
+
+            {/* Dot */}
+            <circle cx={xScale(cat.value)} cy={yScale(i)} r="5" fill={fillColor} />
+
+            {/* Percentile */}
+            <text
+              x={width - margin.right - 8} y={yScale(i)}
+              textAnchor="start" dominantBaseline="middle"
+              fill="gray" fontSize={12}
+            >
+              {getOrdinalSuffix(pct)}
             </text>
           </g>
-        ))}
+        );
+      })}
 
-        <text
-          x={margin.left + chartWidth / 2}
-          y={height + 15}
-          textAnchor="middle"
-          style={{
-            fontSize: 30,        
-            fontWeight: 600,
-            fill: "#374151"     
-          }}
-        >
-          Runs
-        </text>
+      {/* X axis */}
+      <line
+        x1={margin.left} y1={height - margin.bottom}
+        x2={width - margin.right} y2={height - margin.bottom}
+        stroke="black" strokeWidth="1"
+      />
 
-      </svg>
-    </div>
+      {/* Y axis */}
+      <line
+        x1={margin.left} y1={margin.top}
+        x2={margin.left} y2={height - margin.bottom}
+        stroke="black" strokeWidth="1"
+      />
+
+      {ticks.map((tick) => (
+        <g key={tick}>
+          <line
+            x1={xScale(tick)} y1={height - margin.bottom}
+            x2={xScale(tick)} y2={height - margin.bottom + 3}
+            stroke="black" strokeWidth="1"
+          />
+          <text
+            x={xScale(tick)} y={height - margin.bottom + 10}
+            textAnchor="middle" fill="#374151" fontSize={7}
+          >
+            {tick}
+          </text>
+        </g>
+      ))}
+
+      {/* X axis label */}
+      <text
+        x={margin.left + chartWidth / 2} y={height - 2}
+        textAnchor="middle" fill="#374151" fontSize={8} fontWeight="600"
+      >
+        Runs
+      </text>
+
+    </svg>
   );
 }

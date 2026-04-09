@@ -1,5 +1,12 @@
 export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83, 17], barHeight = 38, inline = false }) {
-  const levelColors = { 'MLB': '#08519c','3A': '#3182bd','2A': '#6baed6','1A': '#bdd7e7','RK': '#eff3ff' };
+  const levelColors = {
+    'ML':  '#08519c',
+    '3A':  '#3182bd',
+    '2A':  '#6baed6',
+    'A+':  '#9ecae1',
+    'A':   '#74a9cf',
+    'RK':  '#4a90c2'
+  };
   const getColor = (level) => levelColors[level] || '#9ca3af';
   const fontSize = Math.round(barHeight * 0.65);
   const subFontSize = Math.round(barHeight * 0.55);
