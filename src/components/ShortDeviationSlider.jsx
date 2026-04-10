@@ -29,7 +29,12 @@ export default function ShortDeviationSlider({
   const color = noValue ? '#9ca3af' : getColor(value);
   const rawPosition = ((value - minValue) / (maxValue - minValue)) * 100;
   const valuePosition = shouldInvert ? 100 - rawPosition : rawPosition;
-  const titleOnRight = noValue ? false : valuePosition < 43;
+
+  // if title > 5 chars, give it more room (increase threshold)
+  const titleLength = title?.length ?? 0;
+  const dynamicThreshold = titleLength < 5 ? 30 : 42;
+  const titleOnRight = noValue ? false : valuePosition < dynamicThreshold;
+
   const labelOnShadow = titleOnRight;
   const titleColor = noValue ? '#6b7280' : (labelOnShadow ? '#6b7280' : '#fff');
   const valueLabel = percent ? `${Math.round(value)}%` : Math.round(value);

@@ -1,4 +1,4 @@
-export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83, 17], barHeight = 38, inline = false }) {
+export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83, 17], barHeight = 38, inline = false, borderRadius = 3 }) {
   const levelColors = {
     'ML':  '#08519c',
     '3A':  '#3182bd',
@@ -8,12 +8,12 @@ export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83
     'RK':  '#4a90c2'
   };
   const getColor = (level) => levelColors[level] || '#9ca3af';
-  const fontSize = Math.round(barHeight * 0.65);
+  const fontSize = Math.round(barHeight * 0.62);
   const subFontSize = Math.round(barHeight * 0.55);
 
   return (
     <div style={{ width: '100%' }}>
-      <div style={{ position: 'relative', height: barHeight, background: '#e5e7eb', borderRadius: 4, display: 'flex', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', height: barHeight, background: '#e5e7eb', borderRadius: borderRadius, display: 'flex', overflow: 'hidden' }}>
         {levels.map((level, index) => {
           const pct = percentages[index];
           const color = getColor(level);
@@ -29,14 +29,14 @@ export default function LevelTimeBar({ levels = ['3A', 'MLB'], percentages = [83
             >
               {(showLevelOnly || showFullLabel) && (
                 inline ? (
-                  <div style={{ color: 'white', fontWeight: 700, display: 'flex', alignItems: 'baseline', gap: 3, lineHeight: 1 }}>
-                    <span style={{ fontSize }}>{level}</span>
-                    {showFullLabel && <span style={{ fontSize: subFontSize }}>{pct}%</span>}
+                  <div style={{ color: 'white', fontWeight: 700, display: 'flex', alignItems: 'baseline', gap: 3, lineHeight: 1, marginTop:-1 }}>
+                    <span style={{ fontSize }}>{level}{showFullLabel && ':'}</span>
+                    {showFullLabel && <span style={{ fontSize: fontSize }}>{pct}%</span>}
                   </div>
                 ) : (
                   <div style={{ color: 'white', fontWeight: 700, textAlign: 'center', lineHeight: 1 }}>
-                    <div style={{ fontSize }}>{level}</div>
-                    {showFullLabel && <div style={{ fontSize: subFontSize }}>{pct}%</div>}
+                    <div style={{ fontSize }}>{level}{showFullLabel && ':'}</div>
+                    {showFullLabel && <div style={{ fontSize: fontSize }}>{pct}%</div>}
                   </div>
                 )
               )}

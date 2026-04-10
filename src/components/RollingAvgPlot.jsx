@@ -24,6 +24,13 @@ function buildMonthTicks(data) {
 
 // ─── SVG chart ────────────────────────────────────────────────────────────
 function Chart({ data, height = 240 }) {
+  const firstValidIdx = useMemo(() => {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].tmrv_roll != null) return i;
+    }
+    return 0;
+  }, [data]);
+
   const lastValidIdx = useMemo(() => {
     for (let i = data.length - 1; i >= 0; i--) {
       if (data[i].tmrv_roll != null) return i;
@@ -31,7 +38,11 @@ function Chart({ data, height = 240 }) {
     return 0;
   }, [data]);
 
-  const trimmedData = useMemo(() => data.slice(0, lastValidIdx + 1), [data, lastValidIdx]);
+  const trimmedData = useMemo(
+    () => data.slice(firstValidIdx, lastValidIdx + 1),
+    [data, firstValidIdx, lastValidIdx]
+  );
+
   const monthTicks  = useMemo(() => buildMonthTicks(trimmedData), [trimmedData]);
 
   const PAD  = { top: 12, right: 4, bottom: 34, left: 25 };

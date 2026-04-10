@@ -150,36 +150,36 @@ export default function HitterCard({ data }) {
               left: 5, top: 4,
               background: HEADER_BG, color: 'white',
               fontSize: 13, fontWeight: 700, fontStyle: 'italic',
-              padding: '6px 8px', letterSpacing: '0.4px',
+              padding: '6px 46px 6px 8px', letterSpacing: '0.4px',
               zIndex: 1,
             }}>
               RESULTS
             </div>
 
-            {/* Level time bar — between RESULTS and TM banners */}
+            {/* PA count — floats in the centre of the bar */}
             <div style={{
               position: 'absolute',
-              left: 92, right: 48, top: 8,
+              left: '50%', top: 11,
+              transform: 'translateX(-50%)',
+              color: HEADER_BG,
+              fontSize: 17, fontWeight: 750,
+              letterSpacing: '0.4px',
               zIndex: 1,
+              whiteSpace: 'nowrap',
             }}>
-              <LevelTimeBar
-                levels={hitting.level_time.levels}
-                percentages={hitting.level_time.percentages}
-                barHeight={22}
-                inline={true}
-              />
+              PA: {hitting.pa}
             </div>
 
-            {/* TM banner — hangs from right end of line */}
+            {/* TRACKMAN banner — hangs from right end of line */}
             <div style={{
               position: 'absolute',
               right: 5, top: 4,
               background: HEADER_BG, color: 'white',
               fontSize: 13, fontWeight: 700, fontStyle: 'italic',
-              padding: '6px 8px', letterSpacing: '0.4px',
+              padding: '6px 8px 6px 35px', letterSpacing: '0.4px',
               zIndex: 1,
             }}>
-              TM
+              TRACKMAN
             </div>
 
             {/* Center vertical divider */}
@@ -192,8 +192,20 @@ export default function HitterCard({ data }) {
             }} />
 
             {/* Slider columns — padded to clear the hanging banners */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 33, paddingBottom: 12 }}>
-              <div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 33, paddingBottom: 12, alignItems: 'end' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+                {/* Level time bar — acts as a pseudo-slider, aligns with top slider on right */}
+                <div style={{ padding: '3px 12px', boxSizing: 'border-box', width: '102%' }}>
+                  <div style={{ marginTop: 7, marginLeft: -2 }}>
+                    <LevelTimeBar
+                      levels={hitting.level_time.levels}
+                      percentages={hitting.level_time.percentages}
+                      barHeight={24}
+                      inline={true}
+                      borderRadius={12}
+                    />
+                  </div>
+                </div>
                 {hitting.sliders_left.map((s, i) => (
                   <ShortDeviationSlider key={i} {...s} />
                 ))}

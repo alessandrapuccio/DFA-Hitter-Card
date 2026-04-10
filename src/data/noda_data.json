@@ -27,21 +27,21 @@
       "dmg_plus": 144,
       "con_plus": 110
     },
+    "pa":350,
     "level_time": {
       "levels": ["3A", "ML"],
       "percentages": [85, 15]
     },
     "sliders_left": [
-      { "currentValue": 450, "avgValue": 350, "stdDev": 28, "aboveOrBelowRed": "NA",    "title": "PA" },
       { "currentValue": 95,  "avgValue": 100, "stdDev": 10, "aboveOrBelowRed": "below", "title": "TM wRC+" },
       { "currentValue": 100, "avgValue": 100, "stdDev": 10, "aboveOrBelowRed": "below", "title": "wRC+" },
       { "currentValue": 22,  "avgValue": 10.5,"stdDev": 3.6,"aboveOrBelowRed": "below", "title": "BB%", "percent": true },
       { "currentValue": 34,  "avgValue": 21.4,"stdDev": 6.7,"aboveOrBelowRed": "above", "title": "K%",  "percent": true }
     ],
     "sliders_right": [
-      { "currentValue": 62.2,  "avgValue": 65.6, "stdDev": 5.8, "aboveOrBelowRed": "below", "title": "ZSwing%" },
-      { "currentValue": 14.7,  "avgValue": 24.7, "stdDev": 5.8, "aboveOrBelowRed": "above", "title": "Chase%" },
-      { "currentValue": 29.5,  "avgValue": 16.2, "stdDev": 5.1, "aboveOrBelowRed": "above", "title": "ZWhiff%" },
+      { "currentValue": 62.2,  "avgValue": 65.6, "stdDev": 5.8, "aboveOrBelowRed": "below", "title": "ZSwing%",  "percent": true  },
+      { "currentValue": 14.7,  "avgValue": 24.7, "stdDev": 5.8, "aboveOrBelowRed": "above", "title": "Chase%",  "percent": true  },
+      { "currentValue": 29.5,  "avgValue": 16.2, "stdDev": 5.1, "aboveOrBelowRed": "above", "title": "ZWhiff%",  "percent": true  },
       { "currentValue": 111.7, "avgValue": 106,  "stdDev": 2.8, "aboveOrBelowRed": "below", "title": "EV T10%" },
       { "currentValue": 37,  "avgValue": 50, "stdDev": 10, "aboveOrBelowRed": "below", "title": "Bat T10%" }
     ]

@@ -76,7 +76,7 @@ export default function PlayerBioPanel({ player }) {
         <span style={{ margin: '0 6px', opacity: 0.7 }}>•</span>
         Age: {player.age}
         <span style={{ margin: '0 6px', opacity: 0.7 }}>•</span>
-        MLS: {player.mls}
+        MLS: {Number(player.mls).toFixed(3)}
       </span>
     </div>
   </div>
