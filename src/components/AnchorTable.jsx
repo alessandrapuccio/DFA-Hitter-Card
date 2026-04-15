@@ -4,8 +4,8 @@ import ANCHOR from '../data/KRAKEN.png';
 import MLV from '../data/MLV.png';
 import PV from '../data/PV.svg';
 
-const fmt = (val) => val === '—' ? '—' : Number(val).toFixed(1);
-const display = (val) => val === '—' ? '—' : `$${fmt(val)}`;
+const fmt = (val) => val === '—' ? '—' : Number(val).toFixed(0);
+const display = (val) => val === '—' ? '—' : `$${fmt(val)}M`;
 
 export default function AnchorTable({ player }) {
   const cellBorder = '1px solid #cbd5e1';

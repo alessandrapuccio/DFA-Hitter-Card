@@ -24,7 +24,7 @@ function formatSalary(value) {
     return `${str.endsWith('.0') ? str.slice(0, -2) : str}${suffix.label}`;
   };
 
-  if (num >= 1_000_000) return `$${format(num, { div: 1_000_000, label: 'M' })}`;
+  if (num >= 1_000_000) return `$${(num / 1_000_000).toFixed(1)}M`;
   if (num >= 1_000)     return `$${format(num, { div: 1_000, label: 'K' })}`;
   return `$${num.toFixed(1).endsWith('.0') ? num.toFixed(0) : num.toFixed(1)}`;
 }

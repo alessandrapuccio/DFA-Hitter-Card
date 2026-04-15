@@ -36,8 +36,8 @@ export default function HitterCard({ data }) {
 
       {/* Rolling avg chart — keep overflow crop; chart is Recharts auto-sized */}
       <div style={{ borderTop: BORDER, flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <SectionHeader label="ROLLING AVG TM wRC+" align="center" />
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <SectionHeader label="ROLLING AVG TM wRC+ (100 PA Window)" align="center" />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: -25}}>
           <RollingAveragePlot
             data={hitting.rollingTmwrcData}
             height={180}
@@ -192,11 +192,11 @@ export default function HitterCard({ data }) {
             }} />
 
             {/* Slider columns — padded to clear the hanging banners */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 33, paddingBottom: 12, alignItems: 'end' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 33, paddingBottom: 10, alignItems: 'end' }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                 {/* Level time bar — acts as a pseudo-slider, aligns with top slider on right */}
                 <div style={{ padding: '3px 12px', boxSizing: 'border-box', width: '102%' }}>
-                  <div style={{ marginTop: 7, marginLeft: -2 }}>
+                  <div style={{ marginTop: 6, marginLeft: -2 }}>
                     <LevelTimeBar
                       levels={hitting.level_time.levels}
                       percentages={hitting.level_time.percentages}
@@ -223,54 +223,85 @@ export default function HitterCard({ data }) {
         {/* ── COL 3: Defense / Baserunning / Health ──────────────────────── */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
 
-        {/* DEFENSE */}
+
+
+{/* DEFENSE */}
         <div style={{ flex: 5, minHeight: 0, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-          <SectionHeader label="DEFENSE" />
+          <SectionHeader label="DEFENSE (2025)" />
 
-          {/* DEF Runs badge + stacked Rng/Arm (or Deter/Arm for catchers) */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '6px 12px 8px', flexShrink: 0 }}>
-            <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>DEF Runs:</span>
-            <span style={{
-              background: defense.def_runs >= 1 ? '#dcfce7' : defense.def_runs <= -1 ? '#fee2e2' : '#f3f4f6',
-              color:      defense.def_runs >= 1 ? '#16a34a' : defense.def_runs <= -1 ? '#dc2626' : '#374151',
-              padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
-            }}>
-              {defense.def_runs}
-            </span>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginLeft: 6, fontSize: 16, fontWeight: 600 }}>
-            <span>{defense.primary_catcher ? 'Deter+' : 'Rng+'}:{' '}
-              <strong style={{ color: (defense.primary_catcher ? defense.deter_plus : defense.rng_plus) == null ? '#374151' : (defense.primary_catcher ? defense.deter_plus : defense.rng_plus) > 110 ? '#16a34a' : (defense.primary_catcher ? defense.deter_plus : defense.rng_plus) < 90 ? '#dc2626' : '#374151' }}>
-                {(defense.primary_catcher ? defense.deter_plus : defense.rng_plus) ?? ' —'}
-              </strong>
-            </span>
-            <span>Arm+: <strong style={{ color: defense.arm_plus == null ? '#374151' : defense.arm_plus > 110 ? '#16a34a' : defense.arm_plus < 90 ? '#dc2626' : '#374151' }}>{defense.arm_plus ?? ' —'}</strong></span>
-          </div>
-          </div>
-          {/* Decorative HEADER_BG divider — inset from edges */}
-          <div style={{ height: 2, minHeight: 2, flexShrink: 0, background: HEADER_BG, margin: '0 20px 0' }} />
+          {/* ── Top section ─────────────────────────────────────────────── */}
+          {(() => {
+            const positions = defense.positions || [];
+            const hasCatcherRows = positions.some(r => r.type === 'catcher');
+            const hasFieldRows   = positions.some(r => r.type === 'field');
+            const extraHeaderRow = hasCatcherRows && hasFieldRows ? 1 : 0;
+            const visualRowCount = defense.primary_catcher ? 0 : positions.length + extraHeaderRow;
+            const isCompact = !defense.primary_catcher && visualRowCount >= 3;
+            const diamondSize = isCompact ? 73 : 90;
+            const topPadding = isCompact ? '2px 12px 2px' : '4px 12px 4px';
+            const dividerMargin = isCompact ? '0 20px 0' : '0 20px 0';
+            return (
+              <>
+                <div style={{
+                  display: 'flex', alignItems: 'center',
+                  justifyContent: defense.primary_catcher ? 'space-between' : 'center',
+                  gap: 10,
+                  padding: defense.primary_catcher ? '6px 22px 6px 29px' : topPadding,
+                  flexShrink: 0,
+                }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+                    <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>DEF Runs:</span>
+                    <span style={{
+                      background: defense.def_runs >= 1 ? '#dcfce7' : defense.def_runs <= -1 ? '#fee2e2' : '#f3f4f6',
+                      color:      defense.def_runs >= 1 ? '#16a34a' : defense.def_runs <= -1 ? '#dc2626' : '#374151',
+                      padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
+                    }}>
+                      {defense.def_runs}
+                    </span>
+                  </div>
 
-          {/* Diamond (non-catcher) or CatchingChart (catcher) + position table */}
-          <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'visible', alignItems: 'center', justifyContent: 'space-around', padding: '0 10px 0 12px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', marginRight: defense.primary_catcher ? 8 : 25, justifyContent: 'center', flex: 1 }}>
-              {defense.primary_catcher
-                ? <CatchingChart
-                    overall={defense.catcher_def_runs}
-                    framing={defense.catcher_framing_runs}
-                    sb={defense.catcher_sb_runs}
-                    blocking={defense.catcher_block_runs}
-                    width={155}
-                    height={150}
-                  />
-                : <BaseballDiamond positions={defense.positions} />
-              }
-            </div>
-            <PositionTable positions={defense.positions} isCatcher={defense.is_catcher} />
+                  {defense.primary_catcher ? (
+                    // CatchingChart right-aligned via space-between; Deter+/Arm+ move to table
+                    <CatchingChart
+                      overall={defense.catcher_def_runs}
+                      framing={defense.catcher_framing_runs}
+                      sb={defense.catcher_sb_runs}
+                      blocking={defense.catcher_block_runs}
+                      width={155}
+                      height={130}
+                    />
+                  ) : (
+                    <BaseballDiamond positions={defense.positions} width={diamondSize} height={diamondSize} />
+                  )}
+                </div>
+
+                {/* Decorative divider */}
+                <div style={{ height: 2, minHeight: 2, flexShrink: 0, background: HEADER_BG, margin: dividerMargin }} />
+              </>
+            );
+          })()}
+
+          {/* ── Bottom section: position table ──────────────────────────── */}
+          <div style={{ display: 'flex', flex: 1, minHeight: 0, overflow: 'visible', alignItems: 'center', justifyContent: 'center', padding: defense.primary_catcher ? '10px 10px 4px 12px' : '4px 10px 4px 12px' }}>
+            {defense.primary_catcher ? (
+              // Deter+/Arm+ now live in the table; compact to leave room for chart above
+              <PositionTable
+                positions={defense.positions}
+                isCatcher={defense.is_catcher}
+                deterPlus={defense.deter_plus}
+                armPlus={defense.arm_plus}
+                compact
+              />
+            ) : (
+              <PositionTable positions={defense.positions} isCatcher={defense.is_catcher} />
+            )}
           </div>
         </div>
 
+
         {/* BASERUNNING */}
         <div style={{ flex: 3, minHeight: 0, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-          <SectionHeader label="BASERUNNING" />
+          <SectionHeader label="BASERUNNING (2025)" />
 
           {/* BSR Runs badge + SB */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '8px 12px 7px', flexShrink: 0 }}>
