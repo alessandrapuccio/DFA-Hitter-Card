@@ -235,7 +235,7 @@ export default function HitterCard({ data }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '8px 16px 2px',
+              padding: '12px 16px 2px',
               flexShrink: 0,
             }}>
               {/* DEF Runs — single line */}
@@ -287,7 +287,7 @@ export default function HitterCard({ data }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '4px 8px 8px',
+              padding: '0px 8px 12px',
               minHeight: 0,
             }}>
               {defense.primary_catcher ? (
@@ -303,8 +303,8 @@ export default function HitterCard({ data }) {
                 <BaseballDiamond
                   positions={defense.positions}
                   projectedDef={defense.projected_def || []}
-                  width={180}
-                  height={200}
+                  width={220}
+                  height={220}
                 />
               )}
             </div>
