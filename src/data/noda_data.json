@@ -51,23 +51,27 @@
       { "currentValue": 37,    "avgValue": 50,   "stdDev": 10,  "aboveOrBelowRed": "below", "title": "Bat T10%" }
     ]
   },
-  "defense": {
-    "is_catcher": true,
-    "primary_catcher": true,
-    "def_runs": -1.1,
-    "rng_plus": 107,
-    "arm_plus": 95,
-    "deter_plus": 88,
-    "catcher_gc": 58,
-    "catcher_def_runs": -1.1,
-    "catcher_framing_runs": -3.2,
-    "catcher_sb_runs": 1.7,
-    "catcher_block_runs": 0.3,
-    "positions": [
-      { "pos": "C",  "gc": 59, "runs_saved": -1.1, "type": "catcher", "rng_plus": null, "arm_plus": null },
-      { "pos": "1B", "gc": 4,  "runs_saved": -1,   "type": "field",   "rng_plus": 107,  "arm_plus": 95  }
-    ]
-  },
+"defense": {
+  "is_catcher": true,
+  "primary_catcher": false,
+  "def_runs": -1.1,
+  "rng_plus": 107,
+  "arm_plus": 95,
+  "deter_plus": 88,
+  "catcher_gc": 58,
+  "catcher_def_runs": -1.1,
+  "catcher_framing_runs": -3.2,
+  "catcher_sb_runs": 1.7,
+  "catcher_block_runs": 0.3,
+  "positions": [
+    { "pos": "C",  "gc": 59, "runs_saved": -1.1, "type": "catcher", "rng_plus": null, "arm_plus": null },
+    { "pos": "1B", "gc": 4,  "runs_saved": -1,   "type": "field",   "rng_plus": 107,  "arm_plus": 95  }
+  ],
+  "projected_def": [
+    { "pos": "C",  "def": -2.3 },
+    { "pos": "1B", "def": 0.0  }
+  ]
+},
   "baserunning": {
     "bsr_runs": 2.9,
     "sb_made": 7,
