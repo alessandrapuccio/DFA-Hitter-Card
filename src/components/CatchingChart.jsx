@@ -37,7 +37,7 @@ export default function CatchingChart({
   width = 210,
   height = 155,
 }) {
-  const margin = { top: 15, right: 20, bottom: 26, left: 38 };
+  const margin = { top: 23, right: 20, bottom: 26, left: 38 };
   
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;

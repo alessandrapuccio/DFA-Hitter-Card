@@ -21,6 +21,17 @@ export default function HitterCard({ data }) {
   const getOpps = (p) => p.opps ?? p.gc ?? 0;
   const totalOpps = (defense.positions || []).reduce((sum, p) => sum + getOpps(p), 0);
 
+  const formatBodyParts = (text) => {
+    const parts = text.split(/(\(x\d+\))/g);
+
+    return parts.map((part, i) => {
+      if (/\(x\d+\)/.test(part)) {
+        return <strong key={i}>{part}</strong>;
+      }
+      return <span key={i}>{part}</span>;
+    });
+  };
+
   return (
     <div style={{
       width: 1020,
@@ -136,6 +147,8 @@ export default function HitterCard({ data }) {
           </div>
 
 
+
+
           {/* RESULTS | TM slider columns — matched to PROJECTIONS style */}
           <div style={{ position: 'relative', marginTop: -6 }}>
 
@@ -153,24 +166,27 @@ export default function HitterCard({ data }) {
               left: 5, top: 4,
               background: HEADER_BG, color: 'white',
               fontSize: 13, fontWeight: 700, fontStyle: 'italic',
-              padding: '6px 46px 6px 8px', letterSpacing: '0.4px',
+              padding: '6px 25px 6px 8px', letterSpacing: '0.4px',
               zIndex: 1,
             }}>
               RESULTS
             </div>
 
-            {/* PA count — floats in the centre of the bar */}
+            {/* LevelTimeBar — centred between the two banners */}
             <div style={{
               position: 'absolute',
-              left: '50%', top: 11,
+              left: '49.3%', top: 8,
               transform: 'translateX(-50%)',
-              color: HEADER_BG,
-              fontSize: 17, fontWeight: 750,
-              letterSpacing: '0.4px',
+              width: '42%',
               zIndex: 1,
-              whiteSpace: 'nowrap',
             }}>
-              PA: {hitting.pa}
+              <LevelTimeBar
+                levels={hitting.level_time.levels}
+                percentages={hitting.level_time.percentages}
+                barHeight={21}
+                inline={true}
+                borderRadius={10}
+              />
             </div>
 
             {/* TRACKMAN banner — hangs from right end of line */}
@@ -179,7 +195,7 @@ export default function HitterCard({ data }) {
               right: 5, top: 4,
               background: HEADER_BG, color: 'white',
               fontSize: 13, fontWeight: 700, fontStyle: 'italic',
-              padding: '6px 8px 6px 35px', letterSpacing: '0.4px',
+              padding: '6px 8px 6px 15px', letterSpacing: '0.4px',
               zIndex: 1,
             }}>
               TRACKMAN
@@ -194,21 +210,9 @@ export default function HitterCard({ data }) {
               pointerEvents: 'none',
             }} />
 
-            {/* Slider columns — padded to clear the hanging banners */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 33, paddingBottom: 10, alignItems: 'end' }}>
+            {/* Slider columns */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', paddingTop: 33, paddingBottom: 10, alignItems: 'center', alignContent: 'center', flex: 1 }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
-                {/* Level time bar — acts as a pseudo-slider, aligns with top slider on right */}
-                <div style={{ padding: '3px 12px', boxSizing: 'border-box', width: '102%' }}>
-                  <div style={{ marginTop: 6, marginLeft: -2 }}>
-                    <LevelTimeBar
-                      levels={hitting.level_time.levels}
-                      percentages={hitting.level_time.percentages}
-                      barHeight={24}
-                      inline={true}
-                      borderRadius={12}
-                    />
-                  </div>
-                </div>
                 {hitting.sliders_left.map((s, i) => (
                   <ShortDeviationSlider key={i} {...s} />
                 ))}
@@ -220,9 +224,7 @@ export default function HitterCard({ data }) {
               </div>
             </div>
           </div>
-
         </div>
-
         {/* ── COL 3: Defense / Baserunning / Health ──────────────────────── */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
 
@@ -248,7 +250,7 @@ export default function HitterCard({ data }) {
                   color: defense.def_runs >= 1 ? '#16a34a' : defense.def_runs <= -1 ? '#dc2626' : '#374151',
                   padding: '2px 4px', borderRadius: 4, fontWeight: 800, fontSize: 19,
                 }}>
-                  {defense.def_runs}
+                  {Number(defense.def_runs).toFixed(1)}
                 </span>
               </div>
 
@@ -281,6 +283,10 @@ export default function HitterCard({ data }) {
               </div>
             </div>
 
+            {/* Divider */}
+            <div style={{ height: 2, background: HEADER_BG, margin: '6px 20px -5px', flexShrink: 0 }} />
+
+
             {/* ── Main visual: big diamond or catching chart ─────────────── */}
             <div style={{
               flex: 1,
@@ -312,29 +318,41 @@ export default function HitterCard({ data }) {
 
 
           {/* BASERUNNING */}
-          <div style={{ flex: 3, minHeight: 0, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ flex: 2.4, minHeight: 0, borderBottom: BORDER, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <SectionHeader label="BASERUNNING (2025)" />
 
             {/* BSR Runs badge + SB */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '8px 12px 7px', flexShrink: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '6px 12px 4px', flexShrink: 0 }}>
               <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>BSR Runs:</span>
               <span style={{
                 background: baserunning.bsr_runs >= 1 ? '#dcfce7' : baserunning.bsr_runs <= -1 ? '#fee2e2' : '#f3f4f6',
                 color: baserunning.bsr_runs >= 1 ? '#16a34a' : baserunning.bsr_runs <= -1 ? '#dc2626' : '#374151',
                 padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
               }}>
-                {baserunning.bsr_runs}
+                {Number(baserunning.bsr_runs).toFixed(1)}
               </span>
               <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', marginLeft: 6, color: HEADER_BG }}>SB:</span>
-              <span style={{ fontSize: 17, fontWeight: 600 }}>
+              <span style={{
+                fontSize: 17,
+                fontWeight: 600,
+                color: (() => {
+                  const sb = baserunning.sb_made;
+                  const att = baserunning.sb_attempted;
+                  if (att < 3) return 'black';
+                  const fSB = sb / att * 100;
+                  if (fSB >= 80) return '#16a34a';
+                  if (fSB <= 60) return '#ef4444';
+                  return 'black';
+                })()
+              }}>
                 {baserunning.sb_made}/{baserunning.sb_attempted}
               </span>
             </div>
             {/* Decorative HEADER_BG divider */}
-            <div style={{ height: 2, background: HEADER_BG, margin: '0 20px 2px', flexShrink: 0 }} />
+            <div style={{ height: 2, background: HEADER_BG, margin: '0 20px 1px', flexShrink: 0 }} />
 
             {/* Side-by-side sliders */}
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', marginTop: -5 }}>
+            <div style={{ flex: .9, display: 'flex', alignItems: 'center', marginTop: -12, marginBottom: -12 }}>
               <div style={{ flex: 1, marginRight: -5, marginLeft: 5 }}>
                 <ShortDeviationSlider
                   title="BSR+"
@@ -357,41 +375,54 @@ export default function HitterCard({ data }) {
           </div>
 
           {/* HEALTH */}
-          <div style={{ flex: 1.60, minHeight: 0, overflow: 'hidden' }}>
+          <div style={{ flex: 2.3, minHeight: 0, maxHeight: 112, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <SectionHeader label="HEALTH" />
             {(() => {
-              const years = Object.keys(health).sort((a, b) => a - b);
+              const years = Object.keys(health).filter(k => k !== 'body_parts').sort((a, b) => a - b);
+              const hasBodyParts = health.body_parts && health.body_parts.trim() !== '';
               return (
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed' }}>
-                  <colgroup>
-                    <col style={{ width: '34%' }} />
-                    {years.map(yr => <col key={yr} style={{ width: `${66 / years.length}%` }} />)}
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th style={{ background: '#e2e8f0', color: HEADER_BG, padding: '7px 8px', textAlign: 'left', fontStyle: 'normal', fontWeight: 700, border: '1px solid #cbd5e1' }}>Year</th>
-                      {years.map(yr => (
-                        <th key={yr} style={{ background: '#e2e8f0', border: '1px solid #cbd5e1', color: HEADER_BG, padding: '3px 8px', textAlign: 'center', fontStyle: 'normal', fontWeight: 700 }}>{yr}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td style={{ padding: '6px 8px', fontWeight: 600, fontSize: 15, border: '1px solid #cbd5e1', textAlign: 'left' }}>Days Missed</td>
-                      {years.map((yr, i) => {
-                        const days = health[yr];
-                        return (
-                          <td key={i} style={{ padding: '7px 8px', textAlign: 'center', border: '1px solid #cbd5e1', fontWeight: 700, fontSize: 16, color: days > 15 ? '#dc2626' : '#374151' }}>
-                            {days}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  </tbody>
-                </table>
+                <>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed', marginTop: 0, ...(hasBodyParts ? {} : { flex: 1 }) }}>
+                    <colgroup>
+                      <col style={{ width: '34%' }} />
+                      {years.map(yr => <col key={yr} style={{ width: `${66 / years.length}%` }} />)}
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th style={{ background: '#e2e8f0', color: HEADER_BG, padding: '3px 8px', textAlign: 'left', fontStyle: 'normal', fontWeight: 700, border: '1px solid #cbd5e1' }}>Year</th>
+                        {years.map(yr => (
+                          <th key={yr} style={{ background: '#e2e8f0', border: '1px solid #cbd5e1', color: HEADER_BG, padding: '3px 8px', textAlign: 'center', fontStyle: 'normal', fontWeight: 700 }}>{yr}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: '4px 8px', fontWeight: 600, fontSize: 15, border: '1px solid #cbd5e1', textAlign: 'left' }}>Days Missed</td>
+                        {years.map((yr, i) => {
+                          const days = health[yr];
+                          return (
+                            <td key={i} style={{ padding: '5px 8px', textAlign: 'center', border: '1px solid #cbd5e1', fontWeight: 700, fontSize: 16, color: days > 15 ? '#dc2626' : '#374151' }}>
+                              {days}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    </tbody>
+                  </table>
+                  {hasBodyParts && (
+                    <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', padding: '4px 8px', fontSize: 15, color: '#374151', lineHeight: 1.3 }}>
+                      <span>
+                        <span style={{ fontWeight: 700, color: HEADER_BG }}>Areas: </span>
+                        {formatBodyParts(health.body_parts)}
+                      </span>
+                    </div>
+                  )}
+                </>
               );
             })()}
           </div>
+
+          
 
         </div>
       </div>

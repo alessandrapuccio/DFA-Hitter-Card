@@ -7,6 +7,14 @@ import PV from '../data/PV.svg';
 const fmt = (val) => val === '—' ? '—' : Number(val).toFixed(0);
 const display = (val) => val === '—' ? '—' : `$${fmt(val)}M`;
 
+const getColor = (val, greenThreshold, redThreshold) => {
+  if (val === '—') return '#1e3a5f';
+  const num = Number(val);
+  if (num > greenThreshold) return '#3e970e';
+  if (num < redThreshold) return '#bc0b0a';
+  return '#1e3a5f';
+};
+
 export default function AnchorTable({ player }) {
   const cellBorder = '1px solid #cbd5e1';
   return (
@@ -31,7 +39,7 @@ export default function AnchorTable({ player }) {
                 pointerEvents: 'none',
                 zIndex: 0,
               }} />
-              <span style={{ position: 'relative', fontWeight: 800, fontSize: 33, lineHeight: 1, color: '#1e3a5f', zIndex: 1 }}>
+              <span style={{ position: 'relative', fontWeight: 800, fontSize: 32, lineHeight: 1, color: getColor(player.anchor_val, 34.5, -22.5), zIndex: 1 }}>
                {display(player.anchor_val)}
               </span>
             </td>
@@ -42,11 +50,10 @@ export default function AnchorTable({ player }) {
                 top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
                 height: 50,
-                // objectFit: 'contain',
                 opacity: 0.18,
                 pointerEvents: 'none',
               }} />
-              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>{display(player.ML_val)}</span>
+              <span style={{ position: 'relative', fontWeight: 700, color: getColor(player.ML_val, 43.5, -24.5), fontSize: 25 }}>{display(player.ML_val)}</span>
             </td>
 
             <td style={{ border: cellBorder, textAlign: 'center', verticalAlign: 'middle', padding: '6px 4px', position: 'relative', overflow: 'hidden' }}>
@@ -55,11 +62,10 @@ export default function AnchorTable({ player }) {
                 top: '50%', left: '50%',
                 transform: 'translate(-50%, -50%)',
                 height: 90,
-                // objectFit: 'contain',
                 opacity: 0.18,
                 pointerEvents: 'none',
               }} />
-              <span style={{ position: 'relative', fontWeight: 700, color: '#1e3a5f', fontSize: 27 }}>{display(player.PV_val)}</span>
+              <span style={{ position: 'relative', fontWeight: 700, color: getColor(player.PV_val, 29.2, -22.5), fontSize: 25 }}>{display(player.PV_val)}</span>
             </td>
           </tr>
         </tbody>

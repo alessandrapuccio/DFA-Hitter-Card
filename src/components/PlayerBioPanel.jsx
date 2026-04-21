@@ -12,21 +12,16 @@ const logoMap = Object.fromEntries(
 
 function formatSalary(value) {
   if (value == "—") return value;
-
   if (value == null) return '';
 
   const num = typeof value === 'string'
     ? parseFloat(value.replace(/,/g, ''))
     : value;
 
-  const format = (n, suffix) => {
-    const str = (n / suffix.div).toFixed(1);
-    return `${str.endsWith('.0') ? str.slice(0, -2) : str}${suffix.label}`;
-  };
-
   if (num >= 1_000_000) return `$${(num / 1_000_000).toFixed(1)}M`;
-  if (num >= 1_000)     return `$${format(num, { div: 1_000, label: 'K' })}`;
-  return `$${num.toFixed(1).endsWith('.0') ? num.toFixed(0) : num.toFixed(1)}`;
+  if (num >= 1_000)     return `$${Math.round(num / 1_000)}K`;
+
+  return `$${Number.isInteger(num) ? num : num.toFixed(1)}`;
 }
 
 export default function PlayerBioPanel({ player }) {

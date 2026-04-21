@@ -14,7 +14,7 @@ export default function ShortDeviationSlider({
   const value = currentValue ?? avgValue;
 
   const shouldInvert = aboveOrBelowRed === 'above';
-  const range = stdDev * 7;
+  const range = stdDev * 3.5;
   const minValue = minRange !== undefined ? minRange : avgValue - range;
   const maxValue = maxRange !== undefined ? maxRange : avgValue + range;
 
@@ -28,16 +28,28 @@ export default function ShortDeviationSlider({
 
   const color = noValue ? '#9ca3af' : getColor(value);
   const rawPosition = ((value - minValue) / (maxValue - minValue)) * 100;
-  const valuePosition = shouldInvert ? 100 - rawPosition : rawPosition;
+  const clampedRawPosition = Math.min(93, Math.max(0, rawPosition));
+  const valuePosition = shouldInvert ? 100 - clampedRawPosition : clampedRawPosition;
 
-  // if title > 5 chars, give it more room (increase threshold)
   const titleLength = title?.length ?? 0;
   const dynamicThreshold = titleLength < 5 ? 30 : 42;
   const titleOnRight = noValue ? false : valuePosition < dynamicThreshold;
 
   const labelOnShadow = titleOnRight;
   const titleColor = noValue ? '#6b7280' : (labelOnShadow ? '#6b7280' : '#fff');
-  const valueLabel = percent ? `${Math.round(value)}%` : Math.round(value);
+
+  // ISO format: no leading zero, 3 decimal places (e.g. .222)
+  const formatValue = (v) => {
+    if (title === 'ISO') {
+      const rounded = parseFloat(v.toFixed(3));
+      return rounded < 0
+        ? `-${Math.abs(rounded).toFixed(3).replace(/^0/, '')}`
+        : `.${rounded.toFixed(3).split('.')[1]}`;
+    }
+    return percent ? `${Math.round(v)}%` : Math.round(v);
+  };
+
+  const valueLabel = formatValue(value);
   const fillStyle = noValue ? { display: 'none' } : { left: 0, width: `${valuePosition}%` };
 
   return (
@@ -59,7 +71,7 @@ export default function ShortDeviationSlider({
           }}
         />
 
-        {/* Colored fill up to thumb — hidden when noValue */}
+        {/* Colored fill up to thumb */}
         <div
           style={{
             position: 'absolute',
@@ -106,7 +118,7 @@ export default function ShortDeviationSlider({
           {title}
         </div>
 
-        {/* Value thumb — hidden when noValue */}
+        {/* Value thumb */}
         {!noValue && (
           <div
             style={{

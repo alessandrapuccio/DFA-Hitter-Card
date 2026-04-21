@@ -8,7 +8,7 @@ const LINE_COLOR = '#1e3a5f';
 
 // ─── color thresholds for rolling average line ────────────────────────────
 const COLOR_RED     = '#ef4444'; // tmrv_roll < 80
-const COLOR_NEUTRAL = '#3f4c5f'; // tmrv_roll 80–120  (matches design system)
+const COLOR_NEUTRAL = '#80868e'; // tmrv_roll 80–120  (matches design system)
 const COLOR_GREEN   = '#16a34a'; // tmrv_roll > 120
 
 function tmrvColor(value) {
@@ -87,25 +87,26 @@ function Chart({ data, height = 240 }) {
   const cH   = svgH - PAD.top  - PAD.bottom;
   const n    = trimmedData.length;
 
-  const validVals = data.map(d => d.tmrv_roll).filter(v => v != null);
-  const yMin  = Math.min(...validVals);
-  const yMax  = Math.max(...validVals);
-  const yPad  = Math.max((yMax - yMin) * 0.12, 5);
+ const seasonAvg = data.find(d => d.season_avg != null)?.season_avg ?? 100;
 
-  const domLo = yMin - yPad;
-  const domHi = yMax + yPad;
+  const validVals = data.map(d => d.tmrv_roll).filter(v => v != null);
+  const dataMin = validVals.length ? Math.min(...validVals) : seasonAvg;
+  const dataMax = validVals.length ? Math.max(...validVals) : seasonAvg;
+
+  const domLo = Math.min(seasonAvg - 60, dataMin);
+  const domHi = Math.max(seasonAvg + 60, dataMax);
 
   function xOf(i) { return PAD.left + (i / Math.max(n - 1, 1)) * cW; }
   function yOf(v) { return PAD.top  + (1 - (v - domLo) / (domHi - domLo)) * cH; }
 
   const yTicks = useMemo(() => {
-    const range = domHi - domLo;
-    const step  = range < 20 ? 5 : range < 50 ? 10 : range < 150 ? 25 : 50;
+    const step  = 25;
     const first = Math.ceil(domLo / step) * step;
     const ticks = [];
     for (let v = first; v <= domHi; v += step) ticks.push(v);
     return ticks;
-  }, [domLo, domHi]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seasonAvg]);
 
   // ─── build colored two-point segments ──────────────────────────────────
   // Each segment connects point[i] → point[i+1], colored by the average of

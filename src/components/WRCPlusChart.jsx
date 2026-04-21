@@ -40,7 +40,7 @@ export default function WRCPlusChart({ vR, vL, barContainerHeight = 130 }) {
               transition: 'height 0.5s',
             }}
           >
-            <span style={{ color: 'white', fontWeight: 700, fontSize: 15, marginTop: 4 }}>
+            <span style={{ color: 'white', fontWeight: 700, fontSize: 15, marginTop: 4, position: 'relative', zIndex:1 }}>
               {value}
             </span>
             <div style={{ flex: 1 }} />

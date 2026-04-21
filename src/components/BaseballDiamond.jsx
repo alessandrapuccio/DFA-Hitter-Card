@@ -44,10 +44,10 @@ export default function BaseballDiamond({ positions, projectedDef = [], width = 
   const projectedMap  = Object.fromEntries(projectedDef.map(p => [p.pos, p.def]));
 
   const fieldDots = {
-    '1B': { cx: 82, cy: 44 },
-    '2B': { cx: 65, cy: 30 },
-    'SS': { cx: 45, cy: 30 },
-    '3B': { cx: 28, cy: 45 },
+    '1B': { cx: 81, cy: 35 },
+    '2B': { cx: 69, cy: 10 },
+    'SS': { cx: 41, cy: 10 },
+    '3B': { cx: 29, cy: 35 },
     'LF': { cx: 8, cy: -8 },
     'CF': { cx: 55, cy: -25 },
     'RF': { cx: 102, cy: -8 },
@@ -60,7 +60,7 @@ export default function BaseballDiamond({ positions, projectedDef = [], width = 
   const getOpps       = (p) => p.opps ?? p.gc ?? 0;
   const totalOpps     = activePosData.reduce((sum, p) => sum + getOpps(p), 0);
   const minDotR = 4;
-  const maxDotR = 9;
+  const maxDotR = 8;
 
   const getDotR = (opps) => {
     if (activePosData.length <= 1 || totalOpps === 0) return minDotR + 3;
