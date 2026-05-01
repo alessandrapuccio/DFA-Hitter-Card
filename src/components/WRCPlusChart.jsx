@@ -8,53 +8,54 @@ export default function WRCPlusChart({ vR, vL, barContainerHeight = 130 }) {
     return '#6b7280';
   };
 
-  // Scale bar fill: treat 170 as "full height"
-  const getBarHeightPct = (value) =>
-    Math.min(Math.max((value / 170) * 100, 0), 85);
+  const MAX_SCALE = 150;
 
-  const BarColumn = ({ value, label }) => {
-    const heightPct = getBarHeightPct(value);
-    const color     = getBarColor(value);
+const getBarHeightPct = (value) =>
+  Math.min(Math.max((value / MAX_SCALE) * 100, 0), 100);
 
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+const BarColumn = ({ value, label }) => {
+  const heightPct = getBarHeightPct(value);
+  const color     = getBarColor(value);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+      <div
+        style={{
+          position: 'relative',
+          width: 44,
+          height: barContainerHeight,
+          background: '#e5e7eb',
+          borderRadius: 4,
+          overflow: 'hidden',
+        }}
+      >
         <div
           style={{
-            position: 'relative',
-            width: 44,
-            height: barContainerHeight,
-            background: '#e5e7eb',
-            borderRadius: 4,
-            overflow: 'hidden',
+            position: 'absolute',
+            bottom: 0, left: 0, right: 0,
+            height: `${heightPct}%`,
+            backgroundColor: color,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            transition: 'height 0.5s',
           }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0, left: 0, right: 0,
-              height: `${heightPct}%`,
-              backgroundColor: color,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              transition: 'height 0.5s',
-            }}
-          >
-            <span style={{ color: 'white', fontWeight: 700, fontSize: 15, marginTop: 4, position: 'relative', zIndex:1 }}>
-              {value}
-            </span>
-            <div style={{ flex: 1 }} />
-            <span style={{ color: 'white', fontWeight: 600, fontSize: 11, marginBottom: 3 }}>
-              {label}
-            </span>
-          </div>
+          <span style={{ color: 'white', fontWeight: 700, fontSize: 15, marginTop: 4, position: 'relative', zIndex: 1 }}>
+            {value}
+          </span>
+          <div style={{ flex: 1 }} />
+          <span style={{ color: 'white', fontWeight: 600, fontSize: 11, marginBottom: 3 }}>
+            {label}
+          </span>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
   // 100 reference line: 100/170 of the bar container height from the bottom
-  const lineFromBottom = (100 / 170) * barContainerHeight;
+  const lineFromBottom = (100 / 150) * barContainerHeight;
 
   return (
     <div
@@ -98,8 +99,8 @@ export default function WRCPlusChart({ vR, vL, barContainerHeight = 130 }) {
         <span
           style={{
             position: 'absolute',
-            right: -30,
-            top: -11,
+            right: 117,
+            top: -8,
             fontSize: 15,
             color: '#6b7280',
             fontWeight: 700,

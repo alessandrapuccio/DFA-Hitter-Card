@@ -57,15 +57,22 @@ export default function BaseballDiamond({ positions, projectedDef = [], width = 
   };
 
   const activePosData = positions.filter(p => fieldDots[p.pos]);
-  const getOpps       = (p) => p.opps ?? p.gc ?? 0;
-  const totalOpps     = activePosData.reduce((sum, p) => sum + getOpps(p), 0);
-  const minDotR = 4;
-  const maxDotR = 8;
 
-  const getDotR = (opps) => {
-    if (activePosData.length <= 1 || totalOpps === 0) return minDotR + 3;
-    const share = opps / totalOpps;
-    return minDotR + share * (maxDotR - minDotR);
+  const MIN_INN_FLOOR   = 50;    // anything below → smallest dot
+  const MAX_INN_CEILING = 1000;  // anything above → largest dot
+  const MIN_R = 4;
+  const MAX_R = 8;
+
+  // Total innings across all active positions (for share calculation)
+  const totalInn = activePosData.reduce((sum, p) => sum + (p.inn ?? 0), 0);
+
+  const getDotR = (inn) => {
+    if (inn == null || isNaN(inn)) return MIN_R;
+    if (inn < MIN_INN_FLOOR)   return MIN_R;
+    if (inn >= MAX_INN_CEILING) return MAX_R;
+    // Middle bucket: scale by share of total innings
+    const share = totalInn > 0 ? inn / totalInn : 0;
+    return MIN_R + share * (MAX_R - MIN_R);
   };
 
   return (
@@ -126,8 +133,8 @@ export default function BaseballDiamond({ positions, projectedDef = [], width = 
         const posData = posMap[pos];
         if (!posData) return null;
 
-        const opps      = getOpps(posData);
-        const r         = getDotR(opps);
+        const inn       = posData.inn ?? 0;
+        const r         = getDotR(inn);
         const defVal    = projectedMap[pos];
         const fill      = defVal !== undefined ? getDefColor(defVal) : '#374151';
 

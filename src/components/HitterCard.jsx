@@ -12,14 +12,28 @@ import PlayerBioPanel from './PlayerBioPanel';
 import AnchorTable from './AnchorTable';
 import BaseballDiamond from './BaseballDiamond';
 
+// Sum innings using baseball convention: .1 = 1 out, .2 = 2 outs, .3 carries to next whole.
+// Splits decimals (outs) from whole innings, sums each, then converts every 3 outs into 1 inning.
+const sumBaseballInnings = (vals) => {
+  let whole = 0;
+  let outs = 0;
+  for (const v of vals) {
+    if (v == null || isNaN(v)) continue;
+    const w = Math.trunc(v);
+    outs += Math.round((v - w) * 10);
+    whole += w;
+  }
+  whole += Math.floor(outs / 3);
+  outs = outs % 3;
+  return whole + outs / 10;
+};
+
 export default function HitterCard({ data }) {
   const { player, hitting, defense, baserunning, health, last_report, impact_statement, grades } = data;
 
   console.log('rollingTmwrcData:', hitting.rollingTmwrcData);
 
-  // Total opportunities across all positions
   const getOpps = (p) => p.opps ?? p.gc ?? 0;
-  const totalOpps = (defense.positions || []).reduce((sum, p) => sum + getOpps(p), 0);
 
   const formatBodyParts = (text) => {
     const parts = text.split(/(\(x\d+\))/g);
@@ -241,7 +255,7 @@ export default function HitterCard({ data }) {
               flexShrink: 0,
             }}>
               {/* DEF Runs — single line */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0, whiteSpace: 'nowrap' }}>
                 <span style={{ fontSize: 19, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>
                   DEF Runs:
                 </span>
@@ -254,32 +268,52 @@ export default function HitterCard({ data }) {
                 </span>
               </div>
 
-              {/* Right side */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                {defense.is_catcher ? (
-                  <>
-                    <span style={{ fontSize: 15, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>
-                      GC: <span style={{ fontWeight: 700, fontSize: 15, color: '#374151', fontStyle: 'normal' }}>{defense.catcher_gc}</span>
-                    </span>
-                    {(defense.positions || [])
-                      .filter(p => p.type === 'field' && getOpps(p) > 0)
-                      .map(p => (
-                        <span key={p.pos} style={{ fontSize: 15, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>
-                          {p.pos} Opps: <span style={{ fontWeight: 700, fontSize: 15, color: '#374151', fontStyle: 'normal' }}>{getOpps(p)}</span>
-                        </span>
-                      ))
+              {/* Right side — innings display */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0, whiteSpace: 'nowrap' }}>
+                {(() => {
+                  const inn = defense.innings_display;
+                  if (!inn) return null;
+
+                  const positions = defense.positions || [];
+                  const haveInn = positions.some(p => p.inn != null);
+
+                    if (inn.type === 'catcher_split') {
+                      const ic = haveInn
+                        ? sumBaseballInnings(positions.filter(p => p.type === 'catcher').map(p => p.inn)).toFixed(1)
+                        : inn.ic;
+                      const ip = haveInn
+                        ? sumBaseballInnings(positions.filter(p => p.type !== 'catcher').map(p => p.inn)).toFixed(1)
+                        : inn.ip;
+                      const IF_POS = new Set(['SS', '1B', '2B', '3B']);
+                      const OF_POS = new Set(['CF', 'LF', 'RF']);
+                      const otherRows = positions.filter(p => p.type !== 'catcher');
+                      const hasIF = otherRows.some(p => IF_POS.has(p.pos));
+                      const hasOF = otherRows.some(p => OF_POS.has(p.pos));
+                      const otherLabel = (hasIF && hasOF) ? 'IF/OF' : hasIF ? 'IF' : hasOF ? 'OF' : 'other';
+                      return (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', lineHeight: 1.15 }}>
+                          <span style={{ fontSize: 14, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>
+                            Inn (C): <span style={{ fontWeight: 500, fontSize: 14, color: '#374151', fontStyle: 'normal' }}>{ic}</span>
+                          </span>
+                          <span style={{ fontSize: 14, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>
+                            Inn ({otherLabel}): <span style={{ fontWeight: 500, fontSize: 14, color: '#374151', fontStyle: 'normal' }}>{ip}</span>
+                          </span>
+                        </div>
+                      );
                     }
-                  </>
-                ) : (
-                  <>
-                    <span style={{ fontSize: 16, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>
-                      Total Opps:
-                    </span>
-                    <span style={{ fontWeight: 700, fontSize: 16, color: '#374151' }}>
-                      {totalOpps}
-                    </span>
-                  </>
-                )}
+
+                    // Default: total innings (catcher-only OR non-catcher both show just "Inn")
+                    const total = haveInn
+                      ? sumBaseballInnings(positions.map(p => p.inn)).toFixed(1)
+                      : (inn.total_inn ?? inn.ic ?? inn.ip ?? '—');
+                    return (
+                      <span style={{ fontSize: 16, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>
+                        Inn: <span style={{ fontWeight: 500, fontSize: 16, color: '#374151', fontStyle: 'normal' }}>
+                          {total}
+                        </span>
+                      </span>
+                    );
+                })()}
               </div>
             </div>
 
@@ -303,7 +337,7 @@ export default function HitterCard({ data }) {
                   sb={defense.catcher_sb_runs}
                   blocking={defense.catcher_block_runs}
                   width={290}
-                  height={200}
+                  height={193}
                 />
               ) : (
                 <BaseballDiamond
@@ -322,34 +356,38 @@ export default function HitterCard({ data }) {
             <SectionHeader label="BASERUNNING (2025)" />
 
             {/* BSR Runs badge + SB */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, padding: '6px 12px 4px', flexShrink: 0 }}>
-              <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>BSR Runs:</span>
-              <span style={{
-                background: baserunning.bsr_runs >= 1 ? '#dcfce7' : baserunning.bsr_runs <= -1 ? '#fee2e2' : '#f3f4f6',
-                color: baserunning.bsr_runs >= 1 ? '#16a34a' : baserunning.bsr_runs <= -1 ? '#dc2626' : '#374151',
-                padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
-              }}>
-                {Number(baserunning.bsr_runs).toFixed(1)}
-              </span>
-              <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', marginLeft: 6, color: HEADER_BG }}>SB:</span>
-              <span style={{
-                fontSize: 17,
-                fontWeight: 600,
-                color: (() => {
-                  const sb = baserunning.sb_made;
-                  const att = baserunning.sb_attempted;
-                  if (att < 3) return 'black';
-                  const fSB = sb / att * 100;
-                  if (fSB >= 80) return '#16a34a';
-                  if (fSB <= 60) return '#ef4444';
-                  return 'black';
-                })()
-              }}>
-                {baserunning.sb_made}/{baserunning.sb_attempted}
-              </span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 16px 4px', flexShrink: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>BSR Runs:</span>
+                <span style={{
+                  background: baserunning.bsr_runs >= 1 ? '#dcfce7' : baserunning.bsr_runs <= -1 ? '#fee2e2' : '#f3f4f6',
+                  color: baserunning.bsr_runs >= 1 ? '#16a34a' : baserunning.bsr_runs <= -1 ? '#dc2626' : '#374151',
+                  padding: '3px 10px', borderRadius: 4, fontWeight: 800, fontSize: 20,
+                }}>
+                  {Number(baserunning.bsr_runs).toFixed(1)}
+                </span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ fontSize: 17, fontWeight: 700, fontStyle: 'italic', color: HEADER_BG }}>SB:</span>
+                <span style={{
+                  fontSize: 17,
+                  fontWeight: 600,
+                  color: (() => {
+                    const sb = baserunning.sb_made;
+                    const att = baserunning.sb_attempted;
+                    if (att < 3) return 'black';
+                    const fSB = sb / att * 100;
+                    if (fSB >= 80) return '#16a34a';
+                    if (fSB <= 60) return '#ef4444';
+                    return 'black';
+                  })()
+                }}>
+                  {baserunning.sb_made}/{baserunning.sb_attempted}
+                </span>
+              </div>
             </div>
             {/* Decorative HEADER_BG divider */}
-            <div style={{ height: 2, background: HEADER_BG, margin: '0 20px 1px', flexShrink: 0 }} />
+            <div style={{ height: 2, background: HEADER_BG, margin: '6px 20px -5px', flexShrink: 0 }} />
 
             {/* Side-by-side sliders */}
             <div style={{ flex: .9, display: 'flex', alignItems: 'center', marginTop: -12, marginBottom: -12 }}>
@@ -379,10 +417,9 @@ export default function HitterCard({ data }) {
             <SectionHeader label="HEALTH" />
             {(() => {
               const years = Object.keys(health).filter(k => k !== 'body_parts').sort((a, b) => a - b);
-              const hasBodyParts = health.body_parts && health.body_parts.trim() !== '';
               return (
                 <>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed', marginTop: 0, ...(hasBodyParts ? {} : { flex: 1 }) }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15, tableLayout: 'fixed', marginTop: 0 }}>
                     <colgroup>
                       <col style={{ width: '34%' }} />
                       {years.map(yr => <col key={yr} style={{ width: `${66 / years.length}%` }} />)}
@@ -409,14 +446,12 @@ export default function HitterCard({ data }) {
                       </tr>
                     </tbody>
                   </table>
-                  {hasBodyParts && (
-                    <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', padding: '4px 8px', fontSize: 15, color: '#374151', lineHeight: 1.3 }}>
-                      <span>
-                        <span style={{ fontWeight: 700, color: HEADER_BG }}>Areas: </span>
-                        {formatBodyParts(health.body_parts)}
-                      </span>
-                    </div>
-                  )}
+                  <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', padding: '4px 8px', fontSize: 15, color: '#374151', lineHeight: 1.3 }}>
+                <span>
+                  <span style={{ fontWeight: 700, color: HEADER_BG }}>Areas: </span>
+                  {health.body_parts ? formatBodyParts(health.body_parts) : 'None'}
+                </span>
+              </div>
                 </>
               );
             })()}

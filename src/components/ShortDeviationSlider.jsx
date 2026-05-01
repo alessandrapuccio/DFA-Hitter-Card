@@ -1,5 +1,13 @@
 import React from 'react';
 
+// Abramowitz & Stegun approximation of the standard normal CDF
+const normalCDF = (z) => {
+  const t = 1 / (1 + 0.2316419 * Math.abs(z));
+  const d = 0.3989423 * Math.exp(-z * z / 2);
+  let p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+  return z > 0 ? 1 - p : p;
+};
+
 export default function ShortDeviationSlider({
   currentValue,
   avgValue,
@@ -14,9 +22,6 @@ export default function ShortDeviationSlider({
   const value = currentValue ?? avgValue;
 
   const shouldInvert = aboveOrBelowRed === 'above';
-  const range = stdDev * 3.5;
-  const minValue = minRange !== undefined ? minRange : avgValue - range;
-  const maxValue = maxRange !== undefined ? maxRange : avgValue + range;
 
   const getColor = (v) => {
     const deviation = (v - avgValue) / stdDev;
@@ -27,9 +32,10 @@ export default function ShortDeviationSlider({
   };
 
   const color = noValue ? '#9ca3af' : getColor(value);
-  const rawPosition = ((value - minValue) / (maxValue - minValue)) * 100;
-  const clampedRawPosition = Math.min(93, Math.max(0, rawPosition));
-  const valuePosition = shouldInvert ? 100 - clampedRawPosition : clampedRawPosition;
+
+  const z = (value - avgValue) / stdDev;
+  const percentile = normalCDF(z) * 100;
+  const valuePosition = shouldInvert ? 100 - percentile : percentile;
 
   const titleLength = title?.length ?? 0;
   const dynamicThreshold = titleLength < 5 ? 30 : 42;
@@ -71,20 +77,19 @@ export default function ShortDeviationSlider({
           }}
         />
 
-        {/* Colored fill up to thumb */}
-        <div
-          style={{
+        {!noValue && (
+          <div style={{
             position: 'absolute',
+            left: 0,
             top: '50%',
             transform: 'translateY(-50%)',
             height: '24px',
             borderRadius: '12px',
             background: color,
             zIndex: 1,
-            ...fillStyle,
-          }}
-        />
-
+            width: `calc(14px + ${valuePosition}% * (100% - 28px) / 100%)`,
+          }} />
+        )}
         {/* Average marker line */}
         <div
           style={{
@@ -120,29 +125,38 @@ export default function ShortDeviationSlider({
 
         {/* Value thumb */}
         {!noValue && (
-          <div
-            style={{
-              position: 'absolute',
-              left: `${valuePosition}%`,
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '28px',
-              height: '28px',
-              borderRadius: '50%',
-              background: '#fff',
-              border: `2px solid ${color}`,
-              color: color,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '12px',
-              fontWeight: 'bold',
-              zIndex: 30,
-              pointerEvents: 'none',
-              userSelect: 'none',
-            }}
-          >
-            {valueLabel}
+          <div style={{
+            position: 'absolute',
+            left: '14px',
+            right: '14px',
+            top: 0,
+            bottom: 0,
+            pointerEvents: 'none',
+          }}>
+            <div
+              style={{
+                position: 'absolute',
+                left: `${valuePosition}%`,
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '28px',
+                height: '28px',
+                borderRadius: '50%',
+                background: '#fff',
+                border: `2px solid ${color}`,
+                color: color,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '12px',
+                fontWeight: 'bold',
+                zIndex: 30,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
+            >
+              {valueLabel}
+            </div>
           </div>
         )}
 

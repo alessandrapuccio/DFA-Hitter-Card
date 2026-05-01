@@ -24,13 +24,7 @@ export default function TrinityTrident({ swdec = 111, dmg = 104, con = 63, width
     return getHeight(displayValue);
   };
 
-  const getLabelY = (value, arrowTop) => {
-    if (value > 144 || value < 67) {
-      return arrowTop + 35 + 20;
-    } else {
-      return arrowTop - 40;
-    }
-  };
+  const LABEL_Y = 44;
 
   const leftHeight   = getDisplayHeight(swdec);
   const centerHeight = getDisplayHeight(dmg);
@@ -41,9 +35,9 @@ export default function TrinityTrident({ swdec = 111, dmg = 104, con = 63, width
   const centerArrowTop = 440 - centerHeight;
   const rightArrowTop  = 440 - rightHeight;
 
-  const leftLabelY   = getLabelY(swdec, leftArrowTop);
-  const centerLabelY = getLabelY(dmg, centerArrowTop);
-  const rightLabelY  = getLabelY(con, rightArrowTop);
+  const leftLabelY   = LABEL_Y;
+  const centerLabelY = LABEL_Y;
+  const rightLabelY  = LABEL_Y;
 
   const getColor = (value) => {
     if (value > 110) return '#22c55e';
@@ -102,8 +96,8 @@ export default function TrinityTrident({ swdec = 111, dmg = 104, con = 63, width
       <g>
         <line x1="120" y1={leftArrowTop + 30} x2="120" y2="336" stroke="#d97706" strokeWidth="28" strokeLinecap="butt" />
         <polygon points={`120,${leftArrowTop} 100,${leftArrowTop + 35} 140,${leftArrowTop + 35}`} fill="#d97706" />
-        <rect x="80" y={leftLabelY} width="80" height="40" rx="6" fill={getBgColor(swdec)} />
-        <text x="120" y={leftLabelY + 32} textAnchor="middle" fontSize={40} fontWeight="bold" fill={getColor(swdec)}>
+        <rect x="74" y={leftLabelY} width="80" height="40" rx="6" fill={getBgColor(swdec)} />
+        <text x="114" y={leftLabelY + 32} textAnchor="middle" fontSize={40} fontWeight="bold" fill={getColor(swdec)}>
           {swdec}
         </text>
       </g>
@@ -122,8 +116,8 @@ export default function TrinityTrident({ swdec = 111, dmg = 104, con = 63, width
       <g>
         <line x1="280" y1={rightArrowTop + 30} x2="280" y2="336" stroke="#d97706" strokeWidth="28" strokeLinecap="butt" />
         <polygon points={`280,${rightArrowTop} 260,${rightArrowTop + 35} 300,${rightArrowTop + 35}`} fill="#d97706" />
-        <rect x="244" y={rightLabelY} width="80" height="40" rx="6" fill={getBgColor(con)} />
-        <text x="280" y={rightLabelY + 32} textAnchor="middle" fontSize={40} fontWeight="bold" fill={getColor(con)}>
+        <rect x="250" y={rightLabelY} width="80" height="40" rx="6" fill={getBgColor(con)} />
+        <text x="286" y={rightLabelY + 32} textAnchor="middle" fontSize={40} fontWeight="bold" fill={getColor(con)}>
           {con}
         </text>
       </g>
